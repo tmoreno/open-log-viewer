@@ -1,0 +1,7 @@
+{
+  "name": "log-viewer",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node src/main.js"
+  }
+}
