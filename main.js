@@ -6,7 +6,7 @@ let mainWindow;
 
 function createWindow() {
 	mainWindow = new BrowserWindow({width: 1024, height: 768});
-	mainWindow.loadFile('index.html');
+	mainWindow.loadFile("./app/index.html");
 
 	// Open the DevTools.
 	// mainWindow.webContents.openDevTools();
