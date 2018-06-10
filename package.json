@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "start:dev": "cross-env NODE_ENV=development npm run start"
   },
   "devDependencies": {
-    "electron": "2.0.2"
+    "cross-env": "5.1.6",
+    "electron": "2.0.2",
+    "electron-reload": "1.2.2"
   }
 }
