@@ -4,15 +4,17 @@ const Tail = require("./tail");
 let fileViewer = new FileViewer();
 
 document.getElementById("file-chooser").onchange = function() {
-	const selectedFilePath = this.files[0].path;
-
-	fileViewer.clean();
-
-	let tail = new Tail(selectedFilePath, 1000);
+	if (this.files.length > 0) {
+		const selectedFilePath = this.files[0].path;
 	
-	tail.on('line', (line) => {
-		fileViewer.appendLine(line);
-	});
+		fileViewer.clean();
 	
-	tail.start();
+		let tail = new Tail(selectedFilePath, 1000);
+		
+		tail.on('line', (line) => {
+			fileViewer.appendLine(line);
+		});
+		
+		tail.start();
+	}
 };
