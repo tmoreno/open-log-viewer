@@ -1,6 +1,7 @@
 const FileViewer = require("./file-viewer");
 const Tail = require("./tail");
 
+let tail;
 let fileViewer = new FileViewer();
 
 document.getElementById("file-chooser").onchange = function() {
@@ -9,7 +10,11 @@ document.getElementById("file-chooser").onchange = function() {
 	
 		fileViewer.clean();
 	
-		let tail = new Tail(selectedFilePath, 1000);
+		if (tail) {
+			tail.stop();
+		}
+		
+		tail = new Tail(selectedFilePath, 1000);
 		
 		tail.on('line', (line) => {
 			fileViewer.appendLine(line);
