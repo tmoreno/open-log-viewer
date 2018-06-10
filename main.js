@@ -11,6 +11,7 @@ let mainWindow;
 function createWindow() {
 	mainWindow = new BrowserWindow({width: 1024, height: 768});
 	mainWindow.loadFile("./app/index.html");
+	mainWindow.setMenu(null);
 
 	if (process.env.NODE_ENV === "development") {
 		mainWindow.webContents.openDevTools();
