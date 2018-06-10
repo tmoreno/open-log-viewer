@@ -5,12 +5,17 @@
         <title>Hello World!</title>
 
         <link rel="stylesheet" type="text/css" href="css/normalize.css">
+        <link rel="stylesheet" type="text/css" href="css/main.css">
     </head>
     
     <body>
-        <input id="file-chooser" type="file" />
-
-        <div id="log-lines"></div>
+        <div class="header-container">
+            <input id="file-chooser" type="file" />
+        </div>
+     
+        <div class="container">
+            <div id="log-lines"></div>
+        </div>
 
         <script>
             require('./js/index.js');

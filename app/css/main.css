@@ -1,0 +1,14 @@
+.header-container { 
+    background: #eee; 
+    height: 60px; 
+    left: 0; 
+    position: fixed; 
+    width: 100%; 
+    top: 0; 
+}
+ 
+.container { 
+    margin: 0 auto; 
+    overflow: auto; 
+    padding: 80px 0;
+}
