@@ -11,13 +11,30 @@ module.exports = class FileViewer {
 
     appendLine(line) {
         let p = document.createElement("p");
-		let pContent = document.createTextNode(line); 
-		p.appendChild(pContent);
+        let pContent = document.createTextNode(line);
+        p.appendChild(pContent);
+        
+        this.applyClassColor(p);
 	
 		this.logLines.appendChild(p);
     }
 
     scrollDown() {
         window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    applyClassColor(line) {
+        if (line.textContent.includes("FATAL")) {
+            line.classList.add("fatal");
+        }
+        else if (line.textContent.includes("ERROR")) {
+            line.classList.add("error");
+        }
+        else if (line.textContent.includes("WARNING")) {
+            line.classList.add("warning");
+        }
+        else if (line.textContent.includes("DEBUG")) {
+            line.classList.add("debug");
+        }
     }
 }

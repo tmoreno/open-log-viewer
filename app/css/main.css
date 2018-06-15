@@ -12,3 +12,21 @@
     overflow: auto; 
     padding: 80px 0;
 }
+
+.error, .fatal {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+.warning {
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+}
+
+.debug {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
