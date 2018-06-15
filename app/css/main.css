@@ -11,11 +11,13 @@
     margin: 0 auto; 
     overflow: auto; 
     padding: 60px 0;
+    display: inline-block;
 }
 
 #log-lines p {
     margin: 0;
     font-family: Consolas, monaco, 'Courier New', Courier, monospace;
+    white-space: nowrap;
 }
 
 .error, .fatal {
