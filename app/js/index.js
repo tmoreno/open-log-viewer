@@ -18,6 +18,7 @@ document.getElementById("file-chooser").onchange = function() {
 		
 		tail.on('line', (line) => {
 			fileViewer.appendLine(line);
+			fileViewer.scrollDown();
 		});
 		
 		tail.start();

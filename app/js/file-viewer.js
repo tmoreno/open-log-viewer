@@ -16,4 +16,8 @@ module.exports = class FileViewer {
 	
 		this.logLines.appendChild(p);
     }
+
+    scrollDown() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
 }
