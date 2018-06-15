@@ -6,11 +6,16 @@
     width: 100%; 
     top: 0; 
 }
- 
+
 .container { 
     margin: 0 auto; 
     overflow: auto; 
-    padding: 80px 0;
+    padding: 60px 0;
+}
+
+#log-lines p {
+    margin: 0;
+    font-family: Consolas, monaco, 'Courier New', Courier, monospace;
 }
 
 .error, .fatal {
