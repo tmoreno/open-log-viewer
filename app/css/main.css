@@ -10,7 +10,7 @@
 .container { 
     margin: 0 auto; 
     overflow: auto; 
-    padding: 60px 0;
+    padding-top: 60px;
     display: inline-block;
 }
 
