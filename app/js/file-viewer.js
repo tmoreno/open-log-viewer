@@ -10,9 +10,11 @@ module.exports = class FileViewer {
     }
 
     appendLine(line) {
+        let pre = document.createElement("pre");
+        pre.innerHTML = line;
+        
         let p = document.createElement("p");
-        let pContent = document.createTextNode(line);
-        p.appendChild(pContent);
+        p.appendChild(pre);
         
         this.applyClassColor(p);
 	

@@ -16,8 +16,11 @@
 
 #log-lines p {
     margin: 0;
+}
+
+#log-lines pre {
+    margin: 0;
     font-family: Consolas, monaco, 'Courier New', Courier, monospace;
-    white-space: nowrap;
 }
 
 .error, .fatal {
