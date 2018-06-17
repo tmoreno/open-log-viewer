@@ -16,8 +16,11 @@ document.getElementById("file-chooser").onchange = function() {
 		
 		tail = new Tail(selectedFilePath, 1000);
 		
-		tail.on('line', (line) => {
-			fileViewer.appendLine(line);
+		tail.on('readLines', lines => {
+			lines.forEach(line => {
+				fileViewer.appendLine(line);
+			});
+			
 			fileViewer.scrollDown();
 		});
 		

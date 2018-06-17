@@ -12,6 +12,7 @@ module.exports = class Tail extends EventEmitter {
     }
 
     start() {
+        let lines = [];
         let stats = fs.statSync(this.file);
         let fileSizeInBytes = stats.size;
 
@@ -19,16 +20,18 @@ module.exports = class Tail extends EventEmitter {
             input: fs.createReadStream(this.file, {start: this.startPosition})
         });
         
-        lineReader.on('close', (line) => {
+        lineReader.on('close', () => {
             this.startPosition = fileSizeInBytes;
+
+            this.emit('readLines', lines);
 
             this.timerId = setTimeout(() => {
                 this.start()
             }, this.timeoutInMillis);
         });
 
-        lineReader.on('line', (line) => {
-            this.emit('line', line);
+        lineReader.on('line', line => {
+            lines.push(line);
         });
     }
 
