@@ -21,10 +21,6 @@ module.exports = class FileViewer {
 		this.logLines.appendChild(p);
     }
 
-    scrollDown() {
-        window.scrollTo(0, document.body.scrollHeight);
-    }
-
     applyClassColor(line) {
         if (line.textContent.includes("FATAL")) {
             line.classList.add("fatal");

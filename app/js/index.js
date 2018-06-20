@@ -20,8 +20,6 @@ document.getElementById("file-chooser").onchange = function() {
 			lines.forEach(line => {
 				fileViewer.appendLine(line);
 			});
-			
-			fileViewer.scrollDown();
 		});
 		
 		tail.start();
