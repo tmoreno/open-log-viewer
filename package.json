@@ -6,9 +6,18 @@
     "start": "electron .",
     "start:dev": "cross-env NODE_ENV=development npm run start"
   },
+  "dependencies": {
+    "vue": "2.5.16",
+    "vuetify": "1.0.19"
+  },
   "devDependencies": {
     "cross-env": "5.1.6",
+    "css-loader": "0.28.11",
     "electron": "2.0.2",
-    "electron-reload": "1.2.2"
+    "electron-reload": "1.2.2",
+    "file-loader": "1.1.11",
+    "style-loader": "0.21.0",
+    "vue-loader": "15.2.4",
+    "webpack": "4.12.0"
   }
 }
