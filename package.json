@@ -8,6 +8,7 @@
     "start:dev": "cross-env NODE_ENV=development npm run start"
   },
   "dependencies": {
+    "material-design-icons-iconfont": "3.0.3",
     "vue": "2.5.16",
     "vuetify": "1.0.19"
   },
@@ -18,6 +19,7 @@
     "electron-reload": "1.2.2",
     "file-loader": "1.1.11",
     "style-loader": "0.21.0",
+    "url-loader": "1.0.1",
     "vue-loader": "15.2.4",
     "vue-template-compiler": "2.5.16",
     "webpack": "4.12.0",
