@@ -28,7 +28,7 @@ module.exports = class FileViewer {
         else if (line.textContent.includes("ERROR")) {
             line.classList.add("error");
         }
-        else if (line.textContent.includes("WARNING")) {
+        else if (line.textContent.includes("WARN")) {
             line.classList.add("warning");
         }
         else if (line.textContent.includes("DEBUG")) {
