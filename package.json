@@ -4,6 +4,7 @@
   "main": "main.js",
   "scripts": {
     "build": "webpack",
+    "build:dev": "webpack --watch",
     "start": "electron .",
     "start:dev": "cross-env NODE_ENV=development npm run start"
   },
