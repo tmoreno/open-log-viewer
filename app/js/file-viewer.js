@@ -1,6 +1,6 @@
 module.exports = class FileViewer {
-    constructor() {
-        this.logLines = document.getElementById("log-lines");
+    constructor(logLinesDomElement) {
+        this.logLines = logLinesDomElement;
     }
 
     clean() {

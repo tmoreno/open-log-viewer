@@ -1,27 +1,16 @@
-const FileViewer = require("./file-viewer");
-const Tail = require("./tail");
+import 'typeface-roboto';
+import 'material-design-icons-iconfont/dist/material-design-icons.css';
+import 'vuetify/dist/vuetify.css';
+import '../css/main.css';
 
-let tail;
-let fileViewer = new FileViewer();
+import Vue from 'vue';
+import Vuetify from 'vuetify';
 
-document.getElementById("file-chooser").onchange = function() {
-	if (this.files.length > 0) {
-		const selectedFilePath = this.files[0].path;
-	
-		fileViewer.clean();
-	
-		if (tail) {
-			tail.stop();
-		}
-		
-		tail = new Tail(selectedFilePath, 1000);
-		
-		tail.on('readLines', lines => {
-			lines.forEach(line => {
-				fileViewer.appendLine(line);
-			});
-		});
-		
-		tail.start();
-	}
-};
+import App from './App.vue';
+
+Vue.use(Vuetify);
+
+new Vue({
+  el: '#app',
+  render: h => h(App)
+});

@@ -1,6 +1,6 @@
-const fs = require("fs");
-const readline = require("readline");
-const EventEmitter = require("events");
+const fs = __non_webpack_require__("fs");
+const readline = __non_webpack_require__("readline");
+const EventEmitter = __non_webpack_require__("events");
 
 module.exports = class Tail extends EventEmitter {
     constructor(file, timeoutInMillis) {
