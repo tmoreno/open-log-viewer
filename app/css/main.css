@@ -1,3 +1,7 @@
+html {
+    overflow-x: auto;
+}
+
 .header-container { 
     background: #eee; 
     height: 60px; 
@@ -7,7 +11,7 @@
     top: 0; 
 }
 
-.container { 
+.log-lines-container { 
     margin: 0 auto; 
     overflow: auto; 
     padding-top: 60px;

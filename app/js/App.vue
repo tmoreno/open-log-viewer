@@ -4,7 +4,7 @@
             <input type="file" @change="onFileChanged"/>
         </div>
 
-        <div class="container">
+        <div class="log-lines-container">
             <div id="log-lines" ref="logLines"></div>
         </div>
     </div>
