@@ -18,6 +18,10 @@ html {
     display: inline-block;
 }
 
+#log-lines {
+    font-size: 15px;
+}
+
 #log-lines p {
     margin: 0;
 }
