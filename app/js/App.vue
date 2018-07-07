@@ -1,13 +1,38 @@
 <template>
-    <div>
-        <div class="header-container">
+    <v-app>
+		<v-tabs>
+			<v-tab>
+      			Nuevo archivo
+				<v-btn flat icon>
+					<v-icon>close</v-icon>
+				</v-btn>
+		    </v-tab>
+
+			<v-btn flat icon>
+              <v-icon>add</v-icon>
+            </v-btn>
+
+			<v-tabs-items>
+				<v-tab-item>	
+            		<input type="file" @change="onFileChanged"/>
+        
+					<div class="log-lines-container">
+						<div id="log-lines" ref="logLines"></div>
+					</div>
+				</v-tab-item>
+			</v-tabs-items>
+		</v-tabs>
+        
+		<!--
+		<div class="header-container">
             <input type="file" @change="onFileChanged"/>
         </div>
 
         <div class="log-lines-container">
             <div id="log-lines" ref="logLines"></div>
         </div>
-    </div>
+		-->
+    </v-app>
 </template>
 
 <script>
