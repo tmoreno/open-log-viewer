@@ -1,6 +1,6 @@
 <template>
     <v-app>
-		<v-tabs>
+		<v-tabs show-arrows>
 			<v-tab v-for="(tab, i) in tabs" :key="i">
 				{{ tab.title }}
 
