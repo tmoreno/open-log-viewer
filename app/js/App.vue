@@ -1,14 +1,15 @@
 <template>
     <v-app>
 		<v-tabs>
-			<v-tab>
-      			Nuevo archivo
-				<v-btn flat icon>
+			<v-tab v-for="(tab, i) in tabs" :key="i">
+				{{ tab.title }}
+
+				<v-btn flat icon @click="closeTab(i)" v-show="tabs.length > 1">
 					<v-icon>close</v-icon>
 				</v-btn>
 		    </v-tab>
 
-			<v-btn flat icon>
+			<v-btn flat icon @click="newTab">
               <v-icon>add</v-icon>
             </v-btn>
 
@@ -38,6 +39,7 @@
 <script>
 	const FileViewer = require("./file-viewer");
 	const Tail = require("./tail");
+	const Tab = require("./tab");
 	
 	let tail;
 	let fileViewer;
@@ -46,7 +48,20 @@
 		mounted: function() {
 			fileViewer = new FileViewer(this.$refs.logLines);
 		},
+		data() {
+			return {
+				tabs: [new Tab()]
+			}
+		},
 		methods: {
+			newTab() {
+				this.tabs.push(new Tab());
+			},
+			closeTab(index) {
+				this.tabs = this.tabs.filter((tab, i) => {
+					return i !== index;
+				});
+			},
 			onFileChanged(event) {
 				if (event.target.files.length > 0) {
 					const selectedFilePath = event.target.files[0].path;
