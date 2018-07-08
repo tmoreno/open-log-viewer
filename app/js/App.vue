@@ -46,7 +46,7 @@
 
 	export default {
 		mounted: function() {
-			fileViewer = new FileViewer(this.$refs.logLines);
+			fileViewer = new FileViewer(this.$refs.logLines[0]);
 		},
 		data() {
 			return {
