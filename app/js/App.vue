@@ -1,8 +1,8 @@
 <template>
     <v-app>
 		<v-tabs show-arrows>
-			<v-tab v-for="(tab, i) in tabs" :key="i">
-				{{ tab.title }}
+			<v-tab v-for="(tab, i) in tabs" :key="i" :title="tab.filePath">
+				{{ tab.fileName }}
 
 				<v-btn flat icon @click="closeTab(i)" v-show="tabs.length > 1">
 					<v-icon>close</v-icon>
@@ -62,6 +62,9 @@
 			onFileChanged(event, tab) {
 				if (event.target.files.length > 0) {
 					const selectedFilePath = event.target.files[0].path;
+
+					tab.setFileName(event.target.files[0].name);
+					tab.setFilePath(selectedFilePath);
 				
 					tab.clean();
 				
