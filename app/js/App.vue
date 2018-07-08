@@ -44,6 +44,12 @@
 
 			this.tabs[0].setFileViewer(fileViewer);
 		},
+		updated: function() {
+			let numTabs = this.tabs.length;
+			let fileViewer = new FileViewer(this.$refs.logLines[numTabs - 1]);
+
+			this.tabs[numTabs - 1].setFileViewer(fileViewer);
+		},
 		methods: {
 			newTab() {
 				this.tabs.push(new Tab());
