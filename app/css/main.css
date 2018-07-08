@@ -2,15 +2,6 @@ html {
     overflow-x: auto;
 }
 
-.header-container { 
-    background: #eee; 
-    height: 60px; 
-    left: 0; 
-    position: fixed; 
-    width: 100%; 
-    top: 0; 
-}
-
 .log-lines-container { 
     margin: 0 auto; 
     overflow: auto; 

@@ -23,16 +23,6 @@
 				</v-tab-item>
 			</v-tabs-items>
 		</v-tabs>
-        
-		<!--
-		<div class="header-container">
-            <input type="file" @change="onFileChanged"/>
-        </div>
-
-        <div class="log-lines-container">
-            <div id="log-lines" ref="logLines"></div>
-        </div>
-		-->
     </v-app>
 </template>
 
