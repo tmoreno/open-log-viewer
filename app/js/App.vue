@@ -10,12 +10,14 @@
 		    </v-tab>
 
 			<v-btn flat icon @click="newTab">
-              <v-icon>add</v-icon>
+            	<v-icon>add</v-icon>
             </v-btn>
 
 			<v-tabs-items>
-				<v-tab-item v-for="(tab, i) in tabs" :key="i">	
-            		<input type="file" @change="onFileChanged($event, tab)"/>
+				<v-tab-item v-for="(tab, i) in tabs" :key="i">
+					<file-chooser 
+						v-show="!tab.filePath" 
+						@change="onFileChanged($event, tab)"/>
         
 					<div class="log-lines-container">
 						<div id="log-lines" ref="logLines"></div>
@@ -30,10 +32,14 @@
 	const Tab = require("./tab");
 	const Tail = require("./tail");
 	const FileViewer = require("./file-viewer");
+	const FileChooser = require("./components/FileChooser").default;
 	
 	let tail;
 
 	export default {
+		components: {
+			FileChooser
+		},
 		data() {
 			return {
 				tabs: [new Tab()]
