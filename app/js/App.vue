@@ -15,7 +15,7 @@
 
 			<v-tabs-items>
 				<v-tab-item v-for="(tab, i) in tabs" :key="i">	
-            		<input type="file" @change="onFileChanged"/>
+            		<input type="file" @change="onFileChanged($event, tab)"/>
         
 					<div class="log-lines-container">
 						<div id="log-lines" ref="logLines"></div>
@@ -27,21 +27,22 @@
 </template>
 
 <script>
-	const FileViewer = require("./file-viewer");
-	const Tail = require("./tail");
 	const Tab = require("./tab");
+	const Tail = require("./tail");
+	const FileViewer = require("./file-viewer");
 	
 	let tail;
-	let fileViewer;
 
 	export default {
-		mounted: function() {
-			fileViewer = new FileViewer(this.$refs.logLines[0]);
-		},
 		data() {
 			return {
 				tabs: [new Tab()]
 			}
+		},
+		mounted: function() {
+			let fileViewer = new FileViewer(this.$refs.logLines[0]);
+
+			this.tabs[0].setFileViewer(fileViewer);
 		},
 		methods: {
 			newTab() {
@@ -52,11 +53,11 @@
 					return i !== index;
 				});
 			},
-			onFileChanged(event) {
+			onFileChanged(event, tab) {
 				if (event.target.files.length > 0) {
 					const selectedFilePath = event.target.files[0].path;
 				
-					fileViewer.clean();
+					tab.clean();
 				
 					if (tail) {
 						tail.stop();
@@ -66,7 +67,7 @@
 					
 					tail.on('readLines', lines => {
 						lines.forEach(line => {
-		                	fileViewer.appendLine(line);
+		                	tab.appendLine(line);
         			    });
 					});
 					
