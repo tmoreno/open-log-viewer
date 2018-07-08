@@ -20,6 +20,7 @@ html {
 
 #log-lines {
     font-size: 15px;
+    line-height: initial;
 }
 
 #log-lines p {
