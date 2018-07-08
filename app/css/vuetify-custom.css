@@ -1,3 +1,13 @@
+.tabs__bar {
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+.tabs__items {
+    overflow: inherit;
+}
+
 .tabs__div {
     text-transform: none;
 }
