@@ -14,7 +14,7 @@
             </v-btn>
 
 			<v-tabs-items>
-				<v-tab-item>	
+				<v-tab-item v-for="(tab, i) in tabs" :key="i">	
             		<input type="file" @change="onFileChanged"/>
         
 					<div class="log-lines-container">
