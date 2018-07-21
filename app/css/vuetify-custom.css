@@ -1,14 +1,8 @@
-.tabs__bar {
-    position: fixed;
-    width: 100%;
-    z-index: 1000;
-}
-
-.tabs__items {
-    overflow: inherit;
-}
-
 .tabs__div {
     text-transform: none;
     width: 200px;
+}
+
+.tabs__content {
+    height: 88vh;
 }

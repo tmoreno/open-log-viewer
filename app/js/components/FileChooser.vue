@@ -1,6 +1,6 @@
 <template>
 	<v-container fill-height>
-		<v-layout align-center justify-space-around column fill-height>
+		<v-layout align-center justify-center column fill-height>
 			<input type="file" ref="fileChooser" class="file-chooser" @change="onFileChanged"/>
 			<img class="log-file-format" src="images/log-file-format.svg"/>
 			<v-btn large color="info" @click="openFileChooser">Seleccionar archivo</v-btn>
