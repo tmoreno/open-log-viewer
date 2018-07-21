@@ -25,12 +25,10 @@
 					:id="'tab' + i">
 					
 					<file-chooser 
-						v-show="!tab.filePath" 
+						v-if="!tab.filePath" 
 						@change="onFileChanged($event, tab)"/>
         
-					<div class="log-lines-container">
-						<div id="log-lines" ref="logLines"></div>
-					</div>
+					<file-viewer v-if="tab.filePath" :file="tab.filePath"></file-viewer>
 				</v-tab-item>
 			</v-tabs-items>
 		</v-tabs>
@@ -39,32 +37,18 @@
 
 <script>
 	const Tab = require("./tab");
-	const Tail = require("./tail");
-	const FileViewer = require("./file-viewer");
 	const FileChooser = require("./components/FileChooser").default;
-	
-	let tail;
+	const FileViewer = require("./components/FileViewer").default;
 
 	export default {
 		components: {
-			FileChooser
+			FileChooser, FileViewer
 		},
 		data() {
 			return {
 				tabs: [new Tab()],
 				currentTab: 'tab0'
 			}
-		},
-		mounted: function() {
-			let fileViewer = new FileViewer(this.$refs.logLines[0]);
-
-			this.tabs[0].setFileViewer(fileViewer);
-		},
-		updated: function() {
-			let numTabs = this.tabs.length;
-			let fileViewer = new FileViewer(this.$refs.logLines[numTabs - 1]);
-
-			this.tabs[numTabs - 1].setFileViewer(fileViewer);
 		},
 		methods: {
 			newTab() {
@@ -82,22 +66,6 @@
 
 					tab.setFileName(event.target.files[0].name);
 					tab.setFilePath(selectedFilePath);
-				
-					tab.clean();
-				
-					if (tail) {
-						tail.stop();
-					}
-					
-					tail = new Tail(selectedFilePath, 1000);
-					
-					tail.on('readLines', lines => {
-						lines.forEach(line => {
-		                	tab.appendLine(line);
-        			    });
-					});
-					
-					tail.start();
 				}
 			}
 		}
