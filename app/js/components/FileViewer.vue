@@ -10,6 +10,7 @@
 		margin: 0 auto;
 		display: flex;
 		overflow: auto;
+		max-width: 100%;
 	}
 
 	div.log-lines {
