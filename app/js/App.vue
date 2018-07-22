@@ -1,12 +1,7 @@
 <template>
     <v-app>
 		<v-tabs show-arrows v-model="currentTab">
-			<v-tab 
-				v-for="(tab, i) in tabs" 
-				:key="i" 
-				:href="'#tab' + i"
-				:title="tab.filePath">
-
+			<v-tab v-for="(tab, i) in tabs" :key="i" :href="'#tab' + i"	:title="tab.filePath">
 				{{ tab.fileName }}
 
 				<v-btn flat icon @click="closeTab(i)" v-show="tabs.length > 1">
@@ -19,16 +14,10 @@
             </v-btn>
 
 			<v-tabs-items>
-				<v-tab-item 
-					v-for="(tab, i) in tabs" 
-					:key="i"
-					:id="'tab' + i">
-					
-					<file-chooser 
-						v-if="!tab.filePath" 
-						@change="onFileChanged($event, tab)"/>
+				<v-tab-item v-for="(tab, i) in tabs" :key="i" :id="'tab' + i">
+					<file-chooser v-if="!tab.filePath" @change="onFileChanged($event, tab)" />
         
-					<file-viewer v-if="tab.filePath" :file="tab.filePath"></file-viewer>
+					<file-viewer v-if="tab.filePath" :file="tab.filePath" />
 				</v-tab-item>
 			</v-tabs-items>
 		</v-tabs>
