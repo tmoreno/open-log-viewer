@@ -1,8 +1,8 @@
+html {
+    overflow: hidden;
+}
+
 .tabs__div {
     text-transform: none;
     width: 200px;
-}
-
-.tabs__content {
-    height: 88vh;
 }

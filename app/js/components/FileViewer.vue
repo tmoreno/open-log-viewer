@@ -1,8 +1,6 @@
 <template>
-	<v-container fill-height>
-		<div class="log-lines-container">
-			<div id="log-lines" ref="logLines"></div>
-		</div>
+	<v-container class="log-lines-container" :style="{height: height + 'px'}">
+		<div id="log-lines" ref="logLines"></div>
 	</v-container>
 </template>
 
@@ -17,6 +15,11 @@
 		props: [
 			'file'
 		],
+		data() {
+			return {
+				height: window.innerHeight - document.querySelector(".tabs__bar").offsetHeight
+			}
+		},
 		mounted: function() {
 			let tail = new Tail(this.file, 1000);
 					
