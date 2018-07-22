@@ -55,10 +55,12 @@
 		],
 		data() {
 			return {
-				height: window.innerHeight - document.querySelector(".tabs__bar").offsetHeight
+				height: this.calcHeight()
 			}
 		},
 		mounted: function() {
+			window.addEventListener('resize', this.handleResize);
+
 			let tail = new Tail(this.file, 1000);
 					
 			tail.on('readLines', lines => {
@@ -94,6 +96,12 @@
 				else if (line.textContent.includes("DEBUG")) {
 					line.classList.add("debug");
 				}
+			},
+			handleResize() {
+				this.height = this.calcHeight();
+			},
+			calcHeight() {
+				return window.innerHeight - document.querySelector(".tabs__bar").offsetHeight;
 			}
 		}
 	}
