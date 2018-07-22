@@ -1,11 +1,48 @@
 <template>
 	<v-container class="log-lines-container" :style="{height: height + 'px'}">
-		<div id="log-lines" ref="logLines"></div>
+		<div class="log-lines" ref="logLines"></div>
 	</v-container>
 </template>
 
 <style>
-	
+	.log-lines-container { 
+		padding: 0px;
+		margin: 0 auto;
+		display: flex;
+		overflow: auto;
+	}
+
+	div.log-lines {
+		font-size: 15px;
+		line-height: initial;
+	}
+
+	div.log-lines p {
+		margin: 0;
+	}
+
+	div.log-lines pre {
+		margin: 0;
+		font-family: Consolas, monaco, 'Courier New', Courier, monospace;
+	}
+
+	.error, .fatal {
+		color: #721c24;
+		background-color: #f8d7da;
+		border-color: #f5c6cb;
+	}
+
+	.warning {
+		color: #856404;
+		background-color: #fff3cd;
+		border-color: #ffeeba;
+	}
+
+	.debug {
+		color: #155724;
+		background-color: #d4edda;
+		border-color: #c3e6cb;
+	}
 </style>
 
 <script>
