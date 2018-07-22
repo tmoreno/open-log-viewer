@@ -49,6 +49,8 @@
 <script>
 	const Tail = require("../tail");
 
+	let tail;
+
 	export default {
 		props: [
 			'file'
@@ -61,7 +63,7 @@
 		mounted: function() {
 			window.addEventListener('resize', this.handleResize);
 
-			let tail = new Tail(this.file, 1000);
+			tail = new Tail(this.file, 1000);
 					
 			tail.on('readLines', lines => {
 				lines.forEach(line => {
@@ -70,6 +72,11 @@
 			});
 			
 			tail.start();
+		},
+		beforeDestroy: function() {
+			tail.stop();
+
+			window.removeEventListener('resize', this.handleResize);
 		},
 		methods: {
 			appendLine(line) {
