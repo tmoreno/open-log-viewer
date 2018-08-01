@@ -1,29 +1,19 @@
 <template>
-	<v-container class="log-lines-container" :style="{height: height + 'px'}">
-		<div class="log-lines" ref="logLines"></div>
-	</v-container>
+	<div ref="logLinesScroll" class="clusterize-scroll" :style="{'max-height': height + 'px'}">
+		<div ref="logLinesContent" class="clusterize-content"></div>
+	</div>
 </template>
 
 <style>
-	.log-lines-container { 
-		padding: 0px;
-		margin: 0 auto;
-		display: flex;
-		overflow: auto;
-		max-width: 100%;
-	}
-
-	div.log-lines {
+	.clusterize-content {
 		font-size: 15px;
 		line-height: initial;
+		display: inline-block;
 	}
 
-	div.log-lines p {
+	.clusterize-content p {
 		margin: 0;
-	}
-
-	div.log-lines pre {
-		margin: 0;
+		white-space: pre;
 		font-family: Consolas, monaco, 'Courier New', Courier, monospace;
 	}
 
@@ -48,6 +38,7 @@
 
 <script>
 	const Tail = require("../tail");
+	const Clusterize = require("clusterize.js");
 
 	let tail;
 
@@ -61,14 +52,21 @@
 			}
 		},
 		mounted: function() {
+			let clusterize = new Clusterize({
+				scrollElem: this.$refs.logLinesScroll,
+				contentElem: this.$refs.logLinesContent
+			});
+
 			window.addEventListener('resize', this.handleResize);
 
 			tail = new Tail(this.file, 1000);
 					
 			tail.on('readLines', lines => {
-				lines.forEach(line => {
-					this.appendLine(line);
+				let logLines = lines.map(line => {
+					return this.createLogLine(line);
 				});
+
+				clusterize.append(logLines);
 			});
 			
 			tail.start();
@@ -79,16 +77,16 @@
 			window.removeEventListener('resize', this.handleResize);
 		},
 		methods: {
-			appendLine(line) {
-				let pre = document.createElement("pre");
-				pre.innerHTML = line;
-				
+			createLogLine(line) {
 				let p = document.createElement("p");
-				p.appendChild(pre);
+				p.innerHTML = line;
 				
 				this.applyClassColor(p);
-			
-				this.$refs.logLines.appendChild(p);
+
+				let temp = document.createElement("div");
+				temp.appendChild(p);
+
+				return temp.innerHTML;
 			},
 			applyClassColor(line) {
 				if (line.textContent.includes("FATAL")) {

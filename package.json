@@ -9,6 +9,7 @@
     "start:dev": "cross-env NODE_ENV=development npm run start"
   },
   "dependencies": {
+    "clusterize.js": "0.18.1",
     "material-design-icons-iconfont": "3.0.3",
     "typeface-roboto": "0.0.54",
     "vue": "2.5.16",

@@ -1,6 +1,7 @@
 import 'typeface-roboto';
 import 'material-design-icons-iconfont/dist/material-design-icons.css';
 import 'vuetify/dist/vuetify.css';
+import 'clusterize.js/clusterize.css'
 import '../css/vuetify-custom.css';
 
 import Vue from 'vue';
