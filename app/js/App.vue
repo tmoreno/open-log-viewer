@@ -1,7 +1,13 @@
 <template>
     <v-app>
 		<v-tabs show-arrows v-model="currentTab">
-			<v-tab v-for="(tab, i) in tabs" :key="i" :href="'#tab' + i"	:title="tab.filePath">
+			<v-tab 
+				v-for="(tab, i) in tabs" 
+				:key="i" 
+				:href="'#tab' + i"
+				:title="tab.filePath" 
+				v-if="!tab.removed">
+
 				{{ tab.fileName }}
 
 				<v-btn flat icon @click="closeTab(i)" v-show="tabs.length > 1">
@@ -14,7 +20,12 @@
             </v-btn>
 
 			<v-tabs-items>
-				<v-tab-item v-for="(tab, i) in tabs" :key="i" :id="'tab' + i">
+				<v-tab-item 
+					v-for="(tab, i) in tabs" 
+					:key="i" 
+					:id="'tab' + i" 
+					v-if="!tab.removed">
+					
 					<file-chooser v-if="!tab.filePath" @change="onFileChanged($event, tab)" />
         
 					<file-viewer v-if="tab.filePath" :file="tab.filePath" />
@@ -45,9 +56,7 @@
 				this.currentTab = 'tab' + (this.tabs.length - 1);
 			},
 			closeTab(index) {
-				this.tabs = this.tabs.filter((tab, i) => {
-					return i !== index;
-				});
+				this.tabs[index].removed = true;
 			},
 			onFileChanged(event, tab) {
 				if (event.target.files.length > 0) {
