@@ -1,4 +1,5 @@
 const {app, BrowserWindow} = require('electron');
+const path = require('path');
 
 if (process.env.NODE_ENV === "development") {
 	require('electron-reload')(__dirname);
@@ -9,7 +10,12 @@ if (process.env.NODE_ENV === "development") {
 let mainWindow;
 
 function createWindow() {
-	mainWindow = new BrowserWindow({width: 1024, height: 768});
+	mainWindow = new BrowserWindow({
+		width: 1024, 
+		height: 768,
+		icon: path.join(__dirname, 'app/icons/logo.ico')
+	});
+
 	mainWindow.loadFile("./app/index.html");
 	mainWindow.setMenu(null);
 
