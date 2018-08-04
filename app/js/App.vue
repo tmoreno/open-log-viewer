@@ -10,7 +10,7 @@
 
 				{{ tab.fileName }}
 
-				<v-btn flat icon @click="closeTab(i)" v-show="tabs.length > 1">
+				<v-btn flat icon @click="closeTab(i)" v-show="showCloseButton()">
 					<v-icon>close</v-icon>
 				</v-btn>
 		    </v-tab>
@@ -76,6 +76,13 @@
 				userPreferences.removeFile(this.tabs[index].filePath);
 
 				this.tabs[index].removed = true;
+			},
+			showCloseButton() {
+				const numOpenTabs = this.tabs.filter(tab => {
+					return tab.removed === false;
+				}).length;
+
+				return numOpenTabs >= 2;
 			},
 			onFileChanged(event, tab) {
 				if (event.target.files.length > 0) {
