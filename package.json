@@ -1,5 +1,5 @@
 {
-  "name": "log-viewer",
+  "name": "open-log-viewer",
   "version": "1.0.0",
   "main": "main.js",
   "scripts": {
