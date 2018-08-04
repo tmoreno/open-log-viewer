@@ -37,8 +37,11 @@
 
 <script>
 	const Tab = require("./tab");
+	const UserPreferences = require("./userPreferences");
 	const FileChooser = require("./components/FileChooser").default;
 	const FileViewer = require("./components/FileViewer").default;
+
+	let userPreferences = new UserPreferences();
 
 	export default {
 		components: {
@@ -46,8 +49,22 @@
 		},
 		data() {
 			return {
-				tabs: [new Tab()],
+				tabs: [],
 				currentTab: 'tab0'
+			}
+		},
+		mounted: function() {
+			userPreferences.getFiles().forEach(file => {
+				let tab = new Tab();
+
+				tab.setFileName(file.name);
+				tab.setFilePath(file.path);
+
+				this.tabs.push(tab);
+			});
+
+			if (this.tabs.length === 0) {
+				this.tabs.push(new Tab());
 			}
 		},
 		methods: {
@@ -56,14 +73,19 @@
 				this.currentTab = 'tab' + (this.tabs.length - 1);
 			},
 			closeTab(index) {
+				userPreferences.removeFile(this.tabs[index].filePath);
+
 				this.tabs[index].removed = true;
 			},
 			onFileChanged(event, tab) {
 				if (event.target.files.length > 0) {
+					const selectedFileName = event.target.files[0].name;
 					const selectedFilePath = event.target.files[0].path;
 
-					tab.setFileName(event.target.files[0].name);
+					tab.setFileName(selectedFileName);
 					tab.setFilePath(selectedFilePath);
+
+					userPreferences.addFile(selectedFileName, selectedFilePath);
 				}
 			}
 		}
