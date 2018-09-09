@@ -41,7 +41,7 @@
       ]
     },
     "win": {
-      "target": "nsis",
+      "target": "portable",
       "icon": "app/icons/logo.ico"
     }
   },
