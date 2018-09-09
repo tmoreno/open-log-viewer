@@ -21,6 +21,7 @@
     "productName": "Open Log Viewer",
     "files": [
       "main.js",
+      "mainMenu.js",
       "app/index.html",
       "app/images/*.*",
       "dist/build.js"

@@ -17,7 +17,6 @@ function createWindow() {
 	});
 
 	mainWindow.loadFile("./app/index.html");
-	mainWindow.setMenu(null);
 
 	if (process.env.NODE_ENV === "development") {
 		mainWindow.webContents.openDevTools();
@@ -30,7 +29,7 @@ function createWindow() {
 		mainWindow = null;
 	});
 
-	require('./app/js/mainMenu');
+	require('./mainMenu');
 }
 
 app.on('ready', createWindow);
