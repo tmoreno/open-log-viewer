@@ -8,8 +8,13 @@
     "build:dev": "webpack --watch",
     "start": "electron .",
     "start:dev": "cross-env NODE_ENV=development npm run start",
-    "pack": "electron-builder --dir",
-    "dist": "electron-builder"
+    "pack:win": "electron-builder --win --dir",
+    "pack:mac": "electron-builder --mac --dir",
+    "pack:linux": "electron-builder --linux --dir",
+    "dist": "electron-builder -mwl",
+    "dist:win": "electron-builder --win",
+    "dist:mac": "electron-builder --mac",
+    "dist:linux": "electron-builder --linux"
   },
   "build": {
     "appId": "com.tmoreno.openlogviewer",
