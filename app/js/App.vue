@@ -1,10 +1,9 @@
 <template>
     <v-app id="drag-and-drop-zone">
-		<v-tabs show-arrows>
+		<v-tabs show-arrows v-model="currentTab">
 			<v-tab 
 				v-for="(tab, i) in tabs" 
 				:key="i" 
-				:href="'#tab' + i"
 				:title="tab.filePath" 
 				v-if="!tab.removed">
 
@@ -18,20 +17,19 @@
 			<v-btn flat icon @click="newTab">
             	<v-icon>add</v-icon>
             </v-btn>
-
-			<v-tabs-items>
-				<v-tab-item 
-					v-for="(tab, i) in tabs" 
-					:key="i" 
-					:id="'tab' + i" 
-					v-if="!tab.removed">
-					
-					<file-chooser v-if="!tab.filePath" @change="onFileChanged($event, tab)" />
-        
-					<file-viewer v-if="tab.filePath" :file="tab.filePath" />
-				</v-tab-item>
-			</v-tabs-items>
 		</v-tabs>
+
+		<v-tabs-items v-model="currentTab">
+			<v-tab-item 
+				v-for="(tab, i) in tabs" 
+				:key="i" 
+				v-if="!tab.removed">
+				
+				<file-chooser v-if="!tab.filePath" @change="onFileChanged($event, tab)" />
+	
+				<file-viewer v-if="tab.filePath" :file="tab.filePath" />
+			</v-tab-item>
+		</v-tabs-items>
     </v-app>
 </template>
 
@@ -49,7 +47,8 @@
 		},
 		data() {
 			return {
-				tabs: []
+				tabs: [],
+				currentTab: null
 			}
 		},
 		mounted: function() {
@@ -80,6 +79,8 @@
 
 					this.tabs.push(tab);
 
+					this.currentTab = "" + (this.tabs.length - 1);
+
 					userPreferences.addFile(selectedFileName, selectedFilePath);
             	}
             
@@ -89,6 +90,8 @@
 		methods: {
 			newTab() {
 				this.tabs.push(new Tab());
+
+				this.currentTab = "" + (this.tabs.length - 1);
 			},
 			closeTab(index) {
 				userPreferences.removeFile(this.tabs[index].filePath);
