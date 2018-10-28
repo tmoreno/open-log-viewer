@@ -1,5 +1,5 @@
 <template>
-    <v-app>
+    <v-app id="drag-and-drop-zone">
 		<v-tabs show-arrows>
 			<v-tab 
 				v-for="(tab, i) in tabs" 
@@ -65,6 +65,26 @@
 			if (this.tabs.length === 0) {
 				this.tabs.push(new Tab());
 			}
+
+			document.getElementById("drag-and-drop-zone").ondrop = (e) => {
+            	e.preventDefault();
+
+            	for (let file of e.dataTransfer.files) {
+                	const selectedFileName = file.name;
+					const selectedFilePath = file.path;
+
+					let tab = new Tab();
+
+					tab.setFileName(selectedFileName);
+					tab.setFilePath(selectedFilePath);
+
+					this.tabs.push(tab);
+
+					userPreferences.addFile(selectedFileName, selectedFilePath);
+            	}
+            
+            	return false;
+        	};
 		},
 		methods: {
 			newTab() {
