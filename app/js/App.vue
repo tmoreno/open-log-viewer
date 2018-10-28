@@ -1,6 +1,6 @@
 <template>
     <v-app>
-		<v-tabs show-arrows v-model="currentTab">
+		<v-tabs show-arrows>
 			<v-tab 
 				v-for="(tab, i) in tabs" 
 				:key="i" 
@@ -49,8 +49,7 @@
 		},
 		data() {
 			return {
-				tabs: [],
-				currentTab: 'tab0'
+				tabs: []
 			}
 		},
 		mounted: function() {
@@ -70,7 +69,6 @@
 		methods: {
 			newTab() {
 				this.tabs.push(new Tab());
-				this.currentTab = 'tab' + (this.tabs.length - 1);
 			},
 			closeTab(index) {
 				userPreferences.removeFile(this.tabs[index].filePath);
