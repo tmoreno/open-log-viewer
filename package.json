@@ -1,7 +1,9 @@
 {
   "name": "open-log-viewer",
   "version": "1.0.0",
-  "author": "Tomás Moreno Bernal",
+  "author": "Tomás Moreno Bernal <@tmorenobernal>",
+  "homepage": "https://github.com/tmoreno/open-log-viewer",
+  "license" : "GPL-v3",
   "main": "main.js",
   "scripts": {
     "build": "webpack",
