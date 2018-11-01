@@ -1,6 +1,28 @@
 <template>
-	<div ref="logLinesScroll" class="clusterize-scroll" :style="{'max-height': height + 'px'}">
-		<div ref="logLinesContent" class="clusterize-content"></div>
+	<div>
+		<div ref="logLinesScroll" class="clusterize-scroll" :style="{'max-height': height + 'px'}">
+			<div ref="logLinesContent" class="clusterize-content"></div>
+		</div>
+
+		<v-dialog v-model="showDialog" max-width="500">
+      		<v-card>
+        		<v-card-title class="title error">
+					Atención
+				</v-card-title>
+
+				<v-card-text class="font-weight-medium subheading">
+					El archivo "{{file}}" no existe
+				</v-card-text>
+
+				<v-card-actions>
+					<v-spacer></v-spacer>
+
+					<v-btn color="primary" flat @click="showDialog = false">
+						OK
+					</v-btn>
+				</v-card-actions>
+			</v-card>
+		</v-dialog>
 	</div>
 </template>
 
@@ -48,7 +70,8 @@
 		],
 		data() {
 			return {
-				height: this.calcHeight()
+				height: this.calcHeight(),
+				showDialog: false
 			}
 		},
 		mounted: function() {
@@ -69,7 +92,7 @@
 				clusterize.append(logLines);
 			});
 			
-			tail.start();
+			tail.start().catch(error => this.showDialog = true);
 		},
 		beforeDestroy: function() {
 			tail.stop();

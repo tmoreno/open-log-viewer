@@ -12,26 +12,29 @@ module.exports = class Tail extends EventEmitter {
     }
 
     start() {
-        let lines = [];
-        let stats = fs.statSync(this.file);
-        let fileSizeInBytes = stats.size;
-
-        let lineReader = readline.createInterface({
-            input: fs.createReadStream(this.file, {start: this.startPosition})
-        });
+        return new Promise((resolve, reject) => {
+            try {
+                let lines = [];
+                let stats = fs.statSync(this.file);
+                let fileSizeInBytes = stats.size;
         
-        lineReader.on('close', () => {
-            this.startPosition = fileSizeInBytes;
-
-            this.emit('readLines', lines);
-
-            this.timerId = setTimeout(() => {
-                this.start()
-            }, this.timeoutInMillis);
-        });
-
-        lineReader.on('line', line => {
-            lines.push(line);
+                readline.createInterface({
+                    input: fs.createReadStream(this.file, {start: this.startPosition})
+                })
+                .on('close', () => {
+                    this.startPosition = fileSizeInBytes;
+        
+                    this.emit('readLines', lines);
+        
+                    this.timerId = setTimeout(() => this.start().catch(error => reject(error)), this.timeoutInMillis);
+                })
+                .on('line', line => {
+                    lines.push(line);
+                });
+            }
+            catch(error) {
+                reject(error);
+            }
         });
     }
 
