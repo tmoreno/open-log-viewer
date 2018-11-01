@@ -27,6 +27,7 @@
 
 <script>
 	const Tab = require("./tab");
+	const fs = __non_webpack_require__("fs");
 	const UserPreferences = require("./userPreferences");
 	const FileChooser = require("./components/FileChooser").default;
 	const FileViewer = require("./components/FileViewer").default;
@@ -45,12 +46,17 @@
 		},
 		mounted: function() {
 			userPreferences.getFiles().forEach(file => {
-				let tab = new Tab();
-
-				tab.setFileName(file.name);
-				tab.setFilePath(file.path);
-
-				this.tabs.push(tab);
+				if (fs.existsSync(file.path)) {
+					let tab = new Tab();
+	
+					tab.setFileName(file.name);
+					tab.setFilePath(file.path);
+	
+					this.tabs.push(tab);
+				}
+				else {
+					userPreferences.removeFile(file.path);
+				}
 			});
 
 			if (this.tabs.length === 0) {
