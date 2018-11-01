@@ -2,7 +2,7 @@ html {
     overflow: hidden;
 }
 
-.tabs__div {
+.v-tabs__div {
     text-transform: none;
     width: 200px;
 }

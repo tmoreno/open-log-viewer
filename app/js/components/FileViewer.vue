@@ -106,7 +106,7 @@
 				this.height = this.calcHeight();
 			},
 			calcHeight() {
-				return window.innerHeight - document.querySelector(".tabs__bar").offsetHeight;
+				return window.innerHeight - document.querySelector(".v-tabs__bar").offsetHeight;
 			}
 		}
 	}

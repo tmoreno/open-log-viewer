@@ -1,7 +1,7 @@
 <template>
     <v-app id="drag-and-drop-zone">
 		<v-tabs show-arrows v-model="currentTab">
-			<v-tab v-for="(tab, i) in tabs" :key="tab.id" :title="tab.filePath">
+			<v-tab v-for="(tab, i) in tabs" :key="tab.id" :title="tab.filePath" :href="'#tab' + tab.id">
 
 				{{ tab.fileName }}
 
@@ -16,7 +16,7 @@
 		</v-tabs>
 
 		<v-tabs-items v-model="currentTab">
-			<v-tab-item v-for="tab in tabs" :key="tab.id">
+			<v-tab-item v-for="tab in tabs" :key="tab.id" :value="'tab' + tab.id" >
 				<file-chooser v-if="!tab.filePath" @change="onFileChanged($event, tab)" />
 	
 				<file-viewer v-if="tab.filePath" :file="tab.filePath" />
@@ -71,7 +71,7 @@
 
 					this.tabs.push(tab);
 
-					this.currentTab = "" + (this.tabs.length - 1);
+					this.currentTab = this.tabs.length - 1;
 
 					userPreferences.addFile(selectedFileName, selectedFilePath);
             	}
@@ -83,22 +83,19 @@
 			newTab() {
 				this.tabs.push(new Tab());
 
-				this.currentTab = "" + (this.tabs.length - 1);
+				this.currentTab = this.tabs.length - 1;
 			},
 			closeTab(index) {
 				userPreferences.removeFile(this.tabs[index].filePath);
 
 				this.tabs.splice(index, 1);
 
-				let currentTabNumber = parseInt(this.currentTab);
-				if (index <= currentTabNumber) {
-					currentTabNumber--;
+				if (index <= this.currentTab) {
+					this.currentTab--;
 
-					if (currentTabNumber < 0) {
-						currentTabNumber = 0;
+					if (this.currentTab < 0) {
+						this.currentTab = 0;
 					}
-
-					this.currentTab = "" + currentTabNumber;
 				}
 			},
 			showCloseButton() {
