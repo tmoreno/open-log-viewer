@@ -9,7 +9,7 @@
 
 				{{ tab.fileName }}
 
-				<v-btn flat icon @click="closeTab(i)" v-show="showCloseButton()">
+				<v-btn flat icon @click.stop.prevent="closeTab(i)" v-show="showCloseButton()">
 					<v-icon>close</v-icon>
 				</v-btn>
 		    </v-tab>
