@@ -47,11 +47,8 @@
 		mounted: function() {
 			userPreferences.getFiles().forEach(file => {
 				if (fs.existsSync(file.path)) {
-					let tab = new Tab();
-	
-					tab.setFileName(file.name);
-					tab.setFilePath(file.path);
-	
+					let tab = new Tab(file.name, file.path);
+
 					this.tabs.push(tab);
 				}
 				else {
@@ -60,26 +57,20 @@
 			});
 
 			if (this.tabs.length === 0) {
-				this.tabs.push(new Tab());
+				this.tabs.push(new Tab(this.$t("new-file")));
 			}
 
 			document.getElementById("drag-and-drop-zone").ondrop = (e) => {
             	e.preventDefault();
 
             	for (let file of e.dataTransfer.files) {
-                	const selectedFileName = file.name;
-					const selectedFilePath = file.path;
-
-					let tab = new Tab();
-
-					tab.setFileName(selectedFileName);
-					tab.setFilePath(selectedFilePath);
+					let tab = new Tab(file.name, file.path);
 
 					this.tabs.push(tab);
 
 					this.currentTab = this.tabs.length - 1;
 
-					userPreferences.addFile(selectedFileName, selectedFilePath);
+					userPreferences.addFile(file.name, file.path);
             	}
             
             	return false;
@@ -87,7 +78,7 @@
 		},
 		methods: {
 			newTab() {
-				this.tabs.push(new Tab());
+				this.tabs.push(new Tab(this.$t("new-file")));
 
 				this.currentTab = this.tabs.length - 1;
 			},
