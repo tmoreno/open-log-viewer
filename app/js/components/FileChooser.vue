@@ -3,7 +3,7 @@
 		<v-layout align-center justify-center column fill-height>
 			<input type="file" ref="fileChooser" class="file-chooser" @change="onFileChanged"/>
 			<img class="log-file-format" src="images/log-file-format.svg"/>
-			<v-btn large color="info" @click="openFileChooser">Seleccionar archivo</v-btn>
+			<v-btn large color="info" @click="openFileChooser">{{ $t("choose-file") }}</v-btn>
 		</v-layout>
 	</v-container>
 </template>

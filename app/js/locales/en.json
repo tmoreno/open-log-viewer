@@ -1,3 +1,5 @@
 {
-    "choose-file": "Seleccionar archivo"
+    "choose-file": "Choose file",
+    "warning": "Warning",
+    "file-no-exists": "The file \"{filename}\" doesn't exists"
 }

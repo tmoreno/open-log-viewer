@@ -7,11 +7,11 @@
 		<v-dialog v-model="showDialog" max-width="500">
       		<v-card>
         		<v-card-title class="title error">
-					Atención
+					{{ $t("warning") }}
 				</v-card-title>
 
 				<v-card-text class="font-weight-medium subheading">
-					El archivo "{{file}}" no existe
+					{{ $t("file-no-exists", {filename: file}) }}
 				</v-card-text>
 
 				<v-card-actions>
