@@ -1,6 +1,6 @@
 <template>
     <v-app id="drag-and-drop-zone">
-		<v-tabs show-arrows v-model="currentTab">
+		<v-tabs show-arrows v-model="currentTab" hide-slider>
 			<v-tab v-for="(tab, i) in tabs" :key="tab.id" :title="tab.filePath" :href="'#tab' + tab.id">
 
 				{{ tab.fileName }}

@@ -1,5 +1,13 @@
 <template>
 	<div>
+		<v-toolbar color="grey lighten-5 elevation-0" :height="toolbarHeight">
+			<v-btn icon>
+				<v-icon style="font-size: 24px">delete</v-icon>
+			</v-btn>
+
+			<v-spacer></v-spacer>
+		</v-toolbar>
+
 		<div ref="logLinesScroll" class="clusterize-scroll" :style="{'max-height': height + 'px'}">
 			<div ref="logLinesContent" class="clusterize-content"></div>
 		</div>
@@ -70,6 +78,7 @@
 		],
 		data() {
 			return {
+				toolbarHeight: 40,
 				height: this.calcHeight(),
 				showDialog: false
 			}
@@ -129,7 +138,7 @@
 				this.height = this.calcHeight();
 			},
 			calcHeight() {
-				return window.innerHeight - document.querySelector(".v-tabs__bar").offsetHeight;
+				return window.innerHeight - document.querySelector(".v-tabs__bar").offsetHeight - 40;
 			}
 		}
 	}

@@ -6,3 +6,7 @@ html {
     text-transform: none;
     width: 200px;
 }
+
+.v-tabs__item--active {
+    background-color: #fafafa;
+}
