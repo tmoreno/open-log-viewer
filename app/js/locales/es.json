@@ -2,5 +2,6 @@
     "choose-file": "Seleccionar archivo",
     "warning": "Atención",
     "file-no-exists": "El archivo \"{filename}\" no existe",
-    "new-file": "Nuevo archivo"
+    "new-file": "Nuevo archivo",
+    "clean": "Limpiar"
 }

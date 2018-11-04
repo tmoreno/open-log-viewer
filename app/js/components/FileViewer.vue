@@ -1,8 +1,8 @@
 <template>
 	<div>
 		<v-toolbar color="grey lighten-5 elevation-0" :height="toolbarHeight">
-			<v-btn icon>
-				<v-icon style="font-size: 24px">delete</v-icon>
+			<v-btn icon @click="clean">
+				<v-icon :title="$t('clean')" style="font-size: 24px">delete</v-icon>
 			</v-btn>
 
 			<v-spacer></v-spacer>
@@ -78,15 +78,17 @@
 		],
 		data() {
 			return {
+				clusterize: null,
 				toolbarHeight: 40,
 				height: this.calcHeight(),
 				showDialog: false
 			}
 		},
 		mounted: function() {
-			let clusterize = new Clusterize({
+			this.clusterize = new Clusterize({
 				scrollElem: this.$refs.logLinesScroll,
-				contentElem: this.$refs.logLinesContent
+				contentElem: this.$refs.logLinesContent,
+				show_no_data_row: false
 			});
 
 			window.addEventListener('resize', this.handleResize);
@@ -98,7 +100,7 @@
 					return this.createLogLine(line);
 				});
 
-				clusterize.append(logLines);
+				this.clusterize.append(logLines);
 			});
 			
 			tail.start().catch(error => this.showDialog = true);
@@ -109,6 +111,9 @@
 			window.removeEventListener('resize', this.handleResize);
 		},
 		methods: {
+			clean() {
+				this.clusterize.clear();
+			},
 			createLogLine(line) {
 				let p = document.createElement("p");
 				p.innerHTML = line;
