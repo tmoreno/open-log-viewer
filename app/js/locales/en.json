@@ -3,5 +3,6 @@
     "warning": "Warning",
     "file-no-exists": "The file \"{filename}\" doesn't exists",
     "new-file": "New file",
-    "clean": "Clean"
+    "clean": "Clean",
+    "settings": "Settings"
 }

@@ -6,6 +6,10 @@
 			</v-btn>
 
 			<v-spacer></v-spacer>
+
+			<v-btn flat icon color="grey darken-1" @click="settings">
+				<v-icon :title="$t('settings')" style="font-size: 24px">settings</v-icon>
+			</v-btn>
 		</v-toolbar>
 
 		<div ref="logLinesScroll" class="clusterize-scroll" :style="{'max-height': height + 'px'}">
@@ -113,6 +117,9 @@
 		methods: {
 			clean() {
 				this.clusterize.clear();
+			},
+			settings() {
+
 			},
 			createLogLine(line) {
 				let p = document.createElement("p");
