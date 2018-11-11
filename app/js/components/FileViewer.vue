@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<v-toolbar color="grey lighten-5 elevation-0" :height="toolbarHeight">
-			<v-btn icon @click="clean">
+			<v-btn flat icon color="grey darken-1" @click="clean">
 				<v-icon :title="$t('clean')" style="font-size: 24px">delete</v-icon>
 			</v-btn>
 

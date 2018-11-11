@@ -10,7 +10,7 @@
 				</v-btn>
 		    </v-tab>
 
-			<v-btn flat icon @click="newTab">
+			<v-btn flat icon color="grey darken-1" @click="newTab">
             	<v-icon>add</v-icon>
             </v-btn>
 		</v-tabs>
