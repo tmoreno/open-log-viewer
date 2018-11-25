@@ -8,14 +8,14 @@
             <v-flex xs2>
                 <v-layout column>
                     <span class="caption setting-header">{{ $t("text") }}</span>
-                    <v-btn @click="showColorPicker = true"></v-btn>
+                    <color-picker :color="textColor" @accept="changeTextColor"></color-picker>
                 </v-layout>
             </v-flex>
 
             <v-flex xs2>
                 <v-layout column>
                     <span class="caption setting-header">{{ $t("background") }}</span>
-                    <v-btn @click="showColorPicker = true"></v-btn>
+                    <color-picker :color="backgroundColor" @accept="changeBackgroundColor"></color-picker>
                 </v-layout>
             </v-flex>
 
@@ -26,8 +26,6 @@
                 </v-layout>
             </v-flex>
         </v-layout>
-
-        <color-picker :show="showColorPicker" :color="color" @cancel="showColorPicker = false"></color-picker>
     </v-flex>
 </template>
 
@@ -54,8 +52,16 @@
         ],
         data() {
             return {
-                color: "#194d33",
-                showColorPicker: false
+                textColor: "#ffffff",
+                backgroundColor: "#000000"
+            }
+        },
+        methods: {
+            changeTextColor(newColor) {
+                this.textColor = newColor;
+            },
+            changeBackgroundColor(newColor) {
+                this.backgroundColor = newColor;
             }
         }
 	}
