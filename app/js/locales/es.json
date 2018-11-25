@@ -6,5 +6,8 @@
     "clean": "Limpiar",
     "settings": "Configuración",
     "save": "Guardar",
-    "close": "Cerrar"
+    "close": "Cerrar",
+    "text": "Texto",
+    "background": "Fondo",
+    "regex": "Expresión regular"
 }

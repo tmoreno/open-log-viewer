@@ -6,5 +6,8 @@
     "clean": "Clean",
     "settings": "Settings",
     "save": "Save",
-    "close": "Close"
+    "close": "Close",
+    "text": "Text",
+    "background": "Background",
+    "regex": "Regular expression"
 }
