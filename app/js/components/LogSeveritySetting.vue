@@ -8,14 +8,14 @@
             <v-flex xs2>
                 <v-layout column>
                     <span class="caption setting-header">{{ $t("text") }}</span>
-                    <v-btn></v-btn>
+                    <v-btn @click="showColorPicker = true"></v-btn>
                 </v-layout>
             </v-flex>
 
             <v-flex xs2>
                 <v-layout column>
                     <span class="caption setting-header">{{ $t("background") }}</span>
-                    <v-btn></v-btn>
+                    <v-btn @click="showColorPicker = true"></v-btn>
                 </v-layout>
             </v-flex>
 
@@ -26,6 +26,24 @@
                 </v-layout>
             </v-flex>
         </v-layout>
+
+        <v-dialog v-model="showColorPicker" width="225">
+            <v-card>
+                <color-picker v-model="colors"></color-picker>
+
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+
+                    <v-btn color="primary" @click="showColorPicker = false">
+                        {{ $t("accept") }}
+                    </v-btn>
+
+                    <v-btn color="primary" flat @click="showColorPicker = false">
+                        {{ $t("cancel") }}
+                    </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
     </v-flex>
 </template>
 
@@ -41,9 +59,20 @@
 </style>
 
 <script>
+    import { Chrome } from 'vue-color';
+
 	export default {
+        components: {
+			"color-picker": Chrome
+		},
 		props: [
 			'severity'
-        ]
+        ],
+        data() {
+            return {
+                colors: "#194d33",
+                showColorPicker: false
+            }
+        }
 	}
 </script>
