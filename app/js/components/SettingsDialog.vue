@@ -11,149 +11,15 @@
                 <v-card-text>
                     <v-container grid-list-md style="padding: 0">
                         <v-layout row wrap>
-                            <v-flex xs12>
-                                <span class="title">DEBUG</span>
-                                
-                                <v-divider></v-divider>
+                            <log-severity-setting severity="DEBUG"></log-severity-setting>
 
-                                <v-layout row wrap>
-                                    <v-flex xs2>
-                                        <v-layout column>
-                                            <span class="caption setting-header">{{ $t("text") }}</span>
-                                            <v-btn></v-btn>
-                                        </v-layout>
-                                    </v-flex>
+                            <log-severity-setting severity="INFO"></log-severity-setting>
 
-                                    <v-flex xs2>
-                                        <v-layout column>
-                                            <span class="caption setting-header">{{ $t("background") }}</span>
-                                            <v-btn></v-btn>
-                                        </v-layout>
-                                    </v-flex>
+                            <log-severity-setting severity="WARNING"></log-severity-setting>
 
-                                    <v-flex xs8>
-                                        <v-layout column>
-                                            <span class="caption setting-header">{{ $t("regex") }}</span>
-                                            <v-text-field class="regex-input" hide-details></v-text-field>
-                                        </v-layout>
-                                    </v-flex>
-                                </v-layout>
-                            </v-flex>
+                            <log-severity-setting severity="ERROR"></log-severity-setting>
 
-                            <v-flex xs12>
-                                <span class="title">INFO</span>
-
-                                <v-divider></v-divider>
-
-                                <v-layout row wrap>
-                                    <v-flex xs2>
-                                        <v-layout column>
-                                            <span class="caption setting-header">{{ $t("text") }}</span>
-                                            <v-btn></v-btn>
-                                        </v-layout>
-                                    </v-flex>
-
-                                    <v-flex xs2>
-                                        <v-layout column>
-                                            <span class="caption setting-header">{{ $t("background") }}</span>
-                                            <v-btn></v-btn>
-                                        </v-layout>
-                                    </v-flex>
-
-                                    <v-flex xs8>
-                                        <v-layout column>
-                                            <span class="caption setting-header">{{ $t("regex") }}</span>
-                                            <v-text-field class="regex-input" hide-details></v-text-field>
-                                        </v-layout>
-                                    </v-flex>
-                                </v-layout>
-                            </v-flex>
-
-                            <v-flex xs12>
-                                <span class="title">WARNING</span>
-
-                                <v-divider></v-divider>
-
-                                <v-layout row wrap>
-                                    <v-flex xs2>
-                                        <v-layout column>
-                                            <span class="caption setting-header">{{ $t("text") }}</span>
-                                            <v-btn></v-btn>
-                                        </v-layout>
-                                    </v-flex>
-
-                                    <v-flex xs2>
-                                        <v-layout column>
-                                            <span class="caption setting-header">{{ $t("background") }}</span>
-                                            <v-btn></v-btn>
-                                        </v-layout>
-                                    </v-flex>
-
-                                    <v-flex xs8>
-                                        <v-layout column>
-                                            <span class="caption setting-header">{{ $t("regex") }}</span>
-                                            <v-text-field class="regex-input" hide-details></v-text-field>
-                                        </v-layout>
-                                    </v-flex>
-                                </v-layout>
-                            </v-flex>
-
-                            <v-flex xs12>
-                                <span class="title">ERROR</span>
-
-                                <v-divider></v-divider>
-
-                                <v-layout row wrap>
-                                    <v-flex xs2>
-                                        <v-layout column>
-                                            <span class="caption setting-header">{{ $t("text") }}</span>
-                                            <v-btn></v-btn>
-                                        </v-layout>
-                                    </v-flex>
-
-                                    <v-flex xs2>
-                                        <v-layout column>
-                                            <span class="caption setting-header">{{ $t("background") }}</span>
-                                            <v-btn></v-btn>
-                                        </v-layout>
-                                    </v-flex>
-
-                                    <v-flex xs8>
-                                        <v-layout column>
-                                            <span class="caption setting-header">{{ $t("regex") }}</span>
-                                            <v-text-field class="regex-input" hide-details></v-text-field>
-                                        </v-layout>
-                                    </v-flex>
-                                </v-layout>
-                            </v-flex>
-
-                            <v-flex xs12>
-                                <span class="title">FATAL</span>
-
-                                <v-divider></v-divider>
-                                <v-layout row wrap>
-                                    <v-flex xs2>
-                                        <v-layout column>
-                                            <span class="caption setting-header">{{ $t("text") }}</span>
-                                            <v-btn></v-btn>
-                                        </v-layout>
-                                    </v-flex>
-
-                                    <v-flex xs2>
-                                        <v-layout column>
-                                            <span class="caption setting-header">{{ $t("background") }}</span>
-                                            <v-btn></v-btn>
-                                        </v-layout>
-                                    </v-flex>
-
-                                    <v-flex xs8>
-                                        <v-layout column>
-                                            <span class="caption setting-header">{{ $t("regex") }}</span>
-                                            <v-text-field class="regex-input" hide-details></v-text-field>
-                                        </v-layout>
-                                    </v-flex>
-                                </v-layout>
-                            </v-flex>
+                            <log-severity-setting severity="FATAL"></log-severity-setting>
                         </v-layout>
                     </v-container>
                 </v-card-text>
@@ -174,19 +40,13 @@
     </v-layout>
 </template>
 
-<style>
-    .setting-header {
-        margin-left: 8px;
-    }
-
-    .regex-input {
-        margin-left: 8px; 
-        margin-top: 0;
-    }
-</style>
-
 <script>
+    const LogSeveritySetting = require("./LogSeveritySetting").default;
+
 	export default {
+        components: {
+			LogSeveritySetting
+		},
 		props: [
 			'show'
         ],
