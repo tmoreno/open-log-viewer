@@ -4,5 +4,7 @@
     "file-no-exists": "El archivo \"{filename}\" no existe",
     "new-file": "Nuevo archivo",
     "clean": "Limpiar",
-    "settings": "Configuración"
+    "settings": "Configuración",
+    "save": "Guardar",
+    "close": "Cerrar"
 }

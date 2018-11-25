@@ -12,6 +12,8 @@
 			</v-btn>
 		</v-toolbar>
 
+		<settings-dialog :show="showSettings" @close="showSettings = false"></settings-dialog>
+
 		<div ref="logLinesScroll" class="clusterize-scroll" :style="{'max-height': height + 'px'}">
 			<div ref="logLinesContent" class="clusterize-content"></div>
 		</div>
@@ -73,10 +75,14 @@
 <script>
 	const Tail = require("../tail");
 	const Clusterize = require("clusterize.js");
+	const SettingsDialog = require("./SettingsDialog").default;
 
 	let tail;
 
 	export default {
+		components: {
+			SettingsDialog
+		},
 		props: [
 			'file'
 		],
@@ -85,7 +91,8 @@
 				clusterize: null,
 				toolbarHeight: 40,
 				height: this.calcHeight(),
-				showDialog: false
+				showDialog: false,
+				showSettings: false
 			}
 		},
 		mounted: function() {
@@ -119,7 +126,7 @@
 				this.clusterize.clear();
 			},
 			settings() {
-
+				this.showSettings = true;
 			},
 			createLogLine(line) {
 				let p = document.createElement("p");
