@@ -8,14 +8,14 @@
             <v-flex xs2>
                 <v-layout column>
                     <span class="caption setting-header">{{ $t("text") }}</span>
-                    <color-picker :color="textColor" @accept="changeTextColor"></color-picker>
+                    <color-picker :color="textColorSelected" @accept="changeTextColor"></color-picker>
                 </v-layout>
             </v-flex>
 
             <v-flex xs2>
                 <v-layout column>
                     <span class="caption setting-header">{{ $t("background") }}</span>
-                    <color-picker :color="backgroundColor" @accept="changeBackgroundColor"></color-picker>
+                    <color-picker :color="backgroundColorSelected" @accept="changeBackgroundColor"></color-picker>
                 </v-layout>
             </v-flex>
 
@@ -48,20 +48,22 @@
 			"color-picker": ColorPicker
 		},
 		props: [
-			'severity'
+            'severity',
+            'textColor',
+            'backgroundColor'
         ],
         data() {
             return {
-                textColor: "#ffffff",
-                backgroundColor: "#000000"
+                textColorSelected: this.textColor,
+                backgroundColorSelected: this.backgroundColor
             }
         },
         methods: {
             changeTextColor(newColor) {
-                this.textColor = newColor;
+                this.textColorSelected = newColor;
             },
             changeBackgroundColor(newColor) {
-                this.backgroundColor = newColor;
+                this.backgroundColorSelected = newColor;
             }
         }
 	}

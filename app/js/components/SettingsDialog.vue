@@ -11,15 +11,35 @@
                 <v-card-text>
                     <v-container grid-list-md style="padding: 0">
                         <v-layout row wrap>
-                            <log-severity-setting severity="DEBUG"></log-severity-setting>
+                            <log-severity-setting 
+                                severity="DEBUG" 
+                                :textColor="debugTextColor" 
+                                :backgroundColor="debugBackgroundColor">
+                            </log-severity-setting>
 
-                            <log-severity-setting severity="INFO"></log-severity-setting>
+                            <log-severity-setting 
+                                severity="INFO"
+                                :textColor="infoTextColor" 
+                                :backgroundColor="infoBackgroundColor">
+                            </log-severity-setting>
 
-                            <log-severity-setting severity="WARNING"></log-severity-setting>
+                            <log-severity-setting 
+                                severity="WARNING"
+                                :textColor="warningTextColor" 
+                                :backgroundColor="warningBackgroundColor">
+                            </log-severity-setting>
 
-                            <log-severity-setting severity="ERROR"></log-severity-setting>
+                            <log-severity-setting 
+                                severity="ERROR"
+                                :textColor="errorTextColor" 
+                                :backgroundColor="errorBackgroundColor">
+                            </log-severity-setting>
 
-                            <log-severity-setting severity="FATAL"></log-severity-setting>
+                            <log-severity-setting 
+                                severity="FATAL"
+                                :textColor="fatalTextColor" 
+                                :backgroundColor="fatalBackgroundColor">
+                            </log-severity-setting>
                         </v-layout>
                     </v-container>
                 </v-card-text>
@@ -52,7 +72,17 @@
         ],
         data() {
             return {
-                showDialog: this.show
+                showDialog: this.show,
+                debugTextColor: "#ffffff",
+                debugBackgroundColor: "#000000",
+                infoTextColor: "#ffffff",
+                infoBackgroundColor: "#000000",
+                warningTextColor: "#ffffff",
+                warningBackgroundColor: "#000000",
+                errorTextColor: "#ffffff",
+                errorBackgroundColor: "#000000",
+                fatalTextColor: "#ffffff",
+                fatalBackgroundColor: "#000000"
             }
         },
         watch: {

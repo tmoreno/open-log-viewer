@@ -35,7 +35,7 @@
         data() {
             return {
                 showDialog: false,
-                selectedColor: this.color,
+                selectedColor: this.color || "#ffffff",
                 selectedColorButton: this.color
             }
         },
