@@ -72,6 +72,9 @@
 
 <script>
     const LogSeveritySetting = require("./LogSeveritySetting").default;
+    const UserPreferences = require("../userPreferences");
+
+    let userPreferences = new UserPreferences();
 
 	export default {
         components: {
@@ -83,16 +86,16 @@
         data() {
             return {
                 showDialog: this.show,
-                debugTextColor: "#ffffff",
-                debugBackgroundColor: "#000000",
-                infoTextColor: "#ffffff",
-                infoBackgroundColor: "#000000",
-                warningTextColor: "#ffffff",
-                warningBackgroundColor: "#000000",
-                errorTextColor: "#ffffff",
-                errorBackgroundColor: "#000000",
-                fatalTextColor: "#ffffff",
-                fatalBackgroundColor: "#000000"
+                debugTextColor: userPreferences.getDebugSeveritySettings().textColor,
+                debugBackgroundColor: userPreferences.getDebugSeveritySettings().backgroundColor,
+                infoTextColor: userPreferences.getInfoSeveritySettings().textColor,
+                infoBackgroundColor: userPreferences.getInfoSeveritySettings().backgroundColor,
+                warningTextColor: userPreferences.getWarningSeveritySettings().textColor,
+                warningBackgroundColor: userPreferences.getWarningSeveritySettings().backgroundColor,
+                errorTextColor: userPreferences.getErrorSeveritySettings().textColor,
+                errorBackgroundColor: userPreferences.getErrorSeveritySettings().backgroundColor,
+                fatalTextColor: userPreferences.getFatalSeveritySettings().textColor,
+                fatalBackgroundColor: userPreferences.getFatalSeveritySettings().backgroundColor
             }
         },
         watch: {
@@ -152,6 +155,12 @@
                 this.$emit('close');
             },
             save() {
+                userPreferences.saveDebugSeveritySettings(this.debugTextColor, this.debugBackgroundColor);
+                userPreferences.saveInfoSeveritySettings(this.infoTextColor, this.infoBackgroundColor);
+                userPreferences.saveWarningSeveritySettings(this.warningTextColor, this.warningBackgroundColor);
+                userPreferences.saveErrorSeveritySettings(this.errorTextColor, this.errorBackgroundColor);
+                userPreferences.saveFatalSeveritySettings(this.fatalTextColor, this.fatalBackgroundColor);
+
                 this.close();
             }
         }
