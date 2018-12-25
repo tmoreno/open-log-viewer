@@ -14,31 +14,41 @@
                             <log-severity-setting 
                                 severity="DEBUG" 
                                 :textColor="debugTextColor" 
-                                :backgroundColor="debugBackgroundColor">
+                                :backgroundColor="debugBackgroundColor"
+                                @textColorChanged="textColorChangedHandler"
+                                @backgroundColorChanged="backgroundColorChangedHandler">
                             </log-severity-setting>
 
                             <log-severity-setting 
                                 severity="INFO"
                                 :textColor="infoTextColor" 
-                                :backgroundColor="infoBackgroundColor">
+                                :backgroundColor="infoBackgroundColor"
+                                @textColorChanged="textColorChangedHandler"
+                                @backgroundColorChanged="backgroundColorChangedHandler">
                             </log-severity-setting>
 
                             <log-severity-setting 
                                 severity="WARNING"
                                 :textColor="warningTextColor" 
-                                :backgroundColor="warningBackgroundColor">
+                                :backgroundColor="warningBackgroundColor"
+                                @textColorChanged="textColorChangedHandler"
+                                @backgroundColorChanged="backgroundColorChangedHandler">
                             </log-severity-setting>
 
                             <log-severity-setting 
                                 severity="ERROR"
                                 :textColor="errorTextColor" 
-                                :backgroundColor="errorBackgroundColor">
+                                :backgroundColor="errorBackgroundColor"
+                                @textColorChanged="textColorChangedHandler"
+                                @backgroundColorChanged="backgroundColorChangedHandler">
                             </log-severity-setting>
 
                             <log-severity-setting 
                                 severity="FATAL"
                                 :textColor="fatalTextColor" 
-                                :backgroundColor="fatalBackgroundColor">
+                                :backgroundColor="fatalBackgroundColor"
+                                @textColorChanged="textColorChangedHandler"
+                                @backgroundColorChanged="backgroundColorChangedHandler">
                             </log-severity-setting>
                         </v-layout>
                     </v-container>
@@ -91,6 +101,52 @@
             }
         },
         methods: {
+            textColorChangedHandler(eventData) {
+                switch(eventData.severity) {
+                    case 'DEBUG':
+                        this.debugTextColor = eventData.color;
+                        break;
+
+                    case 'INFO':
+                        this.infoTextColor = eventData.color;
+                        break;
+
+                    case 'WARNING':
+                        this.warningTextColor = eventData.color;
+                        break;
+
+                    case 'ERROR':
+                        this.errorTextColor = eventData.color;
+                        break;
+
+                    case 'FATAL':
+                        this.fatalTextColor = eventData.color;
+                        break;
+                }
+            },
+            backgroundColorChangedHandler(eventData) {
+                switch(eventData.severity) {
+                    case 'DEBUG':
+                        this.debugBackgroundColor = eventData.color;
+                        break;
+
+                    case 'INFO':
+                        this.infoBackgroundColor = eventData.color;
+                        break;
+
+                    case 'WARNING':
+                        this.warningBackgroundColor = eventData.color;
+                        break;
+
+                    case 'ERROR':
+                        this.errorBackgroundColor = eventData.color;
+                        break;
+
+                    case 'FATAL':
+                        this.fatalBackgroundColor = eventData.color;
+                        break;
+                }
+            },
             close() {
                 this.showDialog = false;
                 this.$emit('close');

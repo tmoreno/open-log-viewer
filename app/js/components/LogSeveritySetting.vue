@@ -61,9 +61,11 @@
         methods: {
             changeTextColor(newColor) {
                 this.textColorSelected = newColor;
+                this.$emit('textColorChanged', {severity: this.severity, color: newColor});
             },
             changeBackgroundColor(newColor) {
                 this.backgroundColorSelected = newColor;
+                this.$emit('backgroundColorChanged', {severity: this.severity, color: newColor});
             }
         }
 	}
