@@ -161,7 +161,8 @@
                 userPreferences.saveErrorSeveritySettings(this.errorTextColor, this.errorBackgroundColor);
                 userPreferences.saveFatalSeveritySettings(this.fatalTextColor, this.fatalBackgroundColor);
 
-                this.close();
+                this.showDialog = false;
+                this.$emit('accept');
             }
         }
 	}
