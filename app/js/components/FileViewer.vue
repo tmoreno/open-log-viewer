@@ -12,7 +12,7 @@
 			</v-btn>
 		</v-toolbar>
 
-		<settings-dialog :show="showSettings" @close="showSettings = false"></settings-dialog>
+		<settings-dialog :show="showSettings" @accept="acceptSettings" @close="closeSettings"></settings-dialog>
 
 		<div ref="logLinesScroll" class="clusterize-scroll" :style="{'max-height': height + 'px'}">
 			<div ref="logLinesContent" class="clusterize-content"></div>
@@ -91,25 +91,15 @@
 			}
 		},
 		mounted: function() {
+			window.addEventListener('resize', this.handleResize);
+
 			this.clusterize = new Clusterize({
 				scrollElem: this.$refs.logLinesScroll,
 				contentElem: this.$refs.logLinesContent,
 				show_no_data_row: false
 			});
 
-			window.addEventListener('resize', this.handleResize);
-
-			tail = new Tail(this.file, 1000);
-					
-			tail.on('readLines', lines => {
-				let logLines = lines.map(line => {
-					return this.createLogLine(line);
-				});
-
-				this.clusterize.append(logLines);
-			});
-			
-			tail.start().catch(error => this.showDialog = true);
+			this.startTail();
 		},
 		beforeDestroy: function() {
 			tail.stop();
@@ -122,6 +112,40 @@
 			},
 			settings() {
 				this.showSettings = true;
+			},
+			acceptSettings() {
+				this.debugTextColor = userPreferences.getDebugSeveritySettings().textColor;
+                this.debugBackgroundColor = userPreferences.getDebugSeveritySettings().backgroundColor;
+                this.infoTextColor = userPreferences.getInfoSeveritySettings().textColor;
+                this.infoBackgroundColor = userPreferences.getInfoSeveritySettings().backgroundColor;
+                this.warningTextColor = userPreferences.getWarningSeveritySettings().textColor;
+                this.warningBackgroundColor = userPreferences.getWarningSeveritySettings().backgroundColor;
+                this.errorTextColor = userPreferences.getErrorSeveritySettings().textColor;
+                this.errorBackgroundColor = userPreferences.getErrorSeveritySettings().backgroundColor;
+                this.fatalTextColor = userPreferences.getFatalSeveritySettings().textColor;
+				this.fatalBackgroundColor = userPreferences.getFatalSeveritySettings().backgroundColor;
+
+				tail.stop();
+
+				this.clean();
+				this.startTail();
+				this.closeSettings();
+			},
+			closeSettings() {
+				this.showSettings = false;
+			},
+			startTail() {
+				tail = new Tail(this.file, 1000);
+					
+				tail.on('readLines', lines => {
+					let logLines = lines.map(line => {
+						return this.createLogLine(line);
+					});
+
+					this.clusterize.append(logLines);
+				});
+				
+				tail.start().catch(error => this.showDialog = true);
 			},
 			createLogLine(line) {
 				let p = document.createElement("p");
