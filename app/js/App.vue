@@ -28,6 +28,7 @@
 <script>
 	const Tab = require("./tab");
 	const fs = __non_webpack_require__("fs");
+	const FileSettings = require("./fileSettings");
 	const UserPreferences = require("./userPreferences");
 	const FileChooser = require("./components/FileChooser").default;
 	const FileViewer = require("./components/FileViewer").default;
@@ -47,7 +48,7 @@
 		mounted: function() {
 			userPreferences.getFiles().forEach(file => {
 				if (fs.existsSync(file.path)) {
-					let tab = new Tab(file.name, file.path);
+					let tab = new Tab(file.name, file.path, file.settings);
 
 					this.tabs.push(tab);
 				}
@@ -64,13 +65,14 @@
             	e.preventDefault();
 
             	for (let file of e.dataTransfer.files) {
-					let tab = new Tab(file.name, file.path);
+					let fileSettings = new FileSettings();
+					let tab = new Tab(file.name, file.path, fileSettings);
 
 					this.tabs.push(tab);
 
 					this.currentTab = this.tabs.length - 1;
 
-					userPreferences.addFile(file.name, file.path);
+					userPreferences.addFile(file.name, file.path, fileSettings);
             	}
             
             	return false;
@@ -102,11 +104,13 @@
 				if (event.target.files.length > 0) {
 					const selectedFileName = event.target.files[0].name;
 					const selectedFilePath = event.target.files[0].path;
+					const fileSettings = new FileSettings();
 
 					tab.setFileName(selectedFileName);
 					tab.setFilePath(selectedFilePath);
+					tab.setFileSettings(fileSettings);
 
-					userPreferences.addFile(selectedFileName, selectedFilePath);
+					userPreferences.addFile(selectedFileName, selectedFilePath, fileSettings);
 				}
 			}
 		}

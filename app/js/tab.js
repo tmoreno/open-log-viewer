@@ -7,10 +7,11 @@ function generateId() {
 }
 
 module.exports = class Tab {
-    constructor(fileName, filePath) {
+    constructor(fileName, filePath, fileSettings) {
         this.id = generateId();
         this.fileName = fileName;
         this.filePath = filePath;
+        this.fileSettings = fileSettings;
     }
 
     setFileName(fileName) {
@@ -19,5 +20,9 @@ module.exports = class Tab {
 
     setFilePath(filePath) {
         this.filePath = filePath;
+    }
+
+    setFileSettings(fileSettings) {
+        this.fileSettings = fileSettings;
     }
 }

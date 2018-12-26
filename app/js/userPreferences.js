@@ -13,10 +13,10 @@ module.exports = class UserPreferences {
         return instance;
     }
 
-    addFile(fileName, filePath) {
+    addFile(fileName, filePath, fileSettings) {
         let files = this.getFiles();
 
-        files.push({name: fileName, path: filePath});
+        files.push({name: fileName, path: filePath, settings: fileSettings});
 
         this.store.set("files", files);
     }
