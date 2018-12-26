@@ -52,30 +52,15 @@
 		white-space: pre;
 		font-family: Consolas, monaco, 'Courier New', Courier, monospace;
 	}
-
-	.error, .fatal {
-		color: #721c24;
-		background-color: #f8d7da;
-		border-color: #f5c6cb;
-	}
-
-	.warning {
-		color: #856404;
-		background-color: #fff3cd;
-		border-color: #ffeeba;
-	}
-
-	.debug {
-		color: #155724;
-		background-color: #d4edda;
-		border-color: #c3e6cb;
-	}
 </style>
 
 <script>
 	const Tail = require("../tail");
 	const Clusterize = require("clusterize.js");
 	const SettingsDialog = require("./SettingsDialog").default;
+	const UserPreferences = require("../userPreferences");
+
+    let userPreferences = new UserPreferences();
 
 	let tail;
 
@@ -92,7 +77,17 @@
 				toolbarHeight: 40,
 				height: this.calcHeight(),
 				showDialog: false,
-				showSettings: false
+				showSettings: false,
+				debugTextColor: userPreferences.getDebugSeveritySettings().textColor,
+                debugBackgroundColor: userPreferences.getDebugSeveritySettings().backgroundColor,
+                infoTextColor: userPreferences.getInfoSeveritySettings().textColor,
+                infoBackgroundColor: userPreferences.getInfoSeveritySettings().backgroundColor,
+                warningTextColor: userPreferences.getWarningSeveritySettings().textColor,
+                warningBackgroundColor: userPreferences.getWarningSeveritySettings().backgroundColor,
+                errorTextColor: userPreferences.getErrorSeveritySettings().textColor,
+                errorBackgroundColor: userPreferences.getErrorSeveritySettings().backgroundColor,
+                fatalTextColor: userPreferences.getFatalSeveritySettings().textColor,
+                fatalBackgroundColor: userPreferences.getFatalSeveritySettings().backgroundColor
 			}
 		},
 		mounted: function() {
@@ -132,25 +127,33 @@
 				let p = document.createElement("p");
 				p.innerHTML = line;
 				
-				this.applyClassColor(p);
+				this.applyColor(p);
 
 				let temp = document.createElement("div");
 				temp.appendChild(p);
 
 				return temp.innerHTML;
 			},
-			applyClassColor(line) {
+			applyColor(line) {
 				if (line.textContent.includes("FATAL")) {
-					line.classList.add("fatal");
+					line.style.color = this.fatalTextColor;
+					line.style.backgroundColor = this.fatalBackgroundColor;
 				}
 				else if (line.textContent.includes("ERROR")) {
-					line.classList.add("error");
+					line.style.color = this.errorTextColor;
+					line.style.backgroundColor = this.errorBackgroundColor;
 				}
 				else if (line.textContent.includes("WARN")) {
-					line.classList.add("warning");
+					line.style.color = this.warningTextColor;
+					line.style.backgroundColor = this.warningBackgroundColor;
+				}
+				else if (line.textContent.includes("INFO")) {
+					line.style.color = this.infoTextColor;
+					line.style.backgroundColor = this.infoBackgroundColor;
 				}
 				else if (line.textContent.includes("DEBUG")) {
-					line.classList.add("debug");
+					line.style.color = this.debugTextColor;
+					line.style.backgroundColor = this.debugBackgroundColor;
 				}
 			},
 			handleResize() {
