@@ -19,7 +19,7 @@
 			<v-tab-item v-for="tab in tabs" :key="tab.id" :value="'tab' + tab.id" >
 				<file-chooser v-if="!tab.filePath" @change="onFileChanged($event, tab)" />
 	
-				<file-viewer v-if="tab.filePath" :file="tab.filePath" />
+				<file-viewer v-if="tab.filePath" :file="tab.filePath" :file-settings="tab.fileSettings" />
 			</v-tab-item>
 		</v-tabs-items>
     </v-app>
@@ -48,7 +48,7 @@
 		mounted: function() {
 			userPreferences.getFiles().forEach(file => {
 				if (fs.existsSync(file.path)) {
-					let tab = new Tab(file.name, file.path, file.settings);
+					let tab = new Tab(file.name, file.path, FileSettings.createFromSettings(file.settings));
 
 					this.tabs.push(tab);
 				}

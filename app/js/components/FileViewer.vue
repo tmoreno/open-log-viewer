@@ -69,7 +69,8 @@
 			SettingsDialog
 		},
 		props: [
-			'file'
+			'file',
+			'fileSettings'
 		],
 		data() {
 			return {
@@ -78,6 +79,7 @@
 				height: this.calcHeight(),
 				showDialog: false,
 				showSettings: false,
+				currentFileSettings: this.fileSettings,
 				debugTextColor: userPreferences.getDebugSeveritySettings().textColor,
                 debugBackgroundColor: userPreferences.getDebugSeveritySettings().backgroundColor,
                 infoTextColor: userPreferences.getInfoSeveritySettings().textColor,
@@ -159,26 +161,10 @@
 				return temp.innerHTML;
 			},
 			applyColor(line) {
-				if (line.textContent.includes("FATAL")) {
-					line.style.color = this.fatalTextColor;
-					line.style.backgroundColor = this.fatalBackgroundColor;
-				}
-				else if (line.textContent.includes("ERROR")) {
-					line.style.color = this.errorTextColor;
-					line.style.backgroundColor = this.errorBackgroundColor;
-				}
-				else if (line.textContent.includes("WARN")) {
-					line.style.color = this.warningTextColor;
-					line.style.backgroundColor = this.warningBackgroundColor;
-				}
-				else if (line.textContent.includes("INFO")) {
-					line.style.color = this.infoTextColor;
-					line.style.backgroundColor = this.infoBackgroundColor;
-				}
-				else if (line.textContent.includes("DEBUG")) {
-					line.style.color = this.debugTextColor;
-					line.style.backgroundColor = this.debugBackgroundColor;
-				}
+				let lineColorStyle = this.currentFileSettings.getLineColorStyle(line);
+
+				line.style.color = lineColorStyle.textColor;
+				line.style.backgroundColor = lineColorStyle.backgroundColor;
 			},
 			handleResize() {
 				this.height = this.calcHeight();
