@@ -89,50 +89,10 @@
         },
         methods: {
             textColorChangedHandler(eventData) {
-                switch(eventData.severity) {
-                    case 'DEBUG':
-                        this.currentSettings.debug.textColor = eventData.color;
-                        break;
-
-                    case 'INFO':
-                        this.currentSettings.info.textColor = eventData.color;
-                        break;
-
-                    case 'WARNING':
-                        this.currentSettings.warning.textColor = eventData.color;
-                        break;
-
-                    case 'ERROR':
-                        this.currentSettings.error.textColor = eventData.color;
-                        break;
-
-                    case 'FATAL':
-                        this.currentSettings.fatal.textColor = eventData.color;
-                        break;
-                }
+                this.currentSettings.changeTextColor(eventData.severity, eventData.color);
             },
             backgroundColorChangedHandler(eventData) {
-                switch(eventData.severity) {
-                    case 'DEBUG':
-                        this.currentSettings.debug.backgroundColor = eventData.color;
-                        break;
-
-                    case 'INFO':
-                        this.currentSettings.info.backgroundColor = eventData.color;
-                        break;
-
-                    case 'WARNING':
-                        this.currentSettings.warning.backgroundColor = eventData.color;
-                        break;
-
-                    case 'ERROR':
-                        this.currentSettings.error.backgroundColor = eventData.color;
-                        break;
-
-                    case 'FATAL':
-                        this.currentSettings.fatal.backgroundColor = eventData.color;
-                        break;
-                }
+                this.currentSettings.changeBackgroundColor(eventData.severity, eventData.color);
             },
             close() {
                 this.showDialog = false;

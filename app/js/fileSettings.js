@@ -52,4 +52,12 @@ module.exports = class FileSettings {
             return this.info;
         }
     }
+
+    changeTextColor(severity, textColor) {
+        this[severity.toLowerCase()].textColor = textColor;
+    }
+
+    changeBackgroundColor(severity, backgroundColor) {
+        this[severity.toLowerCase()].backgroundColor = backgroundColor;
+    }
 }
