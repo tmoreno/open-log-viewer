@@ -15,35 +15,40 @@
                                 severity="DEBUG" 
                                 :setting="currentSettings.debug" 
                                 @textColorChanged="textColorChangedHandler"
-                                @backgroundColorChanged="backgroundColorChangedHandler">
+                                @backgroundColorChanged="backgroundColorChangedHandler"
+                                @patternChanged="patternChangedHandler">
                             </log-severity-setting>
 
                             <log-severity-setting 
                                 severity="INFO"
                                 :setting="currentSettings.info" 
                                 @textColorChanged="textColorChangedHandler"
-                                @backgroundColorChanged="backgroundColorChangedHandler">
+                                @backgroundColorChanged="backgroundColorChangedHandler"
+                                @patternChanged="patternChangedHandler">
                             </log-severity-setting>
 
                             <log-severity-setting 
                                 severity="WARNING"
                                 :setting="currentSettings.warning" 
                                 @textColorChanged="textColorChangedHandler"
-                                @backgroundColorChanged="backgroundColorChangedHandler">
+                                @backgroundColorChanged="backgroundColorChangedHandler"
+                                @patternChanged="patternChangedHandler">
                             </log-severity-setting>
 
                             <log-severity-setting 
                                 severity="ERROR"
                                 :setting="currentSettings.error" 
                                 @textColorChanged="textColorChangedHandler"
-                                @backgroundColorChanged="backgroundColorChangedHandler">
+                                @backgroundColorChanged="backgroundColorChangedHandler"
+                                @patternChanged="patternChangedHandler">
                             </log-severity-setting>
 
                             <log-severity-setting 
                                 severity="FATAL"
                                 :setting="currentSettings.fatal" 
                                 @textColorChanged="textColorChangedHandler"
-                                @backgroundColorChanged="backgroundColorChangedHandler">
+                                @backgroundColorChanged="backgroundColorChangedHandler"
+                                @patternChanged="patternChangedHandler">
                             </log-severity-setting>
                         </v-layout>
                     </v-container>
@@ -93,6 +98,9 @@
             },
             backgroundColorChangedHandler(eventData) {
                 this.currentSettings.changeBackgroundColor(eventData.severity, eventData.color);
+            },
+            patternChangedHandler(eventData) {
+                this.currentSettings.changePattern(eventData.severity, eventData.pattern);
             },
             close() {
                 this.showDialog = false;

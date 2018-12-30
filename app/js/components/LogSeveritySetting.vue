@@ -22,7 +22,12 @@
             <v-flex xs8>
                 <v-layout column>
                     <span class="caption setting-header">{{ $t("regex") }}</span>
-                    <v-text-field class="regex-input" hide-details></v-text-field>
+                    <v-text-field 
+                        v-model="pattern" 
+                        class="regex-input" 
+                        hide-details 
+                        @change="changePattern">
+                    </v-text-field>
                 </v-layout>
             </v-flex>
         </v-layout>
@@ -54,7 +59,8 @@
         data() {
             return {
                 textColorSelected: this.setting.textColor,
-                backgroundColorSelected: this.setting.backgroundColor
+                backgroundColorSelected: this.setting.backgroundColor,
+                pattern: this.setting.pattern
             }
         },
         methods: {
@@ -65,6 +71,9 @@
             changeBackgroundColor(newColor) {
                 this.backgroundColorSelected = newColor;
                 this.$emit('backgroundColorChanged', {severity: this.severity, color: newColor});
+            },
+            changePattern() {
+                this.$emit('patternChanged', {severity: this.severity, pattern: this.pattern});
             }
         }
 	}

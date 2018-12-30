@@ -60,4 +60,8 @@ module.exports = class FileSettings {
     changeBackgroundColor(severity, backgroundColor) {
         this[severity.toLowerCase()].backgroundColor = backgroundColor;
     }
+
+    changePattern(severity, pattern) {
+        this[severity.toLowerCase()].pattern = pattern;
+    }
 }
