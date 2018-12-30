@@ -49,13 +49,12 @@
 		},
 		props: [
             'severity',
-            'textColor',
-            'backgroundColor'
+            'setting'
         ],
         data() {
             return {
-                textColorSelected: this.textColor,
-                backgroundColorSelected: this.backgroundColor
+                textColorSelected: this.setting.textColor,
+                backgroundColorSelected: this.setting.backgroundColor
             }
         },
         methods: {

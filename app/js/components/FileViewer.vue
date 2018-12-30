@@ -12,7 +12,12 @@
 			</v-btn>
 		</v-toolbar>
 
-		<settings-dialog :show="showSettings" @accept="acceptSettings" @close="closeSettings"></settings-dialog>
+		<settings-dialog 
+			:show="showSettings"
+			:settings="currentFileSettings"
+			@accept="acceptSettings" 
+			@close="closeSettings">
+		</settings-dialog>
 
 		<div ref="logLinesScroll" class="clusterize-scroll" :style="{'max-height': height + 'px'}">
 			<div ref="logLinesContent" class="clusterize-content"></div>
@@ -79,17 +84,7 @@
 				height: this.calcHeight(),
 				showDialog: false,
 				showSettings: false,
-				currentFileSettings: this.fileSettings,
-				debugTextColor: userPreferences.getDebugSeveritySettings().textColor,
-                debugBackgroundColor: userPreferences.getDebugSeveritySettings().backgroundColor,
-                infoTextColor: userPreferences.getInfoSeveritySettings().textColor,
-                infoBackgroundColor: userPreferences.getInfoSeveritySettings().backgroundColor,
-                warningTextColor: userPreferences.getWarningSeveritySettings().textColor,
-                warningBackgroundColor: userPreferences.getWarningSeveritySettings().backgroundColor,
-                errorTextColor: userPreferences.getErrorSeveritySettings().textColor,
-                errorBackgroundColor: userPreferences.getErrorSeveritySettings().backgroundColor,
-                fatalTextColor: userPreferences.getFatalSeveritySettings().textColor,
-                fatalBackgroundColor: userPreferences.getFatalSeveritySettings().backgroundColor
+				currentFileSettings: this.fileSettings
 			}
 		},
 		mounted: function() {
@@ -115,17 +110,10 @@
 			settings() {
 				this.showSettings = true;
 			},
-			acceptSettings() {
-				this.debugTextColor = userPreferences.getDebugSeveritySettings().textColor;
-                this.debugBackgroundColor = userPreferences.getDebugSeveritySettings().backgroundColor;
-                this.infoTextColor = userPreferences.getInfoSeveritySettings().textColor;
-                this.infoBackgroundColor = userPreferences.getInfoSeveritySettings().backgroundColor;
-                this.warningTextColor = userPreferences.getWarningSeveritySettings().textColor;
-                this.warningBackgroundColor = userPreferences.getWarningSeveritySettings().backgroundColor;
-                this.errorTextColor = userPreferences.getErrorSeveritySettings().textColor;
-                this.errorBackgroundColor = userPreferences.getErrorSeveritySettings().backgroundColor;
-                this.fatalTextColor = userPreferences.getFatalSeveritySettings().textColor;
-				this.fatalBackgroundColor = userPreferences.getFatalSeveritySettings().backgroundColor;
+			acceptSettings(newSettings) {
+				this.currentFileSettings = newSettings;
+
+				userPreferences.saveFileSettings(this.file, newSettings);
 
 				tail.stop();
 

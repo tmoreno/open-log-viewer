@@ -13,40 +13,35 @@
                         <v-layout row wrap>
                             <log-severity-setting 
                                 severity="DEBUG" 
-                                :textColor="debugTextColor" 
-                                :backgroundColor="debugBackgroundColor"
+                                :setting="currentSettings.debug" 
                                 @textColorChanged="textColorChangedHandler"
                                 @backgroundColorChanged="backgroundColorChangedHandler">
                             </log-severity-setting>
 
                             <log-severity-setting 
                                 severity="INFO"
-                                :textColor="infoTextColor" 
-                                :backgroundColor="infoBackgroundColor"
+                                :setting="currentSettings.info" 
                                 @textColorChanged="textColorChangedHandler"
                                 @backgroundColorChanged="backgroundColorChangedHandler">
                             </log-severity-setting>
 
                             <log-severity-setting 
                                 severity="WARNING"
-                                :textColor="warningTextColor" 
-                                :backgroundColor="warningBackgroundColor"
+                                :setting="currentSettings.warning" 
                                 @textColorChanged="textColorChangedHandler"
                                 @backgroundColorChanged="backgroundColorChangedHandler">
                             </log-severity-setting>
 
                             <log-severity-setting 
                                 severity="ERROR"
-                                :textColor="errorTextColor" 
-                                :backgroundColor="errorBackgroundColor"
+                                :setting="currentSettings.error" 
                                 @textColorChanged="textColorChangedHandler"
                                 @backgroundColorChanged="backgroundColorChangedHandler">
                             </log-severity-setting>
 
                             <log-severity-setting 
                                 severity="FATAL"
-                                :textColor="fatalTextColor" 
-                                :backgroundColor="fatalBackgroundColor"
+                                :setting="currentSettings.fatal" 
                                 @textColorChanged="textColorChangedHandler"
                                 @backgroundColorChanged="backgroundColorChangedHandler">
                             </log-severity-setting>
@@ -72,30 +67,19 @@
 
 <script>
     const LogSeveritySetting = require("./LogSeveritySetting").default;
-    const UserPreferences = require("../userPreferences");
-
-    let userPreferences = new UserPreferences();
 
 	export default {
         components: {
 			LogSeveritySetting
 		},
 		props: [
-			'show'
+            'show',
+            'settings'
         ],
         data() {
             return {
                 showDialog: this.show,
-                debugTextColor: userPreferences.getDebugSeveritySettings().textColor,
-                debugBackgroundColor: userPreferences.getDebugSeveritySettings().backgroundColor,
-                infoTextColor: userPreferences.getInfoSeveritySettings().textColor,
-                infoBackgroundColor: userPreferences.getInfoSeveritySettings().backgroundColor,
-                warningTextColor: userPreferences.getWarningSeveritySettings().textColor,
-                warningBackgroundColor: userPreferences.getWarningSeveritySettings().backgroundColor,
-                errorTextColor: userPreferences.getErrorSeveritySettings().textColor,
-                errorBackgroundColor: userPreferences.getErrorSeveritySettings().backgroundColor,
-                fatalTextColor: userPreferences.getFatalSeveritySettings().textColor,
-                fatalBackgroundColor: userPreferences.getFatalSeveritySettings().backgroundColor
+                currentSettings: this.settings
             }
         },
         watch: {
@@ -107,46 +91,46 @@
             textColorChangedHandler(eventData) {
                 switch(eventData.severity) {
                     case 'DEBUG':
-                        this.debugTextColor = eventData.color;
+                        this.currentSettings.debug.textColor = eventData.color;
                         break;
 
                     case 'INFO':
-                        this.infoTextColor = eventData.color;
+                        this.currentSettings.info.textColor = eventData.color;
                         break;
 
                     case 'WARNING':
-                        this.warningTextColor = eventData.color;
+                        this.currentSettings.warning.textColor = eventData.color;
                         break;
 
                     case 'ERROR':
-                        this.errorTextColor = eventData.color;
+                        this.currentSettings.error.textColor = eventData.color;
                         break;
 
                     case 'FATAL':
-                        this.fatalTextColor = eventData.color;
+                        this.currentSettings.fatal.textColor = eventData.color;
                         break;
                 }
             },
             backgroundColorChangedHandler(eventData) {
                 switch(eventData.severity) {
                     case 'DEBUG':
-                        this.debugBackgroundColor = eventData.color;
+                        this.currentSettings.debug.backgroundColor = eventData.color;
                         break;
 
                     case 'INFO':
-                        this.infoBackgroundColor = eventData.color;
+                        this.currentSettings.info.backgroundColor = eventData.color;
                         break;
 
                     case 'WARNING':
-                        this.warningBackgroundColor = eventData.color;
+                        this.currentSettings.warning.backgroundColor = eventData.color;
                         break;
 
                     case 'ERROR':
-                        this.errorBackgroundColor = eventData.color;
+                        this.currentSettings.error.backgroundColor = eventData.color;
                         break;
 
                     case 'FATAL':
-                        this.fatalBackgroundColor = eventData.color;
+                        this.currentSettings.fatal.backgroundColor = eventData.color;
                         break;
                 }
             },
@@ -155,14 +139,8 @@
                 this.$emit('close');
             },
             save() {
-                userPreferences.saveDebugSeveritySettings(this.debugTextColor, this.debugBackgroundColor);
-                userPreferences.saveInfoSeveritySettings(this.infoTextColor, this.infoBackgroundColor);
-                userPreferences.saveWarningSeveritySettings(this.warningTextColor, this.warningBackgroundColor);
-                userPreferences.saveErrorSeveritySettings(this.errorTextColor, this.errorBackgroundColor);
-                userPreferences.saveFatalSeveritySettings(this.fatalTextColor, this.fatalBackgroundColor);
-
                 this.showDialog = false;
-                this.$emit('accept');
+                this.$emit('accept', this.currentSettings);
             }
         }
 	}
