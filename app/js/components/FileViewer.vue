@@ -126,10 +126,21 @@
 			},
 			startTail() {
 				tail = new Tail(this.file, 1000);
+
+				let previousLineSeveritySettings = this.currentFileSettings.defaultLogLevel();
 					
 				tail.on('readLines', lines => {
 					let logLines = lines.map(line => {
-						return this.createLogLine(line);
+						let severitySettings = this.currentFileSettings.getSeveritySettings(line);
+
+						if (!severitySettings) {
+							severitySettings = previousLineSeveritySettings;
+						}
+						else {
+							previousLineSeveritySettings = severitySettings;
+						}
+
+						return this.createLogLine(line, severitySettings);
 					});
 
 					this.clusterize.append(logLines);
@@ -137,22 +148,16 @@
 				
 				tail.start().catch(error => this.showDialog = true);
 			},
-			createLogLine(line) {
+			createLogLine(line, severitySettings) {
 				let p = document.createElement("p");
 				p.innerHTML = line;
-				
-				this.applyColor(p);
+				p.style.color = severitySettings.textColor;
+				p.style.backgroundColor = severitySettings.backgroundColor;
 
 				let temp = document.createElement("div");
 				temp.appendChild(p);
 
 				return temp.innerHTML;
-			},
-			applyColor(line) {
-				let lineColorStyle = this.currentFileSettings.getLineColorStyle(line);
-
-				line.style.color = lineColorStyle.textColor;
-				line.style.backgroundColor = lineColorStyle.backgroundColor;
 			},
 			handleResize() {
 				this.height = this.calcHeight();

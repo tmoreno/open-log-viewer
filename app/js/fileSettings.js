@@ -35,21 +35,28 @@ module.exports = class FileSettings {
         return Object.assign(new FileSettings(), settings);
     }
 
-    getLineColorStyle(line) {
-        if (line.textContent.includes(this.fatal.pattern)) {
+    defaultLogLevel() {
+        return this.info;
+    }
+
+    getSeveritySettings(line) {
+        if (line.includes(this.fatal.pattern)) {
             return this.fatal;
         }
-        else if (line.textContent.includes(this.error.pattern)) {
+        else if (line.includes(this.error.pattern)) {
             return this.error;
         }
-        else if (line.textContent.includes(this.warning.pattern)) {
+        else if (line.includes(this.warning.pattern)) {
             return this.warning;
         }
-        else if (line.textContent.includes(this.debug.pattern)) {
+        else if (line.includes(this.info.pattern)) {
+            return this.info;
+        }
+        else if (line.includes(this.debug.pattern)) {
             return this.debug;
         }
         else {
-            return this.info;
+            return null;
         }
     }
 
