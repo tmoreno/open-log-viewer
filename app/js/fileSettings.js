@@ -76,4 +76,16 @@ module.exports = class FileSettings {
     changePattern(severity, pattern) {
         this[severity.toLowerCase()].pattern = pattern;
     }
+
+    getLogLevelsToShow() {
+        return Object.keys(this).filter(severity => this[severity].show);
+    }
+
+    setLogLevelsToShow(logLevelsToShow) {
+        for (let severity in this) {
+            this[severity].show = false;
+        }
+
+        logLevelsToShow.forEach(severity => this[severity.toLowerCase()].show = true);
+    }
 }

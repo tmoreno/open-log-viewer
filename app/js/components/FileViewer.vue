@@ -5,6 +5,10 @@
 				<v-icon :title="$t('clean')" style="font-size: 24px">delete</v-icon>
 			</v-btn>
 
+			<v-flex xs4>
+        		<v-select multiple v-model="logLevelsSelected" :items="logLevels" @change="logLevelsToShowChanged"></v-select>
+			</v-flex>
+
 			<v-spacer></v-spacer>
 
 			<v-btn flat icon color="grey darken-1" @click="settings">
@@ -81,6 +85,8 @@
 			return {
 				clusterize: null,
 				toolbarHeight: 40,
+				logLevels: ["Debug", "Info", "Warning", "Error", "Fatal"],
+				logLevelsSelected: this.getLogLevelsToShow(),
 				height: this.calcHeight(),
 				showDialog: false,
 				showSettings: false,
@@ -104,6 +110,14 @@
 			window.removeEventListener('resize', this.handleResize);
 		},
 		methods: {
+			getLogLevelsToShow() {
+				return this.fileSettings.getLogLevelsToShow().map(severity => this.capitalizeFirstLetter(severity));
+			},
+			logLevelsToShowChanged() {
+				this.currentFileSettings.setLogLevelsToShow(this.logLevelsSelected);
+
+				this.acceptSettings(this.currentFileSettings);
+			},
 			clean() {
 				this.clusterize.clear();
 			},
@@ -170,6 +184,9 @@
 			},
 			calcHeight() {
 				return window.innerHeight - document.querySelector(".v-tabs__bar").offsetHeight - 40;
+			},
+			capitalizeFirstLetter(string) {
+    			return string.charAt(0).toUpperCase() + string.slice(1);
 			}
 		}
 	}
