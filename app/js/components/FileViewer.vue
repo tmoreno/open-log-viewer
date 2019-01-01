@@ -130,7 +130,8 @@
 				let previousLineSeveritySettings = this.currentFileSettings.defaultLogLevel();
 					
 				tail.on('readLines', lines => {
-					let logLines = lines.map(line => {
+					let logLines = lines
+					.map(line => {
 						let severitySettings = this.currentFileSettings.getSeveritySettings(line);
 
 						if (!severitySettings) {
@@ -140,8 +141,13 @@
 							previousLineSeveritySettings = severitySettings;
 						}
 
-						return this.createLogLine(line, severitySettings);
-					});
+						return {
+							severitySettings: severitySettings,
+							line: line
+						};
+					})
+					.filter(line => line.severitySettings.show)
+					.map(line => this.createLogLine(line.line, line.severitySettings));
 
 					this.clusterize.append(logLines);
 				});

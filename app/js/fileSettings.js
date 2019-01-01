@@ -3,31 +3,36 @@ module.exports = class FileSettings {
         this.debug = {
             textColor: "#155724", 
             backgroundColor: "#d4edda",
-            pattern: "[DEBUG]"
+            pattern: "[DEBUG]",
+            show: true
         };
 
         this.info = {
             textColor: "#000000", 
             backgroundColor: "#ffffff",
-            pattern: "[INFO]"
+            pattern: "[INFO]",
+            show: true
         };
 
         this.warning = {
             textColor: "#856404", 
             backgroundColor: "#ffc107",
-            pattern: "[WARN]"
+            pattern: "[WARN]",
+            show: true
         };
 
         this.error = {
             textColor: "#721c24", 
             backgroundColor: "#ff5252",
-            pattern: "[ERROR]"
+            pattern: "[ERROR]",
+            show: true
         };
 
         this.fatal = {
             textColor: "#721c24", 
             backgroundColor: "#ff5252",
-            pattern: "[FATAL]"
+            pattern: "[FATAL]",
+            show: true
         };
     }
 
