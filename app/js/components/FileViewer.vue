@@ -5,11 +5,15 @@
 				<v-icon :title="$t('clean')" style="font-size: 24px">delete</v-icon>
 			</v-btn>
 
+			<v-divider class="mx-3" inset vertical></v-divider>
+
 			<v-flex xs4>
         		<v-select multiple v-model="logLevelsSelected" :items="logLevels" @change="logLevelsToShowChanged"></v-select>
 			</v-flex>
 
 			<v-spacer></v-spacer>
+
+			<v-divider class="mx-3" inset vertical></v-divider>
 
 			<v-btn flat icon color="grey darken-1" @click="settings">
 				<v-icon :title="$t('settings')" style="font-size: 24px">settings</v-icon>
