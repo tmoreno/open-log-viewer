@@ -12,8 +12,7 @@ let mainWindow;
 function createWindow() {
 	mainWindow = new BrowserWindow({
 		width: 1024, 
-		height: 768,
-		icon: path.join(__dirname, 'app/icons/logo.ico')
+		height: 768
 	});
 
 	mainWindow.loadFile("./app/index.html");

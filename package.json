@@ -43,14 +43,10 @@
       ]
     },
     "linux": {
-      "target": [
-        "AppImage",
-        "deb"
-      ]
+      "target": ["AppImage", "deb"]
     },
     "win": {
-      "target": "portable",
-      "icon": "app/icons/logo.ico"
+      "target": "portable"
     }
   },
   "dependencies": {
