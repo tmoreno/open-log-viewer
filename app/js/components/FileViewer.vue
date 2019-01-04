@@ -56,7 +56,7 @@
 <style>
 	.clusterize-content {
 		font-size: 15px;
-		line-height: initial;
+		line-height: 18px;
 		display: inline-block;
 	}
 
