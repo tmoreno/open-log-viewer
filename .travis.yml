@@ -1,0 +1,42 @@
+language: node_js
+node_js: "8.11.2"
+
+os:
+  - linux
+  - osx
+  - windows
+
+install:
+  - |
+    if [ $TRAVIS_OS_NAME = linux ]; then 
+      sudo apt-get install --no-install-recommends -y rpm 
+    fi
+
+script:
+  - npm install
+  - npm run build
+  - | 
+    if [ "$TRAVIS_OS_NAME" == "linux" ]; then
+      npm run dist:linux
+    fi
+    if [ "$TRAVIS_OS_NAME" == "osx" ]; then
+      npm run dist:mac
+    fi
+    if [ "$TRAVIS_OS_NAME" == "windows" ]; then
+      npm run dist:win
+    fi
+
+deploy:
+  provider: releases
+  skip_cleanup: true
+  api_key: 
+    secure: bY7mWnxWR2JMp2nv/JOrMyc3HcC8rEUGQIKZgKBr4J5PoixewjidNJsujEyfDoO4KjeEJwecavxJjKUroY7z/Blxrgp7nhUTuAfZaaSIyz12Ep6xJJSXiOnZ34vnIJN2LKKjYf9qmb9kigym777+VazGswasUCl1ZVrSSkUQWasd/h/OLUjD6x8KCFoaoUn77vSLpaa/B0vHrUaiiOvD6IpQrYegP+P5KXtgWsDqqZzjJd9TqYcQ5WGlGhdOE5lJmbWPl7TE7BCvBahMvU1xBppHYOfImWrvJrAhGV6qsin+G9Dy1wLhjU4FiXMuKcdu/xtrffQK9Qd/RwTyf798u8eOqYB/1zl6//JHADV9hroXWerfiCvihpS/OVDRadiA+9V19yubheDzufxjT3k9ss2ipbYAzQLg8Rw6fG6rJIiKIF11tCd+i748BoMofUIgx0CizhkSPOM0H/Tcr9S/N+hKt1qmOj3P6056fijEbwjfUKQhsRk3az4F9dPwHDUvia5MDFSZTYUperIMXoGQaLyyOWc2BcfTnVUGgdTZXwiQYe4kOMSj+9llom4m4EZXGDX+eO2jgKLavoYD2hYyRB9Mp1A4RbSZdVaZz6DKjnG6QYxIBl2aHWDjiQLTMwz9kSEIFX7F/wNETYpyZPvXRqlwUJ3+aqIeTWvCMUkV4wM=
+  file_glob: true
+  file: 
+    - "dist/*.rpm"
+    - "dist/*.deb"
+    - "dist/*.dmg"
+    - "dist/*.exe"
+  draft: true
+  on:
+    branch: master

@@ -43,7 +43,7 @@
       ]
     },
     "linux": {
-      "target": ["AppImage", "deb"]
+      "target": ["rpm", "deb"]
     },
     "win": {
       "target": "portable"
