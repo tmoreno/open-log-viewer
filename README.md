@@ -54,8 +54,8 @@ Open Log Viewer is available for Linux, Mac and Windows
 
 macOS | Windows | Linux
 -----------------| ---| ---|
-<a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.0.0/Open Log Viewer-1.0.0.dmg'>Download</a> | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.0.0/Open Log Viewer 1.0.0.exe'>Download</a> | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.0.0/open-log-viewer_1.0.0_amd64.deb'>Debian-based</a> |
-| | | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.0.0/open-log-viewer-1.0.0.x86_64.rpm'>RedHat-based</a> |
+<a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.0.0/open-log-viewer_1.0.0.dmg'>Download</a> | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.0.0/open-log-viewer_1.0.0.exe'>Download</a> | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.0.0/open-log-viewer_1.0.0.deb'>Debian-based</a> |
+| | | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.0.0/open-log-viewer_1.0.0.rpm'>RedHat-based</a> |
 ## Credits
 
 This software uses the following open source packages:

@@ -20,7 +20,7 @@
   },
   "build": {
     "appId": "com.tmoreno.openlogviewer",
-    "productName": "Open Log Viewer",
+    "artifactName": "${name}_${version}.${ext}",
     "files": [
       "main.js",
       "mainMenu.js",
