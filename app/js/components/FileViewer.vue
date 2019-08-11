@@ -88,7 +88,9 @@
 			this.viewer.setOptions({
 				readOnly: true,
 				highlightActiveLine: false,
-				showPrintMargin: false
+				showPrintMargin: false,
+				fontFamily: "Consolas, monaco, 'Courier New', Courier, monospace",
+				fontSize: "15px"
 			});
 
 			this.startTail();
