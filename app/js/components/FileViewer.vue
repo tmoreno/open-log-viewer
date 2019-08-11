@@ -85,6 +85,11 @@
 			window.addEventListener('resize', this.handleResize);
 
 			this.viewer = ace.edit("viewer");
+			this.viewer.setOptions({
+				readOnly: true,
+				highlightActiveLine: false,
+				showPrintMargin: false
+			});
 
 			this.startTail();
 		},
