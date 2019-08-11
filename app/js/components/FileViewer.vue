@@ -27,9 +27,7 @@
 			@close="closeSettings">
 		</settings-dialog>
 
-		<div ref="logLinesScroll" class="clusterize-scroll" :style="{'max-height': height + 'px'}">
-			<div ref="logLinesContent" class="clusterize-content"></div>
-		</div>
+		<div id="viewer" :style="{'height': height + 'px'}"></div>
 
 		<v-dialog v-model="showDialog" max-width="500">
       		<v-card>
@@ -53,29 +51,16 @@
 	</div>
 </template>
 
-<style>
-	.clusterize-content {
-		font-size: 15px;
-		line-height: 18px;
-		display: inline-block;
-	}
-
-	.clusterize-content p {
-		margin: 0;
-		white-space: pre;
-		font-family: Consolas, monaco, 'Courier New', Courier, monospace;
-	}
-</style>
-
 <script>
 	const Tail = require("../tail");
-	const Clusterize = require("clusterize.js");
+	const ace = require("ace-builds/src-noconflict/ace.js");
 	const SettingsDialog = require("./SettingsDialog").default;
 	const UserPreferences = require("../userPreferences");
 
     let userPreferences = new UserPreferences();
 
 	let tail;
+	let viewer;
 
 	export default {
 		components: {
@@ -87,7 +72,6 @@
 		],
 		data() {
 			return {
-				clusterize: null,
 				toolbarHeight: 40,
 				logLevels: ["Debug", "Info", "Warning", "Error", "Fatal"],
 				logLevelsSelected: this.getLogLevelsToShow(),
@@ -100,11 +84,7 @@
 		mounted: function() {
 			window.addEventListener('resize', this.handleResize);
 
-			this.clusterize = new Clusterize({
-				scrollElem: this.$refs.logLinesScroll,
-				contentElem: this.$refs.logLinesContent,
-				show_no_data_row: false
-			});
+			this.viewer = ace.edit("viewer");
 
 			this.startTail();
 		},
@@ -123,7 +103,7 @@
 				this.acceptSettings(this.currentFileSettings);
 			},
 			clean() {
-				this.clusterize.clear();
+				this.viewer.setValue("");
 			},
 			settings() {
 				this.showSettings = true;
@@ -165,9 +145,7 @@
 						};
 					})
 					.filter(line => line.severitySettings.show)
-					.map(line => this.createLogLine(line.line, line.severitySettings));
-
-					this.clusterize.append(logLines);
+					.map(line => this.viewer.insert(line.line + "\n"));
 				});
 				
 				tail.start().catch(error => this.showDialog = true);
