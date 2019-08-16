@@ -85,15 +85,15 @@
 		mounted: function() {
 			window.addEventListener('resize', this.handleResize);
 
-			ace.define('ace/mode/example', function(require, exports, module) {
+			ace.define('ace/mode/log_file', function(require, exports, module) {
+				const oop = require("ace/lib/oop");
+				const TextMode = require("ace/mode/text").Mode;
+				const LogFileHighlightRules = require("ace/mode/log_file_highlight_rules").LogFileHighlightRules;
 
-				var oop = require("ace/lib/oop");
-				var TextMode = require("ace/mode/text").Mode;
-				var ExampleHighlightRules = require("ace/mode/example_highlight_rules").ExampleHighlightRules;
-
-				var Mode = function() {
-					this.HighlightRules = ExampleHighlightRules;
+				const Mode = function() {
+					this.HighlightRules = LogFileHighlightRules;
 				};
+
 				oop.inherits(Mode, TextMode);
 
 				(function() {
@@ -103,14 +103,11 @@
 				exports.Mode = Mode;
 			});
 
-			ace.define('ace/mode/example_highlight_rules', function(require, exports, module) {
+			ace.define('ace/mode/log_file_highlight_rules', function(require, exports, module) {
+				const oop = require("ace/lib/oop");
+				const TextHighlightRules = require("ace/mode/text_highlight_rules").TextHighlightRules;
 
-				var oop = require("ace/lib/oop");
-				var TextHighlightRules = require("ace/mode/text_highlight_rules").TextHighlightRules;
-
-				var ExampleHighlightRules = function() {
-
-					//this.$rules = new TextHighlightRules().getRules();
+				const LogFileHighlightRules = function() {
 					this.$rules = {
   						start: [
 							{
@@ -121,13 +118,13 @@
 					};
 				}
 
-				oop.inherits(ExampleHighlightRules, TextHighlightRules);
+				oop.inherits(LogFileHighlightRules, TextHighlightRules);
 
-				exports.ExampleHighlightRules = ExampleHighlightRules;
+				exports.LogFileHighlightRules = LogFileHighlightRules;
 			});
 
 			this.viewer = ace.edit("viewer");
-			this.viewer.getSession().setMode('ace/mode/example');
+			this.viewer.getSession().setMode('ace/mode/log_file');
 			this.viewer.setOptions({
 				readOnly: true,
 				highlightActiveLine: false,
