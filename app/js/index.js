@@ -2,6 +2,7 @@ import 'typeface-roboto';
 import 'material-design-icons-iconfont/dist/material-design-icons.css';
 import 'vuetify/dist/vuetify.css';
 import '../css/vuetify-custom.css';
+import '../css/ace-custom.css';
 import en from '../js/locales/en.json';
 import es from '../js/locales/es.json';
 
