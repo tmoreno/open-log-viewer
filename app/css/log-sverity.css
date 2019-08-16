@@ -1,0 +1,29 @@
+.ace_debug {
+    color: #155724;
+    background-color: #d4edda;
+    display: inherit;
+}
+
+.ace_info {
+    color: #000000;
+    background-color: #ffffff;
+    display: inherit;
+}
+
+.ace_warning {
+    color: #856404;
+    background-color: #ffc107;
+    display: inherit;
+}
+
+.ace_error {
+    color: #721c24;
+    background-color: #ff5252;
+    display: inherit;
+}
+
+.ace_fatal {
+    color: #721c24;
+    background-color: #ff5252;
+    display: inherit;
+}

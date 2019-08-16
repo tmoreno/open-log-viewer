@@ -51,6 +51,10 @@
 	</div>
 </template>
 
+<style scoped>
+	@import '../../css/log-sverity.css';
+</style>
+
 <script>
 	const Tail = require("../tail");
 	const ace = require("ace-builds/src-noconflict/ace.js");
