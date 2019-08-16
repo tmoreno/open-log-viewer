@@ -54,6 +54,7 @@
 <script>
 	const Tail = require("../tail");
 	const ace = require("ace-builds/src-noconflict/ace.js");
+	require("ace-builds/src-noconflict/ext-searchbox.js");
 	const SettingsDialog = require("./SettingsDialog").default;
 	const UserPreferences = require("../userPreferences");
 
