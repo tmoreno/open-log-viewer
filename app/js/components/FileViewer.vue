@@ -27,7 +27,7 @@
 			@close="closeSettings">
 		</settings-dialog>
 
-		<div id="viewer" :style="{'height': height + 'px'}"></div>
+		<div ref="viewer" :style="{'height': height + 'px'}"></div>
 
 		<v-dialog v-model="showDialog" max-width="500">
       		<v-card>
@@ -143,7 +143,7 @@
 				exports.LogFileHighlightRules = LogFileHighlightRules;
 			});
 
-			this.viewer = ace.edit("viewer");
+			this.viewer = ace.edit(this.$refs.viewer);
 			this.viewer.getSession().setMode('ace/mode/log_file');
 			this.viewer.setOptions({
 				readOnly: true,
