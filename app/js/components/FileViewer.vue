@@ -111,8 +111,24 @@
 					this.$rules = {
   						start: [
 							{
+								token: "debug", 
+								regex: "^.*DEBUG.*$"
+							},
+							{
 								token: "info", 
 								regex: "^.*INFO.*$"
+							},
+							{
+								token: "warning", 
+								regex: "^.*WARN.*$"
+							},
+							{
+								token: "error", 
+								regex: "^.*ERROR.*$"
+							},
+							{
+								token: "fatal", 
+								regex: "^.*FATAL.*$"
 							}
 						]
 					};
