@@ -2,35 +2,35 @@ module.exports = class FileSettings {
     constructor() {
         this.debug = {
             textColor: "#155724", 
-            backgroundColor: "#d4edda",
+            backgroundColor: "rgba(212, 237, 218, 0.9)",
             pattern: ".*\\[DEBUG\\].*",
             show: true
         };
 
         this.info = {
             textColor: "#000000", 
-            backgroundColor: "#ffffff",
+            backgroundColor: "rgba(255, 255, 255, 0.9)",
             pattern: ".*\\[INFO\\].*",
             show: true
         };
 
         this.warning = {
             textColor: "#856404", 
-            backgroundColor: "#ffc107",
+            backgroundColor: "rgba(255, 193, 7, 0.9)",
             pattern: ".*\\[WARN\\].*",
             show: true
         };
 
         this.error = {
             textColor: "#721c24", 
-            backgroundColor: "#ff5252",
+            backgroundColor: "rgba(255, 82, 82, 0.9)",
             pattern: ".*\\[ERROR\\].*",
             show: true
         };
 
         this.fatal = {
             textColor: "#721c24", 
-            backgroundColor: "#ff5252",
+            backgroundColor: "rgba(255, 82, 82, 0.9)",
             pattern: ".*\\[FATAL\\].*",
             show: true
         };
