@@ -98,7 +98,7 @@
 				}
 			},
 			tabClicked(tabIndex) {
-				if (this.$refs.fileViewer[tabIndex]) {
+				if (this.$refs.fileViewer && this.$refs.fileViewer[tabIndex]) {
 					this.$refs.fileViewer[tabIndex].applyLogSeverityStyles();
 				}
 			},
