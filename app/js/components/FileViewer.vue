@@ -218,17 +218,6 @@
 				
 				tail.start().catch(error => this.showDialog = true);
 			},
-			createLogLine(line, severitySettings) {
-				let p = document.createElement("p");
-				p.innerHTML = line;
-				p.style.color = severitySettings.textColor;
-				p.style.backgroundColor = severitySettings.backgroundColor;
-
-				let temp = document.createElement("div");
-				temp.appendChild(p);
-
-				return temp.innerHTML;
-			},
 			handleResize() {
 				this.height = this.calcHeight();
 			},
