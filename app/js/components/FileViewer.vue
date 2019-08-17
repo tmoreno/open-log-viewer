@@ -52,7 +52,7 @@
 </template>
 
 <style scoped>
-	@import '../../css/log-sverity.css';
+	@import '../../css/log-severity.css';
 </style>
 
 <script>
