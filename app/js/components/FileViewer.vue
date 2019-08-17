@@ -57,6 +57,7 @@
 	require("ace-builds/src-noconflict/ext-searchbox.js");
 	const SettingsDialog = require("./SettingsDialog").default;
 	const UserPreferences = require("../userPreferences");
+	const Utils = require("../utils");
 
     let userPreferences = new UserPreferences();
 
@@ -242,9 +243,16 @@
 			
 				Array.from(logSeverityStyles.rules).forEach(rule => {
 					const severity = rule.selectorText.replace(".ace_", "");
+					const textColor = this.currentFileSettings[severity].textColor;
 
-					rule.style.color = this.currentFileSettings[severity].textColor;
-					rule.style["background-color"] = this.currentFileSettings[severity].backgroundColor;
+					let backgroundColor = this.currentFileSettings[severity].backgroundColor;
+					// Convert to rgba to be compatible with 1.0.0 version
+					if (backgroundColor.startsWith("#")) {
+						backgroundColor = Utils.hexToRGBA(backgroundColor, 0.9);
+					}
+
+					rule.style.color = textColor;
+					rule.style["background-color"] = backgroundColor;
 				});
 			}
 		}
