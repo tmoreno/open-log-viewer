@@ -1,7 +1,7 @@
 <template>
     <v-app id="drag-and-drop-zone">
 		<v-tabs show-arrows v-model="currentTab" hide-slider>
-			<v-tab v-for="(tab, i) in tabs" :key="tab.id" :title="tab.filePath" :href="'#tab' + tab.id">
+			<v-tab v-for="(tab, i) in tabs" :key="tab.id" :title="tab.filePath" :href="'#tab' + tab.id" @click="tabClicked(i)">
 
 				{{ tab.fileName }}
 
@@ -19,7 +19,7 @@
 			<v-tab-item v-for="tab in tabs" :key="tab.id" :value="'tab' + tab.id" >
 				<file-chooser v-if="!tab.filePath" @change="onFileChanged($event, tab)" />
 	
-				<file-viewer v-if="tab.filePath" :file="tab.filePath" :file-settings="tab.fileSettings" />
+				<file-viewer ref="fileViewer" v-if="tab.filePath" :file="tab.filePath" :file-settings="tab.fileSettings" />
 			</v-tab-item>
 		</v-tabs-items>
     </v-app>
@@ -95,6 +95,11 @@
 					if (this.currentTab < 0) {
 						this.currentTab = 0;
 					}
+				}
+			},
+			tabClicked(tabIndex) {
+				if (this.$refs.fileViewer[tabIndex]) {
+					this.$refs.fileViewer[tabIndex].applyLogSeverityStyles();
 				}
 			},
 			showCloseButton() {
