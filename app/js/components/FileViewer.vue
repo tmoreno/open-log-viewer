@@ -89,7 +89,7 @@
 		mounted: function() {
 			window.addEventListener('resize', this.handleResize);
 
-			ace.define('ace/mode/log_file', function(require, exports, module) {
+			ace.define('ace/mode/log_file', (require, exports, module) => {
 				const oop = require("ace/lib/oop");
 				const TextMode = require("ace/mode/text").Mode;
 				const LogFileHighlightRules = require("ace/mode/log_file_highlight_rules").LogFileHighlightRules;
@@ -107,35 +107,37 @@
 				exports.Mode = Mode;
 			});
 
-			ace.define('ace/mode/log_file_highlight_rules', function(require, exports, module) {
+			ace.define('ace/mode/log_file_highlight_rules', (require, exports, module) => {
 				const oop = require("ace/lib/oop");
 				const TextHighlightRules = require("ace/mode/text_highlight_rules").TextHighlightRules;
+				
+				const rules = {
+					start: [
+						{
+							token: "debug", 
+							regex: this.currentFileSettings.debug.pattern
+						},
+						{
+							token: "info", 
+							regex: this.currentFileSettings.info.pattern
+						},
+						{
+							token: "warning", 
+							regex: this.currentFileSettings.warning.pattern
+						},
+						{
+							token: "error", 
+							regex: this.currentFileSettings.error.pattern
+						},
+						{
+							token: "fatal", 
+							regex: this.currentFileSettings.fatal.pattern
+						}
+					]
+				};
 
 				const LogFileHighlightRules = function() {
-					this.$rules = {
-  						start: [
-							{
-								token: "debug", 
-								regex: "^.*DEBUG.*$"
-							},
-							{
-								token: "info", 
-								regex: "^.*INFO.*$"
-							},
-							{
-								token: "warning", 
-								regex: "^.*WARN.*$"
-							},
-							{
-								token: "error", 
-								regex: "^.*ERROR.*$"
-							},
-							{
-								token: "fatal", 
-								regex: "^.*FATAL.*$"
-							}
-						]
-					};
+					this.$rules = rules;
 				}
 
 				oop.inherits(LogFileHighlightRules, TextHighlightRules);
