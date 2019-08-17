@@ -51,10 +51,6 @@
 	</div>
 </template>
 
-<style scoped>
-	@import '../../css/log-severity.css';
-</style>
-
 <script>
 	const Tail = require("../tail");
 	const ace = require("ace-builds/src-noconflict/ace.js");
@@ -85,6 +81,9 @@
 				showSettings: false,
 				currentFileSettings: this.fileSettings
 			}
+		},
+		created: function() {
+			this.applyLogSeverityStyles();
 		},
 		mounted: function() {
 			window.addEventListener('resize', this.handleResize);
@@ -182,6 +181,7 @@
 
 				tail.stop();
 
+				this.applyLogSeverityStyles();
 				this.clean();
 				this.startTail();
 				this.closeSettings();
@@ -236,6 +236,16 @@
 			},
 			capitalizeFirstLetter(string) {
     			return string.charAt(0).toUpperCase() + string.slice(1);
+			},
+			applyLogSeverityStyles() {
+				const logSeverityStyles = Array.from(document.styleSheets).find(styleSheet => styleSheet.title === "log-severity-styles");
+			
+				Array.from(logSeverityStyles.rules).forEach(rule => {
+					const severity = rule.selectorText.replace(".ace_", "");
+
+					rule.style.color = this.currentFileSettings[severity].textColor;
+					rule.style["background-color"] = this.currentFileSettings[severity].backgroundColor;
+				});
 			}
 		}
 	}
