@@ -47,6 +47,7 @@
 
 <script>
     const ColorPicker = require("./ColorPicker").default;
+    const Utils = require("../utils");
 
 	export default {
         components: {
@@ -69,6 +70,7 @@
                 this.$emit('textColorChanged', {severity: this.severity, color: newColor});
             },
             changeBackgroundColor(newColor) {
+                newColor = Utils.hexToRGBA(newColor, 0.9);
                 this.backgroundColorSelected = newColor;
                 this.$emit('backgroundColorChanged', {severity: this.severity, color: newColor});
             },
