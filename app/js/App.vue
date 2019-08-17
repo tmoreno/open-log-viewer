@@ -42,7 +42,8 @@
 		data() {
 			return {
 				tabs: [],
-				currentTab: null
+				currentTab: null,
+				currentTabIndex: 0
 			}
 		},
 		mounted: function() {
@@ -70,8 +71,6 @@
 
 					this.tabs.push(tab);
 
-					this.currentTab = this.tabs.length - 1;
-
 					userPreferences.addFile(file.name, file.path, fileSettings);
             	}
             
@@ -81,23 +80,29 @@
 		methods: {
 			newTab() {
 				this.tabs.push(new Tab(this.$t("new-file")));
-
-				this.currentTab = this.tabs.length - 1;
 			},
 			closeTab(index) {
 				userPreferences.removeFile(this.tabs[index].filePath);
 
 				this.tabs.splice(index, 1);
 
-				if (index <= this.currentTab) {
-					this.currentTab--;
+				if (index <= this.currentTabIndex) {
+                    this.currentTabIndex--;
 
-					if (this.currentTab < 0) {
-						this.currentTab = 0;
+                    if (this.currentTabIndex < 0) {
+                        this.currentTabIndex = 0;
 					}
-				}
+					
+					// Wait until Vue removes the old current tab 
+					// and goes to the new current tab
+					setTimeout(() => {
+						this.tabClicked(this.currentTabIndex);
+					}, 500);
+                }
 			},
 			tabClicked(tabIndex) {
+				this.currentTabIndex = tabIndex;
+
 				if (this.$refs.fileViewer && this.$refs.fileViewer[tabIndex]) {
 					this.$refs.fileViewer[tabIndex].applyLogSeverityStyles();
 				}
