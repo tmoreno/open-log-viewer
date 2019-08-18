@@ -111,27 +111,49 @@
 				const oop = require("ace/lib/oop");
 				const TextHighlightRules = require("ace/mode/text_highlight_rules").TextHighlightRules;
 				
+				let currentToken = "info";
 				const rules = {
 					start: [
 						{
-							token: "debug", 
+							token: function() {
+								currentToken = "debug";
+								return currentToken;
+							},
 							regex: ".*" + Utils.escapeRegExp(this.currentFileSettings.debug.pattern) + ".*"
 						},
 						{
-							token: "info", 
+							token: function() {
+								currentToken = "info";
+								return currentToken;
+							},
 							regex: ".*" + Utils.escapeRegExp(this.currentFileSettings.info.pattern) + ".*"
 						},
 						{
-							token: "warning", 
+							token: function() {
+								currentToken = "warning";
+								return currentToken;
+							},
 							regex: ".*" + Utils.escapeRegExp(this.currentFileSettings.warning.pattern) + ".*"
 						},
 						{
-							token: "error", 
+							token: function() {
+								currentToken = "error";
+								return currentToken;
+							},
 							regex: ".*" + Utils.escapeRegExp(this.currentFileSettings.error.pattern) + ".*"
 						},
 						{
-							token: "fatal", 
+							token: function() {
+								currentToken = "fatal";
+								return currentToken;
+							},
 							regex: ".*" + Utils.escapeRegExp(this.currentFileSettings.fatal.pattern) + ".*"
+						},
+						{
+							token: function() {
+								return currentToken;
+							},
+							regex: "^.*$"
 						}
 					]
 				};
@@ -215,7 +237,15 @@
 						};
 					})
 					.filter(line => line.severitySettings.show)
-					.map(line => this.viewer.insert(line.line + "\n"));
+					.map(line => {
+						// Ace editor not insert empty lines, and we want all lines
+						// to a better layout
+						if (line.line === "") {
+							line.line = " ";
+						}
+
+						return this.viewer.insert(line.line + "\n");
+					});
 				});
 				
 				tail.start().catch(error => this.showDialog = true);
