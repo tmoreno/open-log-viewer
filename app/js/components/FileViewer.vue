@@ -115,23 +115,23 @@
 					start: [
 						{
 							token: "debug", 
-							regex: this.currentFileSettings.debug.pattern
+							regex: ".*" + Utils.escapeRegExp(this.currentFileSettings.debug.pattern) + ".*"
 						},
 						{
 							token: "info", 
-							regex: this.currentFileSettings.info.pattern
+							regex: ".*" + Utils.escapeRegExp(this.currentFileSettings.info.pattern) + ".*"
 						},
 						{
 							token: "warning", 
-							regex: this.currentFileSettings.warning.pattern
+							regex: ".*" + Utils.escapeRegExp(this.currentFileSettings.warning.pattern) + ".*"
 						},
 						{
 							token: "error", 
-							regex: this.currentFileSettings.error.pattern
+							regex: ".*" + Utils.escapeRegExp(this.currentFileSettings.error.pattern) + ".*"
 						},
 						{
 							token: "fatal", 
-							regex: this.currentFileSettings.fatal.pattern
+							regex: ".*" + Utils.escapeRegExp(this.currentFileSettings.fatal.pattern) + ".*"
 						}
 					]
 				};
