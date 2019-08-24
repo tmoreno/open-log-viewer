@@ -74,11 +74,11 @@
 			window.addEventListener('resize', this.handleResize);
 
 			this.viewer = ace.edit(this.$refs.viewer);
-			this.viewer.getSession().setMode('ace/mode/log_file');
 			this.viewer.setOptions({
 				readOnly: true,
 				highlightActiveLine: false,
 				showPrintMargin: false,
+				mode: "ace/mode/log_file",
 				fontFamily: "Consolas, monaco, 'Courier New', Courier, monospace",
 				fontSize: "15px"
 			});
