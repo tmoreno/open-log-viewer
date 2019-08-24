@@ -5,6 +5,7 @@
     "new-file": "New file",
     "clean": "Clean",
     "global-settings": "Global Settings",
+    "global-settings-warning": "Changes to regular expressions are applied after restarting the application.",
     "accept": "Accept",
     "cancel": "Cancel",
     "save": "Save",

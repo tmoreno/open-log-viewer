@@ -8,6 +8,8 @@
                     </span>
                 </v-card-title>
 
+                <v-card-text>⚠️ {{ $t("global-settings-warning") }}</v-card-text>
+
                 <v-card-text>
                     <v-container grid-list-md style="padding: 0">
                         <v-layout row wrap>

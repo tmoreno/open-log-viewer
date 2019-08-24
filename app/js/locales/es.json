@@ -5,6 +5,7 @@
     "new-file": "Nuevo archivo",
     "clean": "Limpiar",
     "global-settings": "Configuración general",
+    "global-settings-warning": "Los cambios en las expresiones regulares se aplican al reiniciar la aplicación.",
     "accept": "Aceptar",
     "cancel": "Cancelar",
     "save": "Guardar",
