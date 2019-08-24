@@ -16,7 +16,7 @@
 			<v-divider class="mx-3" inset vertical></v-divider>
 
 			<v-btn flat icon color="grey darken-1" @click="settingsButtonClicked">
-				<v-icon :title="$t('settings')" style="font-size: 24px">settings</v-icon>
+				<v-icon :title="$t('global-settings')" style="font-size: 24px">settings</v-icon>
 			</v-btn>
 		</v-toolbar>
 
