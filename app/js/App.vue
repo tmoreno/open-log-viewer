@@ -41,8 +41,11 @@
 <script>
 	const Tab = require("./tab");
 	const fs = __non_webpack_require__("fs");
+	const ace = require("ace-builds/src-noconflict/ace.js");
+	require("ace-builds/src-noconflict/ext-searchbox.js");
 	const FileSettings = require("./fileSettings");
 	const UserPreferences = require("./userPreferences");
+	const Utils = require("./utils");
 	const FileChooser = require("./components/FileChooser").default;
 	const FileViewer = require("./components/FileViewer").default;
 	const SettingsDialog = require("./components/SettingsDialog").default;
@@ -64,6 +67,84 @@
 			}
 		},
 		created: function() {
+			ace.define('ace/mode/log_file', (require, exports, module) => {
+				const oop = require("ace/lib/oop");
+				const TextMode = require("ace/mode/text").Mode;
+				const LogFileHighlightRules = require("ace/mode/log_file_highlight_rules").LogFileHighlightRules;
+
+				const Mode = function() {
+					this.HighlightRules = LogFileHighlightRules;
+				};
+
+				oop.inherits(Mode, TextMode);
+
+				(function() {
+					// Extra logic goes here. (see below)
+				}).call(Mode.prototype);
+
+				exports.Mode = Mode;
+			});
+
+			ace.define('ace/mode/log_file_highlight_rules', (require, exports, module) => {
+				const oop = require("ace/lib/oop");
+				const TextHighlightRules = require("ace/mode/text_highlight_rules").TextHighlightRules;
+				
+				let currentToken = "info";
+				const rules = {
+					start: [
+						{
+							token: function() {
+								currentToken = "debug";
+								return currentToken;
+							},
+							regex: ".*" + Utils.escapeRegExp(this.globalSettings.debug.pattern) + ".*"
+						},
+						{
+							token: function() {
+								currentToken = "info";
+								return currentToken;
+							},
+							regex: ".*" + Utils.escapeRegExp(this.globalSettings.info.pattern) + ".*"
+						},
+						{
+							token: function() {
+								currentToken = "warning";
+								return currentToken;
+							},
+							regex: ".*" + Utils.escapeRegExp(this.globalSettings.warning.pattern) + ".*"
+						},
+						{
+							token: function() {
+								currentToken = "error";
+								return currentToken;
+							},
+							regex: ".*" + Utils.escapeRegExp(this.globalSettings.error.pattern) + ".*"
+						},
+						{
+							token: function() {
+								currentToken = "fatal";
+								return currentToken;
+							},
+							regex: ".*" + Utils.escapeRegExp(this.globalSettings.fatal.pattern) + ".*"
+						},
+						{
+							token: function() {
+								return currentToken;
+							},
+							regex: "^.*$"
+						}
+					]
+				};
+
+				const LogFileHighlightRules = function() {
+					this.$rules = rules;
+				}
+
+				oop.inherits(LogFileHighlightRules, TextHighlightRules);
+
+				exports.LogFileHighlightRules = LogFileHighlightRules;
+			});
+
 			this.applyLogSeverityStyles();
 		},
 		mounted: function() {
