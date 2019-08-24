@@ -49,7 +49,9 @@ module.exports = class UserPreferences {
     }
 
     getGlobalSettings() {
-        return this.store.get("globalSettings", new GlobalSettings());
+        const storedGlobalSettings = this.store.get("globalSettings");
+
+        return new GlobalSettings(storedGlobalSettings);
     }
 
     saveGlobalSettings(globalSettings) {

@@ -1,5 +1,5 @@
 module.exports = class GlobalSettings {
-    constructor() {
+    constructor(settings) {
         this.debug = {
             textColor: "#155724", 
             backgroundColor: "rgba(212, 237, 218, 0.9)",
@@ -29,6 +29,10 @@ module.exports = class GlobalSettings {
             backgroundColor: "rgba(255, 82, 82, 0.9)",
             pattern: "[FATAL]"
         };
+
+        if (settings) {
+            Object.assign(this, settings);
+        }
     }
 
     changeTextColor(severity, textColor) {
