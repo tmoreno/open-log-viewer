@@ -15,17 +15,10 @@
 
 			<v-divider class="mx-3" inset vertical></v-divider>
 
-			<v-btn flat icon color="grey darken-1" @click="settings">
+			<v-btn flat icon color="grey darken-1" @click="settingsButtonClicked">
 				<v-icon :title="$t('settings')" style="font-size: 24px">settings</v-icon>
 			</v-btn>
 		</v-toolbar>
-
-		<settings-dialog 
-			:show="showSettings"
-			:settings="currentFileSettings"
-			@accept="acceptSettings" 
-			@close="closeSettings">
-		</settings-dialog>
 
 		<div ref="viewer" :style="{'height': height + 'px'}"></div>
 
@@ -55,7 +48,6 @@
 	const Tail = require("../tail");
 	const ace = require("ace-builds/src-noconflict/ace.js");
 	require("ace-builds/src-noconflict/ext-searchbox.js");
-	const SettingsDialog = require("./SettingsDialog").default;
 	const UserPreferences = require("../userPreferences");
 	const Utils = require("../utils");
 
@@ -65,12 +57,10 @@
 	let viewer;
 
 	export default {
-		components: {
-			SettingsDialog
-		},
 		props: [
 			'file',
-			'fileSettings'
+			'fileSettings',
+			'globalSettings'
 		],
 		data() {
 			return {
@@ -79,12 +69,8 @@
 				logLevelsSelected: this.getLogLevelsToShow(),
 				height: this.calcHeight(),
 				showDialog: false,
-				showSettings: false,
 				currentFileSettings: this.fileSettings
 			}
-		},
-		created: function() {
-			this.applyLogSeverityStyles();
 		},
 		mounted: function() {
 			window.addEventListener('resize', this.handleResize);
@@ -119,35 +105,35 @@
 								currentToken = "debug";
 								return currentToken;
 							},
-							regex: ".*" + Utils.escapeRegExp(this.currentFileSettings.debug.pattern) + ".*"
+							regex: ".*" + Utils.escapeRegExp(this.globalSettings.debug.pattern) + ".*"
 						},
 						{
 							token: function() {
 								currentToken = "info";
 								return currentToken;
 							},
-							regex: ".*" + Utils.escapeRegExp(this.currentFileSettings.info.pattern) + ".*"
+							regex: ".*" + Utils.escapeRegExp(this.globalSettings.info.pattern) + ".*"
 						},
 						{
 							token: function() {
 								currentToken = "warning";
 								return currentToken;
 							},
-							regex: ".*" + Utils.escapeRegExp(this.currentFileSettings.warning.pattern) + ".*"
+							regex: ".*" + Utils.escapeRegExp(this.globalSettings.warning.pattern) + ".*"
 						},
 						{
 							token: function() {
 								currentToken = "error";
 								return currentToken;
 							},
-							regex: ".*" + Utils.escapeRegExp(this.currentFileSettings.error.pattern) + ".*"
+							regex: ".*" + Utils.escapeRegExp(this.globalSettings.error.pattern) + ".*"
 						},
 						{
 							token: function() {
 								currentToken = "fatal";
 								return currentToken;
 							},
-							regex: ".*" + Utils.escapeRegExp(this.currentFileSettings.fatal.pattern) + ".*"
+							regex: ".*" + Utils.escapeRegExp(this.globalSettings.fatal.pattern) + ".*"
 						},
 						{
 							token: function() {
@@ -185,44 +171,56 @@
 			window.removeEventListener('resize', this.handleResize);
 		},
 		methods: {
+			defaultLogLevel() {
+        		return this.globalSettings.info;
+			},
+			getSeveritySettings(line) {
+				if (line.includes(this.globalSettings.fatal.pattern)) {
+					return this.currentFileSettings.fatal;
+				}
+				else if (line.includes(this.globalSettings.error.pattern)) {
+					return this.currentFileSettings.error;
+				}
+				else if (line.includes(this.globalSettings.warning.pattern)) {
+					return this.currentFileSettings.warning;
+				}
+				else if (line.includes(this.globalSettings.info.pattern)) {
+					return this.currentFileSettings.info;
+				}
+				else if (line.includes(this.globalSettings.debug.pattern)) {
+					return this.currentFileSettings.debug;
+				}
+				else {
+					return null;
+				}
+			},
 			getLogLevelsToShow() {
 				return this.fileSettings.getLogLevelsToShow().map(severity => this.capitalizeFirstLetter(severity));
 			},
 			logLevelsToShowChanged() {
 				this.currentFileSettings.setLogLevelsToShow(this.logLevelsSelected);
 
-				this.acceptSettings(this.currentFileSettings);
+				userPreferences.saveFileSettings(this.file, this.currentFileSettings);
+
+				tail.stop();
+				this.clean();
+				this.startTail();
 			},
 			clean() {
 				this.viewer.setValue("");
 			},
-			settings() {
-				this.showSettings = true;
-			},
-			acceptSettings(newSettings) {
-				this.currentFileSettings = newSettings;
-
-				userPreferences.saveFileSettings(this.file, newSettings);
-
-				tail.stop();
-
-				this.applyLogSeverityStyles();
-				this.clean();
-				this.startTail();
-				this.closeSettings();
-			},
-			closeSettings() {
-				this.showSettings = false;
+			settingsButtonClicked() {
+				this.$emit('settingsButtonClicked');
 			},
 			startTail() {
 				tail = new Tail(this.file, 1000);
 
-				let previousLineSeveritySettings = this.currentFileSettings.defaultLogLevel();
+				let previousLineSeveritySettings = this.defaultLogLevel();
 					
 				tail.on('readLines', lines => {
 					let logLines = lines
 					.map(line => {
-						let severitySettings = this.currentFileSettings.getSeveritySettings(line);
+						let severitySettings = this.getSeveritySettings(line);
 
 						if (!severitySettings) {
 							severitySettings = previousLineSeveritySettings;
@@ -258,23 +256,6 @@
 			},
 			capitalizeFirstLetter(string) {
     			return string.charAt(0).toUpperCase() + string.slice(1);
-			},
-			applyLogSeverityStyles() {
-				const logSeverityStyles = Array.from(document.styleSheets).find(styleSheet => styleSheet.title === "log-severity-styles");
-			
-				Array.from(logSeverityStyles.rules).forEach(rule => {
-					const severity = rule.selectorText.replace(".ace_", "");
-					const textColor = this.currentFileSettings[severity].textColor;
-
-					let backgroundColor = this.currentFileSettings[severity].backgroundColor;
-					// Convert to rgba to be compatible with 1.0.0 version
-					if (backgroundColor.startsWith("#")) {
-						backgroundColor = Utils.hexToRGBA(backgroundColor, 0.9);
-					}
-
-					rule.style.color = textColor;
-					rule.style["background-color"] = backgroundColor;
-				});
 			}
 		}
 	}

@@ -4,7 +4,7 @@
             <v-card>
                 <v-card-title>
                     <span class="headline">
-                        {{ $t("settings") }}
+                        {{ $t("global-settings") }}
                     </span>
                 </v-card-title>
 

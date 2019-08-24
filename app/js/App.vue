@@ -1,7 +1,7 @@
 <template>
     <v-app id="drag-and-drop-zone">
 		<v-tabs show-arrows v-model="currentTab" hide-slider>
-			<v-tab v-for="(tab, i) in tabs" :key="tab.id" :title="tab.filePath" :href="'#tab' + tab.id" @click="tabClicked(i)">
+			<v-tab v-for="(tab, i) in tabs" :key="tab.id" :title="tab.filePath" :href="'#tab' + tab.id">
 
 				{{ tab.fileName }}
 
@@ -19,9 +19,22 @@
 			<v-tab-item v-for="tab in tabs" :key="tab.id" :value="'tab' + tab.id" >
 				<file-chooser v-if="!tab.filePath" @change="onFileChanged($event, tab)" />
 	
-				<file-viewer ref="fileViewer" v-if="tab.filePath" :file="tab.filePath" :file-settings="tab.fileSettings" />
+				<file-viewer 
+					ref="fileViewer" 
+					v-if="tab.filePath" 
+					:file="tab.filePath" 
+					:file-settings="tab.fileSettings"
+					:global-settings="globalSettings"
+					@settingsButtonClicked="settingsButtonClicked" />
 			</v-tab-item>
 		</v-tabs-items>
+
+		<settings-dialog 
+			:show="showSettings"
+			:settings="globalSettings"
+			@accept="acceptSettings" 
+			@close="closeSettings">
+		</settings-dialog>
     </v-app>
 </template>
 
@@ -32,19 +45,26 @@
 	const UserPreferences = require("./userPreferences");
 	const FileChooser = require("./components/FileChooser").default;
 	const FileViewer = require("./components/FileViewer").default;
+	const SettingsDialog = require("./components/SettingsDialog").default;
 
 	let userPreferences = new UserPreferences();
 
 	export default {
 		components: {
-			FileChooser, FileViewer
+			FileChooser, 
+			FileViewer, 
+			SettingsDialog
 		},
 		data() {
 			return {
 				tabs: [],
 				currentTab: null,
-				currentTabIndex: 0
+				showSettings: false,
+				globalSettings: userPreferences.getGlobalSettings()
 			}
+		},
+		created: function() {
+			this.applyLogSeverityStyles();
 		},
 		mounted: function() {
 			userPreferences.getFiles().forEach(file => {
@@ -85,27 +105,6 @@
 				userPreferences.removeFile(this.tabs[index].filePath);
 
 				this.tabs.splice(index, 1);
-
-				if (index <= this.currentTabIndex) {
-                    this.currentTabIndex--;
-
-                    if (this.currentTabIndex < 0) {
-                        this.currentTabIndex = 0;
-					}
-					
-					// Wait until Vue removes the old current tab 
-					// and goes to the new current tab
-					setTimeout(() => {
-						this.tabClicked(this.currentTabIndex);
-					}, 500);
-                }
-			},
-			tabClicked(tabIndex) {
-				this.currentTabIndex = tabIndex;
-
-				if (this.$refs.fileViewer && this.$refs.fileViewer[tabIndex]) {
-					this.$refs.fileViewer[tabIndex].applyLogSeverityStyles();
-				}
 			},
 			showCloseButton() {
 				return this.tabs.length > 1
@@ -122,6 +121,37 @@
 
 					userPreferences.addFile(selectedFileName, selectedFilePath, fileSettings);
 				}
+			},
+			settingsButtonClicked() {
+				this.showSettings = true;
+			},
+			closeSettings() {
+				this.showSettings = false;
+			},
+			acceptSettings(newSettings) {
+				this.globalSettings = newSettings;
+
+				userPreferences.saveGlobalSettings(this.globalSettings);
+
+				this.closeSettings();
+				this.applyLogSeverityStyles();
+			},
+			applyLogSeverityStyles() {
+				const logSeverityStyles = Array.from(document.styleSheets).find(styleSheet => styleSheet.title === "log-severity-styles");
+			
+				Array.from(logSeverityStyles.rules).forEach(rule => {
+					const severity = rule.selectorText.replace(".ace_", "");
+					const textColor = this.globalSettings[severity].textColor;
+
+					let backgroundColor = this.globalSettings[severity].backgroundColor;
+					// Convert to rgba to be compatible with 1.0.0 version
+					if (backgroundColor.startsWith("#")) {
+						backgroundColor = Utils.hexToRGBA(backgroundColor, 0.9);
+					}
+
+					rule.style.color = textColor;
+					rule.style["background-color"] = backgroundColor;
+				});
 			}
 		}
 	}
