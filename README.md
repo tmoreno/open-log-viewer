@@ -56,6 +56,20 @@ macOS | Windows | Linux
 -----------------| ---| ---|
 <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.1.0/open-log-viewer_1.1.0.dmg'>Download</a> | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.1.0/open-log-viewer_1.1.0.exe'>Download</a> | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.1.0/open-log-viewer_1.1.0.deb'>Debian-based</a> |
 | | | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.1.0/open-log-viewer_1.1.0.rpm'>RedHat-based</a> |
+
+## Release Notes
+
+### Version 1.1.0
+
+#### Improvements
+- Enabled search feature. Press Ctrl+F or Command+F to find words or text in the log file.
+- Show line numbers.  
+
+#### Drawbacks
+- Color and patterns settings are global instead of by file.
+- Changes on patterns are applied after restarting the application.
+- Color and pattern settings are not migrated to this version, so you will lost them.
+
 ## Credits
 
 This software uses the following open source packages:
