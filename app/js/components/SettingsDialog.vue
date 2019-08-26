@@ -4,9 +4,11 @@
             <v-card>
                 <v-card-title>
                     <span class="headline">
-                        {{ $t("settings") }}
+                        {{ $t("global-settings") }}
                     </span>
                 </v-card-title>
+
+                <v-card-text>⚠️ {{ $t("global-settings-warning") }}</v-card-text>
 
                 <v-card-text>
                     <v-container grid-list-md style="padding: 0">

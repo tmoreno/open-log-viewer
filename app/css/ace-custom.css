@@ -1,0 +1,16 @@
+.ace-tm .ace_marker-layer .ace_selection {
+    background: #0000ff;
+}
+
+div.ace_layer.ace_text-layer {
+    margin: 0 !important;
+}
+
+.ace_debug,
+.ace_info,
+.ace_warning, 
+.ace_error, 
+.ace_fatal {
+    padding-left: 4px;
+    display: inherit;
+}

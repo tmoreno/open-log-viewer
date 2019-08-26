@@ -19,9 +19,22 @@
 			<v-tab-item v-for="tab in tabs" :key="tab.id" :value="'tab' + tab.id" >
 				<file-chooser v-if="!tab.filePath" @change="onFileChanged($event, tab)" />
 	
-				<file-viewer v-if="tab.filePath" :file="tab.filePath" :file-settings="tab.fileSettings" />
+				<file-viewer 
+					ref="fileViewer" 
+					v-if="tab.filePath" 
+					:file="tab.filePath" 
+					:file-settings="tab.fileSettings"
+					:global-settings="globalSettings"
+					@settingsButtonClicked="settingsButtonClicked" />
 			</v-tab-item>
 		</v-tabs-items>
+
+		<settings-dialog 
+			:show="showSettings"
+			:settings="globalSettings"
+			@accept="acceptSettings" 
+			@close="closeSettings">
+		</settings-dialog>
     </v-app>
 </template>
 
@@ -30,20 +43,31 @@
 	const fs = __non_webpack_require__("fs");
 	const FileSettings = require("./fileSettings");
 	const UserPreferences = require("./userPreferences");
+	const AceEditor = require("./aceEditor");
+	const Utils = require("./utils");
 	const FileChooser = require("./components/FileChooser").default;
 	const FileViewer = require("./components/FileViewer").default;
+	const SettingsDialog = require("./components/SettingsDialog").default;
 
 	let userPreferences = new UserPreferences();
 
 	export default {
 		components: {
-			FileChooser, FileViewer
+			FileChooser, 
+			FileViewer, 
+			SettingsDialog
 		},
 		data() {
 			return {
 				tabs: [],
-				currentTab: null
+				currentTab: null,
+				showSettings: false,
+				globalSettings: userPreferences.getGlobalSettings()
 			}
+		},
+		created: function() {
+			AceEditor.init(this.globalSettings);
+			this.applyLogSeverityStyles();
 		},
 		mounted: function() {
 			userPreferences.getFiles().forEach(file => {
@@ -70,8 +94,6 @@
 
 					this.tabs.push(tab);
 
-					this.currentTab = this.tabs.length - 1;
-
 					userPreferences.addFile(file.name, file.path, fileSettings);
             	}
             
@@ -81,21 +103,11 @@
 		methods: {
 			newTab() {
 				this.tabs.push(new Tab(this.$t("new-file")));
-
-				this.currentTab = this.tabs.length - 1;
 			},
 			closeTab(index) {
 				userPreferences.removeFile(this.tabs[index].filePath);
 
 				this.tabs.splice(index, 1);
-
-				if (index <= this.currentTab) {
-					this.currentTab--;
-
-					if (this.currentTab < 0) {
-						this.currentTab = 0;
-					}
-				}
 			},
 			showCloseButton() {
 				return this.tabs.length > 1
@@ -112,6 +124,37 @@
 
 					userPreferences.addFile(selectedFileName, selectedFilePath, fileSettings);
 				}
+			},
+			settingsButtonClicked() {
+				this.showSettings = true;
+			},
+			closeSettings() {
+				this.showSettings = false;
+			},
+			acceptSettings(newSettings) {
+				this.globalSettings = newSettings;
+
+				userPreferences.saveGlobalSettings(this.globalSettings);
+
+				this.closeSettings();
+				this.applyLogSeverityStyles();
+			},
+			applyLogSeverityStyles() {
+				const logSeverityStyles = Array.from(document.styleSheets).find(styleSheet => styleSheet.title === "log-severity-styles");
+			
+				Array.from(logSeverityStyles.rules).forEach(rule => {
+					const severity = rule.selectorText.replace(".ace_", "");
+					const textColor = this.globalSettings[severity].textColor;
+
+					let backgroundColor = this.globalSettings[severity].backgroundColor;
+					// Convert to rgba to be compatible with 1.0.0 version
+					if (backgroundColor.startsWith("#")) {
+						backgroundColor = Utils.hexToRGBA(backgroundColor, 0.9);
+					}
+
+					rule.style.color = textColor;
+					rule.style["background-color"] = backgroundColor;
+				});
 			}
 		}
 	}

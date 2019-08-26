@@ -43,14 +43,17 @@
       ]
     },
     "linux": {
-      "target": ["rpm", "deb"]
+      "target": [
+        "rpm",
+        "deb"
+      ]
     },
     "win": {
       "target": "portable"
     }
   },
   "dependencies": {
-    "clusterize.js": "0.18.1",
+    "ace-builds": "1.4.5",
     "electron-store": "2.0.0",
     "material-design-icons-iconfont": "3.0.3",
     "typeface-roboto": "0.0.54",

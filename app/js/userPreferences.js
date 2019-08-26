@@ -1,4 +1,5 @@
 const Store = __non_webpack_require__('electron-store');
+const GlobalSettings = require("./globalSettings");
 
 let instance = null;
 
@@ -45,5 +46,15 @@ module.exports = class UserPreferences {
         });
 
         this.store.set("files", files);
+    }
+
+    getGlobalSettings() {
+        const storedGlobalSettings = this.store.get("globalSettings");
+
+        return new GlobalSettings(storedGlobalSettings);
+    }
+
+    saveGlobalSettings(globalSettings) {
+        this.store.set("globalSettings", globalSettings);
     }
 }
