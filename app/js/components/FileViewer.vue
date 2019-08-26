@@ -46,7 +46,7 @@
 
 <script>
 	const Tail = require("../tail");
-	const ace = require("ace-builds/src-noconflict/ace.js");
+	const AceEditor = require("../aceEditor");
 	const UserPreferences = require("../userPreferences");
 
     let userPreferences = new UserPreferences();
@@ -73,15 +73,7 @@
 		mounted: function() {
 			window.addEventListener('resize', this.handleResize);
 
-			this.viewer = ace.edit(this.$refs.viewer);
-			this.viewer.setOptions({
-				readOnly: true,
-				highlightActiveLine: false,
-				showPrintMargin: false,
-				mode: "ace/mode/log_file",
-				fontFamily: "Consolas, monaco, 'Courier New', Courier, monospace",
-				fontSize: "15px"
-			});
+			this.viewer = AceEditor.createViewer(this.$refs.viewer);
 
 			this.startTail();
 		},
