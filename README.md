@@ -24,8 +24,8 @@
 * Tail file changes.
 * Filter log levels.
 * Colored log entries.
-* Customize log levels pattern by file.
-* Customize log levels color by file.
+* Customize log levels pattern.
+* Customize log levels color.
 * Cross platform
   - Windows, macOS and Linux ready.
 
@@ -54,8 +54,8 @@ Open Log Viewer is available for Linux, Mac and Windows
 
 macOS | Windows | Linux
 -----------------| ---| ---|
-<a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.0.0/open-log-viewer_1.0.0.dmg'>Download</a> | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.0.0/open-log-viewer_1.0.0.exe'>Download</a> | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.0.0/open-log-viewer_1.0.0.deb'>Debian-based</a> |
-| | | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.0.0/open-log-viewer_1.0.0.rpm'>RedHat-based</a> |
+<a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.1.0/open-log-viewer_1.1.0.dmg'>Download</a> | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.1.0/open-log-viewer_1.1.0.exe'>Download</a> | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.1.0/open-log-viewer_1.1.0.deb'>Debian-based</a> |
+| | | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.1.0/open-log-viewer_1.1.0.rpm'>RedHat-based</a> |
 ## Credits
 
 This software uses the following open source packages:
@@ -64,7 +64,7 @@ This software uses the following open source packages:
 - [Node.js](https://nodejs.org/)
 - [Vue](https://vuejs.org/)
 - [Vuetify](https://vuetifyjs.com/)
-- [clusterize.js](https://clusterize.js.org/)
+- [Ace](https://ace.c9.io/)
 
 ## License
 
