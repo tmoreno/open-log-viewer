@@ -84,7 +84,7 @@
 		},
 		methods: {
 			defaultLogLevel() {
-        		return this.globalSettings.info;
+        		return this.currentFileSettings.info;
 			},
 			getSeveritySettings(line) {
 				if (line.includes(this.globalSettings.fatal.pattern)) {
