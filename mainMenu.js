@@ -30,7 +30,7 @@ const template = [
                     dialog.showMessageBox({
                         type: "info",
                         title: "About",
-                        message: "Open Log Viewer 1.1.1",
+                        message: "Open Log Viewer 1.1.2",
                         detail: "Developed by Tomás Moreno Bernal\nLicensed under the GNU General Public License v3.0"
                     });
                 }

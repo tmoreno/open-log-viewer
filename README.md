@@ -55,15 +55,20 @@ Open Log Viewer is available for Linux, Mac and Windows
 
 macOS | Windows | Linux
 -----------------| ---| ---|
-<a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.1.1/open-log-viewer_1.1.1.dmg'>Download</a> | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.1.1/open-log-viewer_1.1.1.exe'>Download</a> | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.1.1/open-log-viewer_1.1.1.deb'>Debian-based</a> |
-| | | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.1.1/open-log-viewer_1.1.1.rpm'>RedHat-based</a> |
+<a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.1.2/open-log-viewer_1.1.2.dmg'>Download</a> | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.1.2/open-log-viewer_1.1.2.exe'>Download</a> | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.1.2/open-log-viewer_1.1.2.deb'>Debian-based</a> |
+| | | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.1.2/open-log-viewer_1.1.2.rpm'>RedHat-based</a> |
 
 ## Release Notes
 
-### Version 1.1.0
+### Version 1.1.2
 
 #### Bugs Fixed
--  If the first line does not match any log severity pattern, then the viewer was empty.
+- When there are more than one file opened then files with no line matches has the previous severity color.
+
+### Version 1.1.1
+
+#### Bugs Fixed
+- If the first line does not match any log severity pattern, then the viewer was empty.
 
 ### Version 1.1.0
 
