@@ -26,55 +26,53 @@ module.exports = class AceEditor {
             const oop = require("ace/lib/oop");
             const TextHighlightRules = require("ace/mode/text_highlight_rules").TextHighlightRules;
             
-            let currentToken = "info";
-            const rules = {
-                start: [
-                    {
-                        token: function() {
-                            currentToken = "debug";
-                            return currentToken;
-                        },
-                        regex: ".*" + Utils.escapeRegExp(globalSettings.debug.pattern) + ".*"
-                    },
-                    {
-                        token: function() {
-                            currentToken = "info";
-                            return currentToken;
-                        },
-                        regex: ".*" + Utils.escapeRegExp(globalSettings.info.pattern) + ".*"
-                    },
-                    {
-                        token: function() {
-                            currentToken = "warning";
-                            return currentToken;
-                        },
-                        regex: ".*" + Utils.escapeRegExp(globalSettings.warning.pattern) + ".*"
-                    },
-                    {
-                        token: function() {
-                            currentToken = "error";
-                            return currentToken;
-                        },
-                        regex: ".*" + Utils.escapeRegExp(globalSettings.error.pattern) + ".*"
-                    },
-                    {
-                        token: function() {
-                            currentToken = "fatal";
-                            return currentToken;
-                        },
-                        regex: ".*" + Utils.escapeRegExp(globalSettings.fatal.pattern) + ".*"
-                    },
-                    {
-                        token: function() {
-                            return currentToken;
-                        },
-                        regex: "^.*$"
-                    }
-                ]
+            const debugRule = {
+                token: "debug",
+                regex: ".*" + Utils.escapeRegExp(globalSettings.debug.pattern) + ".*",
+                next: "debug"
             };
 
+            const infoRule = {
+                token: "info",
+                regex: ".*" + Utils.escapeRegExp(globalSettings.info.pattern) + ".*",
+                next: "info"
+            };
+
+            const warningRule = {
+                token: "warning",
+                regex: ".*" + Utils.escapeRegExp(globalSettings.warning.pattern) + ".*",
+                next: "warning"
+            };
+
+            const errorRule = {
+                token: "error",
+                regex: ".*" + Utils.escapeRegExp(globalSettings.error.pattern) + ".*",
+                next: "error"
+            };
+
+            const fatalRule = {
+                token: "fatal",
+                regex: ".*" + Utils.escapeRegExp(globalSettings.fatal.pattern) + ".*",
+                next: "fatal"
+            };
+
+            function noMatchRule(severity) {
+                return {
+                    token: severity,
+                    regex: "^.*$",
+                    next: severity
+                };
+            }
+            
             const LogFileHighlightRules = function() {
-                this.$rules = rules;
+                this.$rules = {
+                    start: [debugRule, infoRule, warningRule, errorRule, fatalRule],
+                    debug: [debugRule, infoRule, warningRule, errorRule, fatalRule, noMatchRule("debug")],
+                    info: [debugRule, infoRule, warningRule, errorRule, fatalRule, noMatchRule("info")],
+                    warning: [debugRule, infoRule, warningRule, errorRule, fatalRule, noMatchRule("warning")],
+                    error: [debugRule, infoRule, warningRule, errorRule, fatalRule, noMatchRule("error")],
+                    fatal: [debugRule, infoRule, warningRule, errorRule, fatalRule, noMatchRule("fatal")]
+                };
             }
 
             oop.inherits(LogFileHighlightRules, TextHighlightRules);
