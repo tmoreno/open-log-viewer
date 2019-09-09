@@ -39,6 +39,7 @@
 </template>
 
 <script>
+	const _ = require('lodash');
 	const Tab = require("./tab");
 	const fs = __non_webpack_require__("fs");
 	const FileSettings = require("./fileSettings");
@@ -132,7 +133,7 @@
 				this.showSettings = false;
 			},
 			acceptSettings(newSettings) {
-				this.globalSettings = newSettings;
+				this.globalSettings = _.merge(this.globalSettings, newSettings);
 
 				userPreferences.saveGlobalSettings(this.globalSettings);
 

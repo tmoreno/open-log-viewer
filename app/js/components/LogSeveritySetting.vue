@@ -64,6 +64,13 @@
                 pattern: this.setting.pattern
             }
         },
+        watch: {
+            setting: function (newValue) {
+                this.textColorSelected = newValue.textColor;
+                this.backgroundColorSelected = newValue.backgroundColor;
+                this.pattern = newValue.pattern;
+            }
+        },
         methods: {
             changeTextColor(newColor) {
                 this.textColorSelected = newColor;

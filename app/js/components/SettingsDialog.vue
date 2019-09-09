@@ -15,7 +15,7 @@
                         <v-layout row wrap>
                             <log-severity-setting 
                                 severity="DEBUG" 
-                                :setting="currentSettings.debug" 
+                                :setting="settingsDebug" 
                                 @textColorChanged="textColorChangedHandler"
                                 @backgroundColorChanged="backgroundColorChangedHandler"
                                 @patternChanged="patternChangedHandler">
@@ -23,7 +23,7 @@
 
                             <log-severity-setting 
                                 severity="INFO"
-                                :setting="currentSettings.info" 
+                                :setting="settingsInfo" 
                                 @textColorChanged="textColorChangedHandler"
                                 @backgroundColorChanged="backgroundColorChangedHandler"
                                 @patternChanged="patternChangedHandler">
@@ -31,7 +31,7 @@
 
                             <log-severity-setting 
                                 severity="WARNING"
-                                :setting="currentSettings.warning" 
+                                :setting="settingsWarning" 
                                 @textColorChanged="textColorChangedHandler"
                                 @backgroundColorChanged="backgroundColorChangedHandler"
                                 @patternChanged="patternChangedHandler">
@@ -39,7 +39,7 @@
 
                             <log-severity-setting 
                                 severity="ERROR"
-                                :setting="currentSettings.error" 
+                                :setting="settingsError" 
                                 @textColorChanged="textColorChangedHandler"
                                 @backgroundColorChanged="backgroundColorChangedHandler"
                                 @patternChanged="patternChangedHandler">
@@ -47,7 +47,7 @@
 
                             <log-severity-setting 
                                 severity="FATAL"
-                                :setting="currentSettings.fatal" 
+                                :setting="settingsFatal" 
                                 @textColorChanged="textColorChangedHandler"
                                 @backgroundColorChanged="backgroundColorChangedHandler"
                                 @patternChanged="patternChangedHandler">
@@ -86,31 +86,59 @@
         data() {
             return {
                 showDialog: this.show,
-                currentSettings: this.settings
+                settingsDebug: this.settings.debug,
+                settingsInfo: this.settings.info,
+                settingsWarning: this.settings.warning,
+                settingsError: this.settings.error,
+                settingsFatal: this.settings.fatal,
+                changes: {
+                    debug: {},
+                    info: {},
+                    warning: {},
+                    error: {},
+                    fatal: {}
+                }
             }
         },
         watch: {
             show: function (newValue) {
                 this.showDialog = newValue;
+
+                if (this.showDialog) {
+                    this.changes = {
+                        debug: {},
+                        info: {},
+                        warning: {},
+                        error: {},
+                        fatal: {}
+                    };
+                }
             }
         },
         methods: {
             textColorChangedHandler(eventData) {
-                this.currentSettings.changeTextColor(eventData.severity, eventData.color);
+                this.changes[eventData.severity.toLowerCase()].textColor = eventData.color;
             },
             backgroundColorChangedHandler(eventData) {
-                this.currentSettings.changeBackgroundColor(eventData.severity, eventData.color);
+                this.changes[eventData.severity.toLowerCase()].backgroundColor = eventData.color;
             },
             patternChangedHandler(eventData) {
-                this.currentSettings.changePattern(eventData.severity, eventData.pattern);
+                this.changes[eventData.severity.toLowerCase()].pattern = eventData.pattern;
             },
             close() {
                 this.showDialog = false;
+
+                this.settingsDebug = Object.assign({}, this.settings.debug);
+                this.settingsInfo = Object.assign({}, this.settings.info);
+                this.settingsWarning = Object.assign({}, this.settings.warning);
+                this.settingsError = Object.assign({}, this.settings.error);
+                this.settingsFatal = Object.assign({}, this.settings.fatal);
+
                 this.$emit('close');
             },
             save() {
                 this.showDialog = false;
-                this.$emit('accept', this.currentSettings);
+                this.$emit('accept', this.changes);
             }
         }
 	}

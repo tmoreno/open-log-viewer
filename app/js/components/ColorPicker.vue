@@ -39,6 +39,12 @@
                 selectedColorButton: this.color
             }
         },
+        watch: {
+            color: function (newValue) {
+                this.selectedColor = newValue;
+                this.selectedColorButton = newValue;
+            }
+        },
         methods: {
             accept() {
                 this.selectedColorButton = this.selectedColor.hex;

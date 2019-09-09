@@ -55,6 +55,7 @@
   "dependencies": {
     "ace-builds": "1.4.5",
     "electron-store": "2.0.0",
+    "lodash": "4.17.15",
     "material-design-icons-iconfont": "3.0.3",
     "typeface-roboto": "0.0.54",
     "vue": "2.5.16",
