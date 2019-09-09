@@ -1,5 +1,7 @@
 module.exports = class GlobalSettings {
     constructor(settings) {
+        this.fontSize = "15";
+        
         this.debug = {
             textColor: "#155724", 
             backgroundColor: "rgba(212, 237, 218, 0.9)",

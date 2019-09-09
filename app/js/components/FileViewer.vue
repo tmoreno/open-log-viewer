@@ -73,7 +73,7 @@
 		mounted: function() {
 			window.addEventListener('resize', this.handleResize);
 
-			this.viewer = AceEditor.createViewer(this.$refs.viewer);
+			this.viewer = AceEditor.createViewer(this.$refs.viewer, this.globalSettings);
 
 			this.startTail();
 		},
@@ -120,6 +120,9 @@
 			},
 			clean() {
 				this.viewer.setValue("");
+			},
+			changeFontSize(fontSize) {
+				this.viewer.setFontSize(fontSize + "px");
 			},
 			settingsButtonClicked() {
 				this.$emit('settingsButtonClicked');

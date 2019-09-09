@@ -81,7 +81,7 @@ module.exports = class AceEditor {
         });
     }
 
-    static createViewer(DOMElement) {
+    static createViewer(DOMElement, globalSettings) {
         const viewer = ace.edit(DOMElement);
 
         viewer.setOptions({
@@ -90,7 +90,7 @@ module.exports = class AceEditor {
             showPrintMargin: false,
             mode: "ace/mode/log_file",
             fontFamily: "Consolas, monaco, 'Courier New', Courier, monospace",
-            fontSize: "15px"
+            fontSize: globalSettings.fontSize + "px"
         });
 
         return viewer;

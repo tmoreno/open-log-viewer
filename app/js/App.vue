@@ -68,7 +68,7 @@
 		},
 		created: function() {
 			AceEditor.init(this.globalSettings);
-			this.applyLogSeverityStyles();
+			this.changeLogSeverityStyles();
 		},
 		mounted: function() {
 			userPreferences.getFiles().forEach(file => {
@@ -138,9 +138,10 @@
 				userPreferences.saveGlobalSettings(this.globalSettings);
 
 				this.closeSettings();
-				this.applyLogSeverityStyles();
+				this.changeLogSeverityStyles();
+				this.changeFontSize(newSettings.fontSize);
 			},
-			applyLogSeverityStyles() {
+			changeLogSeverityStyles() {
 				const logSeverityStyles = Array.from(document.styleSheets).find(styleSheet => styleSheet.title === "log-severity-styles");
 			
 				Array.from(logSeverityStyles.rules).forEach(rule => {
@@ -156,6 +157,13 @@
 					rule.style.color = textColor;
 					rule.style["background-color"] = backgroundColor;
 				});
+			},
+			changeFontSize(fontSize) {
+				if (fontSize) {
+					this.$refs.fileViewer.forEach(fileViewer => {
+						fileViewer.changeFontSize(fontSize);
+					});
+				}
 			}
 		}
 	}

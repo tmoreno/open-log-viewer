@@ -12,5 +12,9 @@
     "close": "Cerrar",
     "text": "Texto",
     "background": "Fondo",
-    "regex": "Expresión regular"
+    "regex": "Expresión regular",
+    "font-size": "Tamaño de la fuente",
+    "min-font-size": "Tamaño mínimo 8",
+    "max-font-size": "Tamaño máximo 30",
+    "required": "Obligatorio"
 }

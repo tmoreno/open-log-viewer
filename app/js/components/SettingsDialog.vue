@@ -13,6 +13,20 @@
                 <v-card-text>
                     <v-container grid-list-md style="padding: 0">
                         <v-layout row wrap>
+                            <v-flex xs4>
+                                <v-text-field
+                                    :label="$t('font-size')"
+                                    v-model="fontSize"
+                                    suffix="px"
+                                    type="number"
+                                    min="8"
+                                    max="30"
+                                    :rules="[rules.required, rules.min, rules.max]">
+                                </v-text-field>
+                            </v-flex>
+                        </v-layout>
+
+                        <v-layout row wrap>
                             <log-severity-setting 
                                 severity="DEBUG" 
                                 :setting="settingsDebug" 
@@ -86,6 +100,7 @@
         data() {
             return {
                 showDialog: this.show,
+                fontSize: this.settings.fontSize,
                 settingsDebug: this.settings.debug,
                 settingsInfo: this.settings.info,
                 settingsWarning: this.settings.warning,
@@ -97,6 +112,11 @@
                     warning: {},
                     error: {},
                     fatal: {}
+                },
+                rules: {
+                    required: value => !!value || this.$t('required'),
+                    min: value => value >= 8 || this.$t('min-font-size'),
+                    max: value => value <= 30 || this.$t('max-font-size')
                 }
             }
         },
@@ -128,6 +148,7 @@
             close() {
                 this.showDialog = false;
 
+                this.fontSize = this.settings.fontSize;
                 this.settingsDebug = Object.assign({}, this.settings.debug);
                 this.settingsInfo = Object.assign({}, this.settings.info);
                 this.settingsWarning = Object.assign({}, this.settings.warning);
@@ -138,6 +159,11 @@
             },
             save() {
                 this.showDialog = false;
+
+                if (this.fontSize !== this.settings.fontSize) {
+                    this.changes.fontSize = this.fontSize;
+                }
+
                 this.$emit('accept', this.changes);
             }
         }

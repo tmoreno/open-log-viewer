@@ -12,5 +12,9 @@
     "close": "Close",
     "text": "Text",
     "background": "Background",
-    "regex": "Regular expression"
+    "regex": "Regular expression",
+    "font-size": "Font Size",
+    "min-font-size": "Min size 8",
+    "max-font-size": "Max size 30",
+    "required": "Required"
 }
