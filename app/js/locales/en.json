@@ -5,7 +5,6 @@
     "new-file": "New file",
     "clean": "Clean",
     "global-settings": "Global Settings",
-    "global-settings-warning": "Changes to regular expressions are applied after restarting the application.",
     "accept": "Accept",
     "cancel": "Cancel",
     "save": "Save",
@@ -16,5 +15,6 @@
     "font-size": "Font Size",
     "min-font-size": "Min size 8",
     "max-font-size": "Max size 30",
-    "required": "Required"
+    "required": "Required",
+    "patternChangedRestartAppWarning": "It is necessary to restart the application to pattern changes have effect"
 }

@@ -41,6 +41,7 @@
 <script>
 	const _ = require('lodash');
 	const Tab = require("./tab");
+	const app = __non_webpack_require__("electron").remote.app;
 	const fs = __non_webpack_require__("fs");
 	const FileSettings = require("./fileSettings");
 	const UserPreferences = require("./userPreferences");
@@ -132,14 +133,19 @@
 			closeSettings() {
 				this.showSettings = false;
 			},
-			acceptSettings(newSettings) {
-				this.globalSettings = _.merge(this.globalSettings, newSettings);
+			acceptSettings(eventData) {
+				this.globalSettings = _.merge(this.globalSettings, eventData.newSettings);
 
 				userPreferences.saveGlobalSettings(this.globalSettings);
 
 				this.closeSettings();
 				this.changeLogSeverityStyles();
-				this.changeFontSize(newSettings.fontSize);
+				this.changeFontSize(eventData.newSettings.fontSize);
+
+				if (eventData.relaunch) {
+					app.relaunch();
+					app.exit();
+				}
 			},
 			changeLogSeverityStyles() {
 				const logSeverityStyles = Array.from(document.styleSheets).find(styleSheet => styleSheet.title === "log-severity-styles");

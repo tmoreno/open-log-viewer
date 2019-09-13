@@ -8,8 +8,6 @@
                     </span>
                 </v-card-title>
 
-                <v-card-text>⚠️ {{ $t("global-settings-warning") }}</v-card-text>
-
                 <v-card-text>
                     <v-container grid-list-md style="padding: 0">
                         <v-layout row wrap>
@@ -75,12 +73,42 @@
                 <v-card-actions>
                     <v-spacer></v-spacer>
 
-                    <v-btn color="primary" :disabled="isDisabledSaveButton" @click="save">
+                    <v-btn color="primary" :disabled="isDisabledSaveButton" @click="saveClicked">
                         {{ $t("save") }}
                     </v-btn>
 
                     <v-btn color="primary" flat @click="close">
                         {{ $t("close") }}
+                    </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
+
+        <v-dialog persistent v-model="showRestartAppDialog" max-width="620px">
+            <v-card>
+                <v-card-title class="title yellow lighten-2" primary-title>
+        ️           ⚠️ {{ $t("warning") }}
+                </v-card-title>
+
+                <v-card-text>
+                    {{ $t("patternChangedRestartAppWarning") }}
+                </v-card-text>
+
+                <v-divider></v-divider>
+
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+
+                    <v-btn color="primary" @click="yesRestartAppClicked">
+                        OK
+                    </v-btn>
+
+                    <v-btn color="primary" flat @click="noRestartAppClicked">
+                        NO
+                    </v-btn>
+
+                    <v-btn color="primary" flat @click="cancelRestartAppClicked">
+                        {{ $t("cancel") }}
                     </v-btn>
                 </v-card-actions>
             </v-card>
@@ -102,6 +130,7 @@
         data() {
             return {
                 showDialog: this.show,
+                showRestartAppDialog: false,
                 isDisabledSaveButton: false,
                 fontSize: this.settings.fontSize,
                 settingsDebug: this.settings.debug,
@@ -129,6 +158,7 @@
 
                 if (this.showDialog) {
                     this.isDisabledSaveButton = false;
+                    this.showRestartAppDialog = false;
                     
                     this.changes = {
                         debug: {},
@@ -170,14 +200,42 @@
 
                 this.$emit('close');
             },
-            save() {
+            saveClicked() {
+                if (this.isAnyPatternChanged()) {
+                    this.showRestartAppDialog = true;
+                }
+                else {
+                    this.save(false);
+                }
+            },
+            save(relaunch) {
                 this.showDialog = false;
-
+    
                 if (this.fontSize !== this.settings.fontSize) {
                     this.changes.fontSize = this.fontSize;
                 }
 
-                this.$emit('accept', this.changes);
+                this.$emit('accept', {newSettings: this.changes, relaunch: relaunch});
+            },
+            cancelRestartAppClicked() {
+                this.showRestartAppDialog = false;
+            },
+            noRestartAppClicked() {
+                this.showRestartAppDialog = false;
+
+                this.save(false);
+            },
+            yesRestartAppClicked() {
+                this.showRestartAppDialog = false;
+
+                this.save(true);
+            },
+            isAnyPatternChanged() {
+                return (this.changes.debug.pattern && this.changes.debug.pattern !== this.settings.debug.pattern) || 
+                        (this.changes.info.pattern && this.changes.info.pattern !== this.settings.info.pattern) ||
+                        (this.changes.warning.pattern && this.changes.warning.pattern !== this.settings.warning.pattern) ||
+                        (this.changes.error.pattern && this.changes.error.pattern !== this.settings.error.pattern) || 
+                        (this.changes.fatal.pattern && this.changes.fatal.pattern !== this.settings.fatal.pattern);
             }
         }
 	}
