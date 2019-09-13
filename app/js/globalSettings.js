@@ -1,5 +1,7 @@
 module.exports = class GlobalSettings {
     constructor(settings) {
+        this.fontSize = "15";
+        
         this.debug = {
             textColor: "#155724", 
             backgroundColor: "rgba(212, 237, 218, 0.9)",
@@ -33,17 +35,5 @@ module.exports = class GlobalSettings {
         if (settings) {
             Object.assign(this, settings);
         }
-    }
-
-    changeTextColor(severity, textColor) {
-        this[severity.toLowerCase()].textColor = textColor;
-    }
-
-    changeBackgroundColor(severity, backgroundColor) {
-        this[severity.toLowerCase()].backgroundColor = backgroundColor;
-    }
-
-    changePattern(severity, pattern) {
-        this[severity.toLowerCase()].pattern = pattern;
     }
 }

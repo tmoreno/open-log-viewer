@@ -5,12 +5,16 @@
     "new-file": "Nuevo archivo",
     "clean": "Limpiar",
     "global-settings": "Configuración general",
-    "global-settings-warning": "Los cambios en las expresiones regulares se aplican al reiniciar la aplicación.",
     "accept": "Aceptar",
     "cancel": "Cancelar",
     "save": "Guardar",
     "close": "Cerrar",
     "text": "Texto",
     "background": "Fondo",
-    "regex": "Expresión regular"
+    "regex": "Expresión regular",
+    "font-size": "Tamaño de la fuente",
+    "min-font-size": "Tamaño mínimo 8",
+    "max-font-size": "Tamaño máximo 30",
+    "required": "Obligatorio",
+    "patternChangedRestartAppWarning": "Para que los cambios de los patrones tengan efecto es necesario reiniciar la aplicación"
 }
