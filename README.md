@@ -55,10 +55,19 @@ Open Log Viewer is available for Linux, Mac and Windows
 
 macOS | Windows | Linux
 -----------------| ---| ---|
-<a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.1.2/open-log-viewer_1.1.2.dmg'>Download</a> | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.1.2/open-log-viewer_1.1.2.exe'>Download</a> | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.1.2/open-log-viewer_1.1.2.deb'>Debian-based</a> |
-| | | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.1.2/open-log-viewer_1.1.2.rpm'>RedHat-based</a> |
+<a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.2.0/open-log-viewer_1.2.0.dmg'>Download</a> | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.2.0/open-log-viewer_1.2.0.exe'>Download</a> | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.2.0/open-log-viewer_1.2.0.deb'>Debian-based</a> |
+| | | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.2.0/open-log-viewer_1.2.0.rpm'>RedHat-based</a> |
 
 ## Release Notes
+
+### Version 1.2.0
+
+#### Improvements
+- Added font size setting.
+- Restart app when change a log pattern.  
+
+#### Bugs Fixed
+- Reset settings when click on cancel button.
 
 ### Version 1.1.2
 
