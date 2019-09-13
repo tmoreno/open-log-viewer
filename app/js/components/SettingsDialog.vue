@@ -15,13 +15,15 @@
                         <v-layout row wrap>
                             <v-flex xs4>
                                 <v-text-field
+                                    ref="fontSize"
                                     :label="$t('font-size')"
                                     v-model="fontSize"
                                     suffix="px"
                                     type="number"
                                     min="8"
                                     max="30"
-                                    :rules="[rules.required, rules.min, rules.max]">
+                                    :rules="[rules.required, rules.min, rules.max]"
+                                    @change="fontSizeChanged">
                                 </v-text-field>
                             </v-flex>
                         </v-layout>
@@ -73,7 +75,7 @@
                 <v-card-actions>
                     <v-spacer></v-spacer>
 
-                    <v-btn color="primary" @click="save">
+                    <v-btn color="primary" :disabled="isDisabledSaveButton" @click="save">
                         {{ $t("save") }}
                     </v-btn>
 
@@ -100,6 +102,7 @@
         data() {
             return {
                 showDialog: this.show,
+                isDisabledSaveButton: false,
                 fontSize: this.settings.fontSize,
                 settingsDebug: this.settings.debug,
                 settingsInfo: this.settings.info,
@@ -125,6 +128,8 @@
                 this.showDialog = newValue;
 
                 if (this.showDialog) {
+                    this.isDisabledSaveButton = false;
+                    
                     this.changes = {
                         debug: {},
                         info: {},
@@ -144,6 +149,14 @@
             },
             patternChangedHandler(eventData) {
                 this.changes[eventData.severity.toLowerCase()].pattern = eventData.pattern;
+            },
+            fontSizeChanged() {
+                if (this.$refs.fontSize.valid) {
+                    this.isDisabledSaveButton = false;
+                }
+                else {
+                    this.isDisabledSaveButton = true;
+                }
             },
             close() {
                 this.showDialog = false;
