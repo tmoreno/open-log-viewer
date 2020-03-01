@@ -16,5 +16,5 @@
     "min-font-size": "Dimensione minima 8",
     "max-font-size": "Dimensione massima 30",
     "required": "Obbligatorio",
-    "patternChangedRestartAppWarning": "È necessario riaviare il programma per rendere effettive le modifiche"
+    "patternChangedRestartAppWarning": "È necessario riaviare il programma per rendere effettive le modifiche dei pattern"
 }
