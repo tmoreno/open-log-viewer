@@ -15,8 +15,4 @@ module.exports = class Utils {
 
         return "rgba("+ +r + "," + +g + "," + +b + "," + alpha + ")";
     }
-
-    static escapeRegExp(text) {
-        return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
-    }
 }

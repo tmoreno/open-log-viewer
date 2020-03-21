@@ -87,19 +87,19 @@
         		return this.currentFileSettings.info;
 			},
 			getSeveritySettings(line) {
-				if (line.includes(this.globalSettings.fatal.pattern)) {
+				if (line.search(this.globalSettings.fatal.pattern) !== -1) {
 					return this.currentFileSettings.fatal;
 				}
-				else if (line.includes(this.globalSettings.error.pattern)) {
+				else if (line.search(this.globalSettings.error.pattern) !== -1) {
 					return this.currentFileSettings.error;
 				}
-				else if (line.includes(this.globalSettings.warning.pattern)) {
+				else if (line.search(this.globalSettings.warning.pattern) !== -1) {
 					return this.currentFileSettings.warning;
 				}
-				else if (line.includes(this.globalSettings.info.pattern)) {
+				else if (line.search(this.globalSettings.info.pattern) !== -1) {
 					return this.currentFileSettings.info;
 				}
-				else if (line.includes(this.globalSettings.debug.pattern)) {
+				else if (line.search(this.globalSettings.debug.pattern) !== -1) {
 					return this.currentFileSettings.debug;
 				}
 				else {

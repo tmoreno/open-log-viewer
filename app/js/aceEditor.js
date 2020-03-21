@@ -28,31 +28,31 @@ module.exports = class AceEditor {
             
             const debugRule = {
                 token: "debug",
-                regex: ".*" + Utils.escapeRegExp(globalSettings.debug.pattern) + ".*",
+                regex: ".*" + globalSettings.debug.pattern + ".*",
                 next: "debug"
             };
 
             const infoRule = {
                 token: "info",
-                regex: ".*" + Utils.escapeRegExp(globalSettings.info.pattern) + ".*",
+                regex: ".*" + globalSettings.info.pattern + ".*",
                 next: "info"
             };
 
             const warningRule = {
                 token: "warning",
-                regex: ".*" + Utils.escapeRegExp(globalSettings.warning.pattern) + ".*",
+                regex: ".*" + globalSettings.warning.pattern + ".*",
                 next: "warning"
             };
 
             const errorRule = {
                 token: "error",
-                regex: ".*" + Utils.escapeRegExp(globalSettings.error.pattern) + ".*",
+                regex: ".*" + globalSettings.error.pattern + ".*",
                 next: "error"
             };
 
             const fatalRule = {
                 token: "fatal",
-                regex: ".*" + Utils.escapeRegExp(globalSettings.fatal.pattern) + ".*",
+                regex: ".*" + globalSettings.fatal.pattern + ".*",
                 next: "fatal"
             };
 
