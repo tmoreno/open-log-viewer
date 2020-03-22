@@ -3,7 +3,7 @@
   "version": "1.2.1",
   "author": "Tomás Moreno Bernal <@tmorenobernal>",
   "homepage": "https://github.com/tmoreno/open-log-viewer",
-  "license": "GPL-v3",
+  "license": "GPL-3.0-only",
   "main": "main.js",
   "scripts": {
     "build": "webpack",
