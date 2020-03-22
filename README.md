@@ -55,10 +55,18 @@ Open Log Viewer is available for Linux, Mac and Windows
 
 macOS | Windows | Linux
 -----------------| ---| ---|
-<a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.2.1/open-log-viewer_1.2.1.dmg'>Download</a> | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.2.1/open-log-viewer_1.2.1.exe'>Download</a> | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.2.1/open-log-viewer_1.2.1.deb'>Debian-based</a> |
-| | | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.2.1/open-log-viewer_1.2.1.rpm'>RedHat-based</a> |
+<a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.3.0/open-log-viewer_1.3.0.dmg'>Download</a> | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.3.0/open-log-viewer_1.3.0.exe'>Download</a> | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.3.0/open-log-viewer_1.3.0.deb'>Debian-based</a> |
+| | | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.3.0/open-log-viewer_1.3.0.rpm'>RedHat-based</a> |
 
 ## Release Notes
+
+### Version 1.3.0
+
+#### Improvements
+- Now you can use valid Java Script regular expressions when you specify a pattern for a log severity.
+
+#### Bugs Fixed
+- A button to close the about dialog should appear for linux and mac.
 
 ### Version 1.2.1
 
