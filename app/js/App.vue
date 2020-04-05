@@ -41,8 +41,8 @@
 <script>
 	const _ = require('lodash');
 	const Tab = require("./tab");
-	const app = __non_webpack_require__("electron").remote.app;
-	const fs = __non_webpack_require__("fs");
+	const app = window.electron.app;
+	const fs = window.node.fs;
 	const FileSettings = require("./fileSettings");
 	const UserPreferences = require("./userPreferences");
 	const AceEditor = require("./aceEditor");

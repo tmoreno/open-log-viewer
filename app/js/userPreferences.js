@@ -1,4 +1,4 @@
-const Store = __non_webpack_require__('electron-store');
+const Store = window.dependecies.electronStore;
 const GlobalSettings = require("./globalSettings");
 
 let instance = null;
