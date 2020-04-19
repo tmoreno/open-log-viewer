@@ -35,7 +35,8 @@ const template = [
                         detail: "Developed by Tomás Moreno Bernal\nLicensed under the GNU General Public License v3.0"
                     });
                 }
-            }
+            },
+            { label: "Copy", accelerator: "CmdOrCtrl+C", selector: "copy:" }
         ]
     }
 ];
