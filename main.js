@@ -12,7 +12,10 @@ let mainWindow;
 function createWindow() {
 	mainWindow = new BrowserWindow({
 		width: 1024, 
-		height: 768
+		height: 768,
+		webPreferences: {
+			preload: path.join(__dirname, "preload.js")
+		}
 	});
 
 	mainWindow.loadFile("./app/index.html");
