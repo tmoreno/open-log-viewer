@@ -31,7 +31,7 @@ const template = [
                         type: "info",
                         title: "About",
                         buttons: ["OK"],
-                        message: "Open Log Viewer 1.3.0",
+                        message: "Open Log Viewer 1.4.0",
                         detail: "Developed by Tomás Moreno Bernal\nLicensed under the GNU General Public License v3.0"
                     });
                 }
