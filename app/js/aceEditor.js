@@ -88,6 +88,7 @@ module.exports = class AceEditor {
             readOnly: true,
             highlightActiveLine: false,
             showPrintMargin: false,
+            displayIndentGuides: false,
             mode: "ace/mode/log_file",
             fontFamily: "Consolas, monaco, 'Courier New', Courier, monospace",
             fontSize: globalSettings.fontSize + "px"
