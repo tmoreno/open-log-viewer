@@ -55,10 +55,15 @@ Open Log Viewer is available for Linux, Mac and Windows
 
 macOS | Windows | Linux
 -----------------| ---| ---|
-<a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.4.0/open-log-viewer_1.4.0.dmg'>Download</a> | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.4.0/open-log-viewer_1.4.0.exe'>Download</a> | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.4.0/open-log-viewer_1.4.0.deb'>Debian-based</a> |
-| | | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.4.0/open-log-viewer_1.4.0.rpm'>RedHat-based</a> |
+<a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.4.1/open-log-viewer_1.4.1.dmg'>Download</a> | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.4.1/open-log-viewer_1.4.1.exe'>Download</a> | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.4.1/open-log-viewer_1.4.1.deb'>Debian-based</a> |
+| | | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.4.1/open-log-viewer_1.4.1.rpm'>RedHat-based</a> |
 
 ## Release Notes
+
+### Version 1.4.1
+
+#### Bugs Fixed
+- When a line starts with more than 4 spaces the line is whited.
 
 ### Version 1.4.0
 
