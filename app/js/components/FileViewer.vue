@@ -157,7 +157,7 @@
 							line.line = " ";
 						}
 
-						return this.viewer.insert(line.line + "\n");
+						return this.viewer.session.insert({row: this.viewer.session.getLength(), column: 0}, line.line + "\n");
 					});
 				});
 				
