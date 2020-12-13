@@ -156,7 +156,12 @@
 							line.line = " ";
 						}
 
-						return this.viewer.session.insert({row: this.viewer.session.getLength(), column: 0}, line.line + "\n");
+						const position = {
+							row: this.viewer.session.getLength(),
+							column: 0
+						};
+
+						return this.viewer.session.insert(position, line.line + "\n");
 					});
 				});
 				
