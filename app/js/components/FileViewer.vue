@@ -133,8 +133,7 @@
 				let previousLineSeveritySettings = this.defaultLogLevel();
 					
 				tail.on('readLines', lines => {
-					let logLines = lines
-					.map(line => {
+					lines.map(line => {
 						let severitySettings = this.getSeveritySettings(line);
 
 						if (!severitySettings) {
@@ -150,7 +149,7 @@
 						};
 					})
 					.filter(line => line.severitySettings.show)
-					.map(line => {
+					.forEach(line => {
 						// Ace editor not insert empty lines, and we want all lines
 						// to a better layout
 						if (line.line === "") {
