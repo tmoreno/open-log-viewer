@@ -55,10 +55,15 @@ Open Log Viewer is available for Linux, Mac and Windows
 
 macOS | Windows | Linux
 -----------------| ---| ---|
-<a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.4.1/open-log-viewer_1.4.1.dmg'>Download</a> | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.4.1/open-log-viewer_1.4.1.exe'>Download</a> | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.4.1/open-log-viewer_1.4.1.deb'>Debian-based</a> |
-| | | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.4.1/open-log-viewer_1.4.1.rpm'>RedHat-based</a> |
+<a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.4.2/open-log-viewer_1.4.2.dmg'>Download</a> | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.4.2/open-log-viewer_1.4.2.exe'>Download</a> | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.4.2/open-log-viewer_1.4.2.deb'>Debian-based</a> |
+| | | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.4.2/open-log-viewer_1.4.2.rpm'>RedHat-based</a> |
 
 ## Release Notes
+
+### Version 1.4.2
+
+#### Bugs Fixed
+- New lines are append to the end of editor instead of cursor position.
 
 ### Version 1.4.1
 
