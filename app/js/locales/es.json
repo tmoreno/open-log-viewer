@@ -4,6 +4,7 @@
     "file-no-exists": "El archivo \"{filename}\" no existe",
     "new-file": "Nuevo archivo",
     "clean": "Limpiar",
+    "scroll-to-end": "Scroll al final",
     "global-settings": "Configuración general",
     "accept": "Aceptar",
     "cancel": "Cancelar",

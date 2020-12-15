@@ -15,6 +15,10 @@
 
 			<v-divider class="mx-3" inset vertical></v-divider>
 
+			<v-btn :depressed="scrollToEnd" :flat="!scrollToEnd" icon color="grey darken-1" @click="scrollToEndClicked">
+				<v-icon :title="$t('scroll-to-end')" style="font-size: 24px">vertical_align_bottom</v-icon>
+			</v-btn>
+
 			<v-btn flat icon color="grey darken-1" @click="settingsButtonClicked">
 				<v-icon :title="$t('global-settings')" style="font-size: 24px">settings</v-icon>
 			</v-btn>
@@ -67,6 +71,7 @@
 				logLevelsSelected: this.getLogLevelsToShow(),
 				height: this.calcHeight(),
 				showDialog: false,
+				scrollToEnd: false,
 				currentFileSettings: this.fileSettings
 			}
 		},
@@ -124,6 +129,9 @@
 			changeFontSize(fontSize) {
 				this.viewer.setFontSize(fontSize + "px");
 			},
+			scrollToEndClicked() {
+				this.scrollToEnd = !this.scrollToEnd;
+			},
 			settingsButtonClicked() {
 				this.$emit('settingsButtonClicked');
 			},
@@ -161,7 +169,9 @@
 							column: 0
 						};
 
-						return this.viewer.session.insert(position, line.line + "\n");
+						this.viewer.session.insert(position, line.line + "\n");
+
+						this.scrollToEndCommand();
 					});
 				});
 				
@@ -175,6 +185,13 @@
 			},
 			capitalizeFirstLetter(string) {
     			return string.charAt(0).toUpperCase() + string.slice(1);
+			},
+			scrollToEndCommand() {
+				const totalLines = this.viewer.session.getLength();
+
+				if (this.scrollToEnd) {
+					this.viewer.scrollToLine(totalLines + 1, false, false);
+				}
 			}
 		}
 	}
