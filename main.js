@@ -60,5 +60,5 @@ function createCli() {
 		.version(require('./package').version, '-v, --version')
 		.description('A multi-platform log viewer built with Electron and styled with Material Design')
 		.option('-f, --file <file-path>', 'file to open')
-		.parse(process.argv);
+		.parse();
 }
