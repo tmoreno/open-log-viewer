@@ -86,12 +86,17 @@
 			});
 
 			if (remote.getGlobal('arguments').file) {
-				new OpenNewFileCommand(
-					remote.getGlobal('arguments').file, 
-					this.tabs, 
-					userPreferences
-				)
-				.execute();
+				try {
+					new OpenNewFileCommand(
+						remote.getGlobal('arguments').file, 
+						this.tabs, 
+						userPreferences
+					)
+					.execute();
+				}
+				catch(error) {
+					console.log(error);
+				}
 			}
 			
 			if (this.tabs.length === 0) {

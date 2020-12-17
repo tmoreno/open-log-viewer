@@ -3,6 +3,7 @@ const path = window.node.path;
 
 const Tab = require("../tab");
 const FileSettings = require("../fileSettings");
+const FileNotFoundError = require("../exceptions/fileNotFoundError");
 
 module.exports = class OpenNewFileCommand {
     constructor(file, tabs, userPreferences) {
@@ -24,7 +25,7 @@ module.exports = class OpenNewFileCommand {
             this.userPreferences.addFile(parsedFile.base, filePath, fileSettings);
         }
         else {
-            console.log("NO");
+            throw new FileNotFoundError(this.file);
         }
     }
 }
