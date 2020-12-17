@@ -46,7 +46,7 @@
 	const fs = window.node.fs;
 	const FileSettings = require("./fileSettings");
 	const UserPreferences = require("./userPreferences");
-	const OpenFileCommand = require("./commands/openFileCommand");
+	const OpenNewFileCommand = require("./commands/openNewFileCommand");
 	const AceEditor = require("./aceEditor");
 	const Utils = require("./utils");
 	const FileChooser = require("./components/FileChooser").default;
@@ -86,7 +86,7 @@
 			});
 
 			if (remote.getGlobal('arguments').file) {
-				new OpenFileCommand(
+				new OpenNewFileCommand(
 					remote.getGlobal('arguments').file, 
 					this.tabs, 
 					userPreferences

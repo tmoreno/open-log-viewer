@@ -4,7 +4,7 @@ const path = window.node.path;
 const Tab = require("../tab");
 const FileSettings = require("../fileSettings");
 
-module.exports = class OpenFileCommand {
+module.exports = class OpenNewFileCommand {
     constructor(file, tabs, userPreferences) {
         this.file = file;
         this.tabs = tabs;
