@@ -11,7 +11,7 @@ if (process.env.NODE_ENV === "development") {
 let mainWindow;
 
 function createWindow() {
-	createCli();
+	parseArguments();
 
 	mainWindow = new BrowserWindow({
 		width: 1024, 
@@ -55,10 +55,16 @@ app.on('window-all-closed', () => {
 	}
 });
 
-function createCli() {
+function parseArguments() {
 	program
 		.version(require('./package').version, '-v, --version')
 		.description('A multi-platform log viewer built with Electron and styled with Material Design')
 		.option('-f, --file <file-path>', 'file to open')
 		.parse();
+
+	if (program.file) {
+		global.arguments = {
+			file: program.file
+		};
+	}
 }
