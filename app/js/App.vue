@@ -107,12 +107,12 @@
             	e.preventDefault();
 
             	for (let file of e.dataTransfer.files) {
-					let fileSettings = new FileSettings();
-					let tab = new Tab(file.name, file.path, fileSettings);
-
-					this.tabs.push(tab);
-
-					userPreferences.addFile(file.name, file.path, fileSettings);
+					new OpenNewFileCommand(
+						file.path, 
+						this.tabs, 
+						userPreferences
+					)
+					.execute();
             	}
             
             	return false;
