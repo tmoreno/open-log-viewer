@@ -42,7 +42,9 @@
 	const _ = require('lodash');
 	const Tab = require("./tab");
 	const app = window.electron.app;
+	const remote = window.electron.remote;
 	const fs = window.node.fs;
+	const path = window.node.path;
 	const FileSettings = require("./fileSettings");
 	const UserPreferences = require("./userPreferences");
 	const AceEditor = require("./aceEditor");
@@ -83,6 +85,8 @@
 				}
 			});
 
+			openFileFromProgramArguments(this.tabs);
+			
 			if (this.tabs.length === 0) {
 				this.tabs.push(new Tab(this.$t("new-file")));
 			}
@@ -100,7 +104,28 @@
             	}
             
             	return false;
-        	};
+			};
+
+			function openFileFromProgramArguments(tabs) {
+				const file = remote.getGlobal('arguments').file;
+
+				if (file) {
+					if (fs.existsSync(file)) {
+						const filePath = path.resolve(file);
+						const parsedFile = path.parse(filePath);
+						
+						const fileSettings = new FileSettings();
+						const tab = new Tab(parsedFile.base, filePath, fileSettings);
+
+						tabs.push(tab);
+
+						userPreferences.addFile(parsedFile.base, filePath, fileSettings);
+					}
+					else {
+						console.log("NO");
+					}
+				}
+			}
 		},
 		methods: {
 			newTab() {

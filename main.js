@@ -62,9 +62,9 @@ function parseArguments() {
 		.option('-f, --file <file-path>', 'file to open')
 		.parse();
 
+	global.arguments = {};
+
 	if (program.file) {
-		global.arguments = {
-			file: program.file
-		};
+		global.arguments.file = program.file;
 	}
 }
