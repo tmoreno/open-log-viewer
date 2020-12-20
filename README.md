@@ -55,10 +55,16 @@ Open Log Viewer is available for Linux, Mac and Windows
 
 macOS | Windows | Linux
 -----------------| ---| ---|
-<a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.4.2/open-log-viewer_1.4.2.dmg'>Download</a> | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.4.2/open-log-viewer_1.4.2.exe'>Download</a> | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.4.2/open-log-viewer_1.4.2.deb'>Debian-based</a> |
-| | | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.4.2/open-log-viewer_1.4.2.rpm'>RedHat-based</a> |
+<a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.5.0/open-log-viewer_1.5.0.dmg'>Download</a> | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.5.0/open-log-viewer_1.5.0.exe'>Download</a> | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.5.0/open-log-viewer_1.5.0.deb'>Debian-based</a> |
+| | | <a href='https://github.com/tmoreno/open-log-viewer/releases/download/1.5.0/open-log-viewer_1.5.0.rpm'>RedHat-based</a> |
 
 ## Release Notes
+
+### Version 1.5.0
+
+#### Improvements
+- Automatic scrolling to the last log entry while new entries are append.
+- Added -f/--file arguments to open a log file from the terminal.
 
 ### Version 1.4.2
 
