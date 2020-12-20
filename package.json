@@ -6,7 +6,7 @@
   "license": "GPL-3.0-only",
   "main": "main.js",
   "scripts": {
-    "build": "webpack",
+    "build": "webpack --mode=production",
     "build:dev": "webpack --watch",
     "start": "electron .",
     "start:dev": "cross-env NODE_ENV=development npm run start",
