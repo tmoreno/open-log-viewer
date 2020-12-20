@@ -25,26 +25,6 @@
 		</v-toolbar>
 
 		<div ref="viewer" :style="{'height': height + 'px'}"></div>
-
-		<v-dialog v-model="showDialog" max-width="500">
-      		<v-card>
-        		<v-card-title class="title error">
-					{{ $t("warning") }}
-				</v-card-title>
-
-				<v-card-text class="font-weight-medium subheading">
-					{{ $t("file-no-exists", {filename: file}) }}
-				</v-card-text>
-
-				<v-card-actions>
-					<v-spacer></v-spacer>
-
-					<v-btn color="primary" flat @click="showDialog = false">
-						OK
-					</v-btn>
-				</v-card-actions>
-			</v-card>
-		</v-dialog>
 	</div>
 </template>
 
@@ -70,7 +50,6 @@
 				logLevels: ["Debug", "Info", "Warning", "Error", "Fatal"],
 				logLevelsSelected: this.getLogLevelsToShow(),
 				height: this.calcHeight(),
-				showDialog: false,
 				scrollToEnd: false,
 				currentFileSettings: this.fileSettings
 			}
@@ -175,7 +154,7 @@
 					});
 				});
 				
-				tail.start().catch(error => this.showDialog = true);
+				tail.start().catch(error => this.$emit('fileNotFoundError', {file: this.file}));
 			},
 			handleResize() {
 				this.height = this.calcHeight();

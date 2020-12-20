@@ -25,7 +25,8 @@
 					:file="tab.filePath" 
 					:file-settings="tab.fileSettings"
 					:global-settings="globalSettings"
-					@settingsButtonClicked="settingsButtonClicked" />
+					@settingsButtonClicked="settingsButtonClicked"
+					@fileNotFoundError="fileNotFoundErrorHandler" />
 			</v-tab-item>
 		</v-tabs-items>
 
@@ -35,6 +36,14 @@
 			@accept="acceptSettings" 
 			@close="closeSettings">
 		</settings-dialog>
+
+		<message-dialog 
+			:show="showMessageDialog" 
+			:severity="'error'" 
+			:title="messageDialogTitle" 
+			:message="messageDialogMessage"
+			@close="closeMessageDialog">
+		</message-dialog>
     </v-app>
 </template>
 
@@ -51,6 +60,7 @@
 	const Utils = require("./utils");
 	const FileChooser = require("./components/FileChooser").default;
 	const FileViewer = require("./components/FileViewer").default;
+	const MessageDialog = require("./components/MessageDialog").default;
 	const SettingsDialog = require("./components/SettingsDialog").default;
 
 	let userPreferences = new UserPreferences();
@@ -59,6 +69,7 @@
 		components: {
 			FileChooser, 
 			FileViewer, 
+			MessageDialog,
 			SettingsDialog
 		},
 		data() {
@@ -66,7 +77,10 @@
 				tabs: [],
 				currentTab: null,
 				showSettings: false,
-				globalSettings: userPreferences.getGlobalSettings()
+				globalSettings: userPreferences.getGlobalSettings(),
+				showMessageDialog: false,
+				messageDialogTitle: '',
+				messageDialogMessage: ''
 			}
 		},
 		created: function() {
@@ -86,16 +100,17 @@
 			});
 
 			if (remote.getGlobal('arguments').file) {
+				const file = remote.getGlobal('arguments').file;
 				try {
 					new OpenNewFileCommand(
-						remote.getGlobal('arguments').file, 
+						file, 
 						this.tabs, 
 						userPreferences
 					)
 					.execute();
 				}
 				catch(error) {
-					console.log(error);
+					this.showFileNotFoundMessageDialog(file);
 				}
 			}
 			
@@ -142,6 +157,17 @@
 
 					userPreferences.addFile(selectedFileName, selectedFilePath, fileSettings);
 				}
+			},
+			fileNotFoundErrorHandler(event) {
+				this.showFileNotFoundMessageDialog(event.file);
+			},
+			showFileNotFoundMessageDialog(file) {
+				this.showMessageDialog = true;
+				this.messageDialogTitle = this.$i18n.t("warning");
+				this.messageDialogMessage = this.$i18n.t("file-no-exists", {filename: file});
+			},
+			closeMessageDialog() {
+				this.showMessageDialog = false;
 			},
 			settingsButtonClicked() {
 				this.showSettings = true;
