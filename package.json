@@ -47,7 +47,14 @@
       "target": [
         "rpm",
         "deb"
-      ]
+      ],
+      "desktop": {
+        "Type": "Application",
+        "Encoding": "UTF-8",
+        "Name": "Open Log Viewer",
+        "Comment": "A multi-platform log viewer built with Electron and styled with Material Design",
+        "Categories": "Utility;"
+      }
     },
     "win": {
       "target": "portable"
