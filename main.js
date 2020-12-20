@@ -55,6 +55,8 @@ app.on('window-all-closed', () => {
 	}
 });
 
+app.allowRendererProcessReuse = true;
+
 function parseArguments() {
 	program
 		.version(require('./package').version, '-v, --version')
