@@ -1,7 +1,4 @@
-const { Menu } = require('electron');
-const { dialog } = require('electron');
-const electron = require('electron');
-const app = electron.app;
+const { dialog, shell, Menu } = require('electron');
 
 const template = [
     {
@@ -13,12 +10,50 @@ const template = [
         ]
     },
     {
+        label: 'Edit',
+        submenu: [
+            { 
+                label: 'Undo', 
+                accelerator: 'CmdOrCtrl+Z', 
+                role: 'undo'
+            },
+            { 
+                label: 'Redo', 
+                accelerator: 'CmdOrCtrl+Y', 
+                role: 'redo'
+            },
+            { 
+                type: "separator" 
+            },
+            { 
+                label: 'Cut', 
+                accelerator: 'CmdOrCtrl+X', 
+                role: 'cut'
+            },
+            { 
+                label: 'Copy', 
+                accelerator: 'CmdOrCtrl+C', 
+                role: 'copy'
+            },
+            { 
+                label: 'Paste', 
+                accelerator: 'CmdOrCtrl+V', 
+                role: 'paste'
+            },
+            {
+                label: 'Select All',
+                accelerator: 'CmdOrCtrl+A',
+                role: 'selectAll'
+            }
+        ]
+    },
+    {
         label: 'Help',
         submenu: [
             {
                 label: 'Source code',
-                click () { 
-                    electron.shell.openExternal('https://github.com/tmoreno/open-log-viewer');
+                click: () => { 
+                    shell.openExternal('https://github.com/tmoreno/open-log-viewer');
                 }
             },
             {
@@ -26,7 +61,7 @@ const template = [
             },
             {
                 label: 'About',
-                click () { 
+                click: () => { 
                     dialog.showMessageBox({
                         type: "info",
                         title: "About",
@@ -40,5 +75,4 @@ const template = [
     }
 ];
 
-const menu = Menu.buildFromTemplate(template)
-Menu.setApplicationMenu(menu)
+Menu.setApplicationMenu(Menu.buildFromTemplate(template));
