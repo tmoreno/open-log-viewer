@@ -5,6 +5,8 @@ import '../css/vuetify-custom.css';
 import '../css/ace-custom.css';
 import en from '../js/locales/en.json';
 import es from '../js/locales/es.json';
+import it from '../js/locales/it.json';
+import ptBR from '../js/locales/ptBR.json';
 
 import Vue from 'vue';
 import Vuetify from 'vuetify';
@@ -16,10 +18,10 @@ Vue.use(Vuetify);
 Vue.use(VueI18n);
 
 const i18n = new VueI18n({
-  locale: navigator.language,
+  locale: navigator.language.replace('-',''),
   fallbackLocale: 'en',
   messages: {
-    en, es
+    en, es, it, ptBR
   }
 });
 
