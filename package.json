@@ -14,9 +14,9 @@
     "pack:mac": "electron-builder --mac --dir",
     "pack:linux": "electron-builder --linux --dir",
     "dist": "electron-builder -mwl",
-    "dist:win": "electron-builder --win",
-    "dist:mac": "electron-builder --mac",
-    "dist:linux": "electron-builder --linux"
+    "dist:win": "electron-builder --win --publish=never",
+    "dist:mac": "electron-builder --mac --publish=never",
+    "dist:linux": "electron-builder --linux --publish=never"
   },
   "build": {
     "appId": "com.tmoreno.openlogviewer",
