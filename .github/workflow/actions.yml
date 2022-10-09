@@ -1,0 +1,36 @@
+name: Build and deploy a new release
+
+on:
+  push:
+    branches: ["develop"]
+
+jobs:
+  build_on_linux:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 16.17
+    - name: see directory
+      run: ls -l
+
+  build_on_mac:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 16.17
+    - name: see directory
+      run: ls
+  
+  build_on_win:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 16.17
+    - name: see directory
+      run: dir
