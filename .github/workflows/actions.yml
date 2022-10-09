@@ -18,6 +18,13 @@ jobs:
       run: npm run build
     - name: Package
       run: npm run dist:linux
+    - name: Release
+        uses: softprops/action-gh-release@v1
+        draft: true
+        with:
+          files: 
+            dist/*.deb
+            dist/*.rpm
 
   build_on_mac:
     runs-on: macos-latest
@@ -31,10 +38,14 @@ jobs:
     - name: Build
       run: npm run build
     - name: Package
-      env:
-        CSC_LINK: ${{ secrets.CSC_LINK }}
       run: npm run dist:mac
-  
+    - name: Release
+        uses: softprops/action-gh-release@v1
+        draft: true
+        with:
+          files: 
+            dist/*.dmg
+
   build_on_win:
     runs-on: windows-latest
     steps:
@@ -50,3 +61,9 @@ jobs:
       env:
         CSC_LINK: ${{ secrets.CSC_LINK }}
       run: npm run dist:win
+    - name: Release
+        uses: softprops/action-gh-release@v1
+        draft: true
+        with:
+          files: 
+            dist/*.exe
