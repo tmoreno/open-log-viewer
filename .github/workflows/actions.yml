@@ -19,7 +19,7 @@ jobs:
     - name: Package
       run: npm run dist:linux
     - name: Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v0.1.14
         draft: true
         with:
           files: 
@@ -40,7 +40,7 @@ jobs:
     - name: Package
       run: npm run dist:mac
     - name: Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v0.1.14
         draft: true
         with:
           files: 
@@ -62,7 +62,7 @@ jobs:
         CSC_LINK: ${{ secrets.CSC_LINK }}
       run: npm run dist:win
     - name: Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v0.1.14
         draft: true
         with:
           files: 
