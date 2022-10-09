@@ -12,8 +12,12 @@ jobs:
     - uses: actions/setup-node@v3
       with:
         node-version: 16.17
-    - name: see directory
-      run: ls
+    - name: Install dependencies
+      run: npm install
+    - name: Build
+      run: npm run build
+    - name: Package
+      run: npm run dist:linux
 
   build_on_mac:
     runs-on: macos-latest
@@ -22,8 +26,12 @@ jobs:
     - uses: actions/setup-node@v3
       with:
         node-version: 16.17
-    - name: see directory
-      run: ls
+    - name: Install dependencies
+      run: npm install
+    - name: Build
+      run: npm run build
+    - name: Package
+      run: npm run dist:mac
   
   build_on_win:
     runs-on: windows-latest
@@ -32,5 +40,9 @@ jobs:
     - uses: actions/setup-node@v3
       with:
         node-version: 16.17
-    - name: see directory
-      run: dir
+    - name: Install dependencies
+      run: npm install
+    - name: Build
+      run: npm run build
+    - name: Package
+      run: npm run dist:win
