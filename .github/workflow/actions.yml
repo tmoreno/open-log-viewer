@@ -13,7 +13,7 @@ jobs:
       with:
         node-version: 16.17
     - name: see directory
-      run: ls -l
+      run: ls
 
   build_on_mac:
     runs-on: macos-latest
