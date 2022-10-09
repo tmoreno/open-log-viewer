@@ -19,12 +19,12 @@ jobs:
     - name: Package
       run: npm run dist:linux
     - name: Release
-        uses: softprops/action-gh-release@v0.1.14
-        draft: true
-        with:
-          files: 
-            dist/*.deb
-            dist/*.rpm
+      uses: softprops/action-gh-release@v0.1.14
+      draft: true
+      with:
+        files: 
+          dist/*.deb
+          dist/*.rpm
 
   build_on_mac:
     runs-on: macos-latest
@@ -40,11 +40,11 @@ jobs:
     - name: Package
       run: npm run dist:mac
     - name: Release
-        uses: softprops/action-gh-release@v0.1.14
-        draft: true
-        with:
-          files: 
-            dist/*.dmg
+      uses: softprops/action-gh-release@v0.1.14
+      draft: true
+      with:
+        files: 
+          dist/*.dmg
 
   build_on_win:
     runs-on: windows-latest
@@ -62,8 +62,8 @@ jobs:
         CSC_LINK: ${{ secrets.CSC_LINK }}
       run: npm run dist:win
     - name: Release
-        uses: softprops/action-gh-release@v0.1.14
-        draft: true
-        with:
-          files: 
-            dist/*.exe
+      uses: softprops/action-gh-release@v0.1.14
+      draft: true
+      with:
+        files: 
+          dist/*.exe
