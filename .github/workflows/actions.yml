@@ -22,7 +22,7 @@ jobs:
       uses: softprops/action-gh-release@v0.1.14
       with:
         draft: true
-        files: 
+        files: |
           dist/*.deb
           dist/*.rpm
 
