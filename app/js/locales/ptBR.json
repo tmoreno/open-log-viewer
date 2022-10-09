@@ -1,0 +1,21 @@
+{
+    "choose-file": "Escolher arquivo",
+    "warning": "Atenção",
+    "file-no-exists": "O arquivo \"{filename}\" não existe.",
+    "new-file": "Novo arquivo",
+    "clean": "Limpar",
+    "scroll-to-end": "Rolar até o final",
+    "global-settings": "Configurações globais",
+    "accept": "Aceitar",
+    "cancel": "Cancelar",
+    "save": "Salvar",
+    "close": "Fechar",
+    "text": "Texto",
+    "background": "Cor de fundo",
+    "regex": "Expressão regular",
+    "font-size": "Tamanho da fonte",
+    "min-font-size": "Tamanho mínimo 8",
+    "max-font-size": "Tamanho máximo 30",
+    "required": "Obrigatório",
+    "patternChangedRestartAppWarning": "É necessário reiniciar o aplicativo para que as alterações de padrão tenham efeito"
+}
